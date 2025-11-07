@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>XPLØR: About Us</title>
+
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        // COLORS MERGED AND ADJUSTED FOR PRIMARY BLUE (#0da6f2)
+        "primary": "#0da6f2",
+        "background-light": "#f5f7f8",
+        "background-dark": "#101c22",
+        
+        // Custom colors for content sections
+        "text-light": "#1f2937", // Darker text for light mode
+        "text-dark": "#f8fafc", // Lighter text for dark mode
+        "text-muted-light": "#64748b", // Muted Dark Text
+        "text-muted-dark": "#94a3b8", // Muted Light Text
+        "surface-light": "#ffffff", // White Surface
+        "surface-dark": "#1e293b", // Dark Surface
+        "border-light": "#e2e8f0", // Light Border
+        "border-dark": "#334155" // Dark Border
+      },
+      fontFamily: {
+        "display": ["Plus Jakarta Sans", "Noto Sans", "sans-serif"]
+      },
+      borderRadius: {
+        "DEFAULT": "1rem",
+        "lg": "2rem",
+        "xl": "3rem",
+        "full": "9999px"
+      },
+    },
+  },
+}
+</script>
+
+<style>
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+.animate-float { animation: float 3s ease-in-out infinite; }
+
+/* Dropdown idiomas */
+#langMenu {
+  position: absolute;
+  right: 0;
+  margin-top: 8px;
+  width: 150px;
+  background: white;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  display: none;
+  z-index: 50;
+}
+#langMenu button {
+  width: 100%;
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 14px;
+}
+#langMenu button:hover { background-color: #0da6f21a; }
+
+/* Compensar header fijo en scroll suave */
+.scroll-offset { scroll-margin-top: 84px; }
+</style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex min-h-screen w-full flex-col">
+
+  <header class="sticky top-0 z-50 flex justify-center border-b border-gray-200/50 bg-background-light/80 px-4 py-3 backdrop-blur-sm dark:border-gray-800/50 dark:bg-background-dark/80 sm:px-8 md:px-10">
+    <div class="flex w-full max-w-7xl items-center justify-between">
+      <div class="flex items-center gap-8">
+        <div class="flex items-center gap-2 text-slate-800 dark:text-white">
+          <span class="material-symbols-outlined text-primary text-3xl">explore</span>
+          <h2 class="text-xl font-bold tracking-tighter">XPLØR</h2>
+        </div>
+        <nav class="hidden items-center gap-6 lg:flex">
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="index.html" data-en="HOME" data-es="INICIO">HOME</a>
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="explore.html" data-en="EXPLORE" data-es="EXPLORA">EXPLORE</a>
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="play.html" data-en="PLAY" data-es="JUEGA">PLAY</a>
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="learn.html" data-en="LEARN" data-es="APRENDE">LEARN</a>
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="earn.html" data-en="EARN" data-es="GANA">EARN</a>
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="about.html" data-en="ABOUT US" data-es="NOSOTROS">ABOUT US</a>
+        </nav>
+      </div>
+
+ <div class="flex items-center gap-2">
+  <a href="login.html" id="signupBtn" class="hidden min-w-[84px] md:flex cursor-pointer items-center justify-center overflow-hidden rounded-full bg-primary px-4 h-10 text-sm font-bold text-white transition-colors hover:bg-primary/90" data-en="LOG IN" data-es="INICIAR SESIÓN">LOG IN</a>
+  
+  <div class="relative">
+    <button id="langBtn" class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
+      <span class="material-symbols-outlined text-xl">language</span>
+    </button>
+    <div id="langMenu">
+      <button data-lang="en">English 🇺🇸</button>
+      <button data-lang="es">Español 🇵🇦</button>
+    </div>
+  </div>
+
+        <button id="profileBtn" class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
+          <span class="material-symbols-outlined text-xl">person</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+    <section class="relative pt-12 pb-20 sm:pt-16 sm:pb-32">
+        <div class="absolute inset-0 bg-cover bg-center" data-alt="A collage of Panama and Singapore landmarks under a starry sky." style='background-image: linear-gradient(rgba(15, 23, 42, 0.6) 0%, rgba(15, 23, 42, 0.8) 100%), url("https://www.ncl.com/adobe/dynamicmedia/deliver/dm-aid--957899a1-e606-477a-8caf-bd19a99f5f06/ncl-panama-canal-cruise-4-hero.jpg?preferwebp=true&quality=85");'></div>
+        <div class="relative container mx-auto px-4 text-center text-white">
+            <h1 class="text-4xl font-black leading-tight tracking-tighter md:text-6xl">About XPLØR</h1>
+            <p class="mt-4 max-w-2xl mx-auto text-base sm:text-lg font-normal text-text-dark">Connecting cultures through exploration and play.</p>
+        </div>
+    </section>
+    <section class="py-16 sm:py-24 bg-surface-light dark:bg-surface-dark">
+        <div class="container mx-auto px-4">
+            <div class="mx-auto max-w-4xl text-center">
+                <h2 class="text-3xl font-bold tracking-tight md:text-4xl">Our Mission and Vision</h2>
+                <p class="mt-4 text-lg text-text-muted-light dark:text-text-muted-dark">XPLØR, through XPLORBOT, is a robotic assistant designed to make our city (and others) a safer, smarter, and more connected place. We seek to improve the urban experience, increase security, promote smart tourism, and contribute to a more inclusive and sustainable world.</p>
+                <div class="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2">
+                    <div class="flex flex-col gap-3 rounded-lg border border-border-light dark:border-border-dark p-4">
+                        <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded" data-alt="Illustration of children playing a game on a world map." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD-aCRctMnBp6mT40xRdGWdg4BUiRWK2UI6UwTnFWjbVo-zbWJvoeQnVKB84pYAr2mKqWvPvJsaPAwHu1y_14XYa4jnw3kXK1c0ruqveKmlpHvUaNZM_0UqMT7zi9iWB8zjI_6-N1VCjiH2OqEfPeDLvpkJp1-RZkg2QQPaXQDwPLkuw0SA8YW9hREISs9OcpkQhuqWWNLt0yxRuLag5qW-B8G-BFqRYisw69iDcSso32JM1SPezCuGi2aSyQ4hGFgtWIJ1Qyy8AEeK");'></div>
+                        <div>
+                            <p class="font-medium">Accessible Technology for Social Impact</p>
+                            <p class="text-sm text-text-muted-light dark:text-text-muted-dark">We believe technology should be accessible to all and used to build smarter, safer, and more human-centered cities.</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-3 rounded-lg border border-border-light dark:border-border-dark p-4">
+                        <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded" data-alt="Illustration showing a global network of connected people." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAIM755ZOKHyxa94rc_rpXjstMmoi7kWM3i3R5UQU0DfHskfbQHlMZCjSWIo9ykizvhL8_h2ep03ibKECtAx6iDq2LkQFD85ec4ThCZ-jgOiEiat_X-KG02qyK5b3zzLagX0qeQ5jW-o_YV8ZgutgbuBK9i9m3P_WBDKTux2eZxHp_uyvEFH6Ks_fbZcRx3TN9DVbk_dxnjwt7S8HacttNSSBm7IgluSS5xoheEQfOfi5ETHW6vyDIXYePffwKc5loee3jYKyPz0e_c");'></div>
+                        <div>
+                            <p class="font-medium">Scalable and High-Impact Solution</p>
+                            <p class="text-sm text-text-muted-light dark:text-text-muted-dark">XPLORBOT represents a scalable, educational, and high-impact solution to build smarter, human-centered cities worldwide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-16 sm:py-24">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold tracking-tight md:text-4xl">Meet the Founding Team</h2>
+                <p class="mt-3 max-w-2xl mx-auto text-base text-text-muted-light dark:text-text-muted-dark">The minds behind XPLØRBOT, the first Edutech startup from Panama created by young innovators for the world.</p>
+            </div>
+            <div class="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-12 max-w-4xl mx-auto">
+                <div class="flex flex-col items-center gap-4 rounded-lg bg-surface-light dark:bg-surface-dark p-8 text-center shadow-sm">
+                    <div class="w-32 h-32 bg-center bg-no-repeat aspect-square bg-cover rounded-full" data-alt="Professional headshot of Paula Castillo Linero" style='background-image: url("img/pau.jpeg");'></div>
+                    <div>
+                        <p class="text-xl font-medium">Paula Castillo Linero</p>
+                        <p class="text-primary text-sm font-normal">Co-Founder & Programming and Design Specialist</p>
+                        <p class="mt-2 text-sm text-text-muted-light dark:text-text-muted-dark">Paula, 14 years old, is a student at The Oxford School. She is the coding mind behind XPLØRBOT, with a great passion for programming, graphic design, and electronics. She also enjoys playing the piano. She shares the vision of creating technological solutions with a significant impact on the world.</p>
+                    </div>
+                </div>
+                <div class="flex flex-col items-center gap-4 rounded-lg bg-surface-light dark:bg-surface-dark p-8 text-center shadow-sm">
+                    <div class="w-32 h-32 bg-center bg-no-repeat aspect-square bg-cover rounded-full" data-alt="Professional headshot of Santiago González Portillo" style='background-image: url("img/santi.jpeg");'></div>
+                    <div>
+                        <p class="text-xl font-medium">Santiago González Portillo</p>
+                        <p class="text-primary text-sm font-normal">Co-Founder & 3D Printing and Robot Assembly Specialist</p>
+                        <p class="mt-2 text-sm text-text-muted-light dark:text-text-muted-dark">Santiago, 13 years old and a student at The Oxford School, leads the robot's physical architecture. His interests center on 3D Printing, robot assembly, programming, and electronics. He loves playing the guitar, and his shared passion is developing innovative solutions with a global impact.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+  </main>
+
+  <footer class="w-full bg-background-light dark:bg-background-dark">
+    <div class="mx-auto max-w-7xl px-4 py-8 sm:px-8">
+      <div class="flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-8 dark:border-slate-800 sm:flex-row">
+        <p class="text-sm text-slate-600 dark:text-slate-400">© 2024 XPLØR. All Rights Reserved.</p>
+        <div class="text-sm text-slate-600 dark:text-slate-400">
+          Follow us: <span class="font-semibold text-slate-800 dark:text-slate-200">@xplor.pty</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

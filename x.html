@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>XPLØR: Explore, Play, Learn and Earn</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "primary": "#0da6f2",
+        "background-light": "#f5f7f8",
+        "background-dark": "#101c22",
+      },
+      fontFamily: {
+        "display": ["Plus Jakarta Sans", "Noto Sans", "sans-serif"]
+      },
+      borderRadius: {
+        "DEFAULT": "1rem",
+        "lg": "2rem",
+        "xl": "3rem",
+        "full": "9999px"
+      },
+    },
+  },
+}
+</script>
+
+<style>
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+.animate-float { animation: float 3s ease-in-out infinite; }
+
+/* Dropdown idiomas */
+#langMenu {
+  position: absolute;
+  right: 0;
+  margin-top: 8px;
+  width: 150px;
+  background: white;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  display: none;
+  z-index: 50;
+}
+#langMenu button {
+  width: 100%;
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 14px;
+}
+#langMenu button:hover { background-color: #0da6f21a; }
+
+/* Compensar header fijo en scroll suave */
+.scroll-offset { scroll-margin-top: 84px; }
+</style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex min-h-screen w-full flex-col">
+
+  <!-- HEADER -->
+  <header class="sticky top-0 z-50 flex justify-center border-b border-gray-200/50 bg-background-light/80 px-4 py-3 backdrop-blur-sm dark:border-gray-800/50 dark:bg-background-dark/80 sm:px-8 md:px-10">
+    <div class="flex w-full max-w-7xl items-center justify-between">
+      <div class="flex items-center gap-8">
+        <div class="flex items-center gap-2 text-slate-800 dark:text-white">
+          <span class="material-symbols-outlined text-primary text-3xl">explore</span>
+          <h2 class="text-xl font-bold tracking-tighter">XPLØR</h2>
+        </div>
+        <nav class="hidden items-center gap-6 lg:flex">
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="index.html" data-en="HOME" data-es="INICIO">HOME</a>
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="explore.html" data-en="EXPLORE" data-es="EXPLORA">EXPLORE</a>
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="play.html" data-en="PLAY" data-es="JUEGA">PLAY</a>
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="learn.html" data-en="LEARN" data-es="APRENDE">LEARN</a>
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="earn.html" data-en="EARN" data-es="GANA">EARN</a>
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="about.html" data-en="ABOUT US" data-es="NOSOTROS">ABOUT US</a>
+        </nav>
+      </div>
+
+ <div class="flex items-center gap-2">
+  <a href="login.html" id="signupBtn" class="hidden min-w-[84px] md:flex cursor-pointer items-center justify-center overflow-hidden rounded-full bg-primary px-4 h-10 text-sm font-bold text-white transition-colors hover:bg-primary/90" data-en="LOG IN" data-es="INICIAR SESIÓN">LOG IN</a>
+  
+  <div class="relative">
+    <button id="langBtn" class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
+      <span class="material-symbols-outlined text-xl">language</span>
+    </button>
+    <div id="langMenu">
+      <button data-lang="en">English 🇺🇸</button>
+      <button data-lang="es">Español 🇵🇦</button>
+    </div>
+  </div>
+
+        <button id="profileBtn" class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
+          <span class="material-symbols-outlined text-xl">person</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="flex-grow">
+
+
+  <!-- FOOTER -->
+</div>
+</body>
+</html>
+  <footer class="w-full bg-background-light dark:bg-background-dark">
+    <div class="mx-auto max-w-7xl px-4 py-8 sm:px-8">
+      <div class="flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-8 dark:border-slate-800 sm:flex-row">
+        <p class="text-sm text-slate-600 dark:text-slate-400">© 2024 XPLØR. All Rights Reserved.</p>
+        <div class="text-sm text-slate-600 dark:text-slate-400">
+          Follow us: <span class="font-semibold text-slate-800 dark:text-slate-200">@xplor.pty</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>

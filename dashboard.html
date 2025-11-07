@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - XPLØR</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet"/>
+    <style>
+        .font-display { font-family: 'Space Grotesk', sans-serif; }
+    </style>
+</head>
+<body class="font-display bg-gray-100 min-h-screen flex flex-col items-center justify-center p-8">
+
+    <div class="max-w-xl w-full bg-white p-8 rounded-xl shadow-2xl text-center">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">Panel de Control (Dashboard)</h1>
+        <p class="text-gray-600 mb-2">¡Aquí va todo el contenido genial de tu aplicación!</p>
+        <p id="welcomeMessage" class="text-xl font-medium text-blue-600 mb-8">Cargando usuario...</p>
+        
+        <button id="logoutButton" class="flex items-center justify-center mx-auto rounded h-12 px-6 text-base font-bold bg-red-600 text-white hover:bg-red-700 transition-all shadow-lg shadow-red-600/20">
+            Cerrar Sesión
+        </button>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script>
+        // ==========================================================
+        // 1. Configuración de Firebase - ¡REEMPLAZA ESTO!
+        // ==========================================================
+        const firebaseConfig = {
+            apiKey: "AIzaSyDevEFBLiwL61zJT_yv2-jcktd-slR1C5I",
+            authDomain: "xplor-5df4a.firebaseapp.com",
+            projectId: "xplor-5df4a",
+            storageBucket: "xplor-5df4a.firebasestorage.app",
+            messagingSenderId: "207109387595",
+            appId: "1:207109387595:web:5646b123c433db5c01a4ce",
+            measurementId: "G-TNGYB5V05R"
+        };
+
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        
+        const welcomeMessage = document.getElementById('welcomeMessage');
+        const logoutButton = document.getElementById('logoutButton');
+
+        // Función 1: Verificar el Estado de la Autenticación y Proteger la Página
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                // El usuario está logueado
+                welcomeMessage.textContent = `Bienvenid@, ${user.email}`;
+            } else {
+                // El usuario NO está logueado, redirigir al Login
+                window.location.href = "/login.html"; // Redirige al login
+            }
+        });
+
+        // Función 2: Cerrar Sesión
+        logoutButton.addEventListener('click', async () => {
+            try {
+                await auth.signOut();
+                // Una vez cerrada la sesión, onAuthStateChanged detectará el cambio y redirigirá al login
+            } catch (error) {
+                console.error("Error al cerrar sesión:", error);
+                alert("Hubo un error al cerrar sesión.");
+            }
+        });
+    </script>
+</body>
+</html>

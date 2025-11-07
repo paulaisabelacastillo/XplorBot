@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>XPLØR - PLAY: Your Mission Awaits</title>
+
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0da6f2",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101c22",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+.animate-float { animation: float 3s ease-in-out infinite; }
+
+/* Dropdown idiomas */
+#langMenu {
+  position: absolute;
+  right: 0;
+  margin-top: 8px;
+  width: 150px;
+  background: white;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  display: none;
+  z-index: 50;
+}
+#langMenu button {
+  width: 100%;
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 14px;
+}
+#langMenu button:hover { background-color: #0da6f21a; }
+
+/* Compensar header fijo en scroll suave */
+.scroll-offset { scroll-margin-top: 84px; }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+
+  <header class="sticky top-0 z-50 flex justify-center border-b border-gray-200/50 bg-background-light/80 px-4 py-3 backdrop-blur-sm dark:border-gray-800/50 dark:bg-background-dark/80 sm:px-8 md:px-10">
+    <div class="flex w-full max-w-7xl items-center justify-between">
+      <div class="flex items-center gap-8">
+        <div class="flex items-center gap-2 text-slate-800 dark:text-gray-200">
+          <span class="material-symbols-outlined text-primary text-3xl">explore</span>
+          <h2 class="text-xl font-bold tracking-tighter">XPLØR</h2>
+        </div>
+        <nav class="hidden items-center gap-6 lg:flex">
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="index.html" data-en="HOME" data-es="INICIO">HOME</a>
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="explore.html" data-en="EXPLORE" data-es="EXPLORA">EXPLORE</a>
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="play.html" data-en="PLAY" data-es="JUGAR">PLAY</a>
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="learn.html" data-en="LEARN" data-es="APRENDE">LEARN</a>
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="earn.html" data-en="EARN" data-es="GANA">EARN</a>
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="about.html" data-en="ABOUT US" data-es="NOSOTROS">ABOUT US</a>
+        </nav>
+      </div>
+
+ <div class="flex items-center gap-2">
+  <a href="login.html" id="signupBtn" class="hidden min-w-[84px] md:flex cursor-pointer items-center justify-center overflow-hidden rounded-full bg-primary px-4 h-10 text-sm font-bold text-white transition-colors hover:bg-primary/90" data-en="LOG IN" data-es="INICIAR SESIÓN">LOG IN</a>
+  
+  <div class="relative">
+    <button id="langBtn" class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
+      <span class="material-symbols-outlined text-xl">language</span>
+    </button>
+    <div id="langMenu">
+      <button data-lang="en">English 🇺🇸</button>
+      <button data-lang="es">Español 🇵🇦</button>
+    </div>
+  </div>
+
+        <button id="profileBtn" class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
+          <span class="material-symbols-outlined text-xl">person</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+<main class="px-4 sm:px-8 lg:px-16 xl:px-24 py-5 flex flex-1 justify-center">
+<div class="layout-content-container flex flex-col max-w-7xl flex-1">
+<div class="w-full @container">
+<div class="@[480px]:p-4">
+<div class="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-center justify-center p-4" data-alt="A vibrant collage of people enjoying activities in Panama and Singapore" style='background-image: linear-gradient(rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCn6PeNkZKSuCPInIFpZ7IZEhloxZPcN355DzoyWcBfA5anjp8Zbg2eqcjwO_q9_IQ6Bw9nJ4G6jC3kZ09dXBK05tFH6rqyC20vcfXaSbbZnZfgMNoinjmNorP4pwVfcwstKXxxo_PFvZolxRrDJ9m_KvpjTU47drtiQ6u9J19DMBNc2Av0s7pZ5sPKN7BFeHrRHnea9VrKo9QASTDULtLgyrNVDol89GKZFwVB1MPInsxz_S_0yIvH9808t9y3qErN19aZl5SXURS7");'>
+<div class="flex flex-col gap-2 text-center">
+<h1 class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]">PLAY: Your Mission Awaits</h1>
+<h2 class="text-white/90 text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">Engage in gamified activities and events in Panama and Singapore. Play, Explore, Learn and Earn!</h2>
+</div>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] hover:bg-primary/90 transition-colors">
+<span class="truncate">View All Missions</span>
+</button>
+</div>
+</div>
+</div>
+<div class="flex flex-wrap gap-3 p-4 justify-center sticky top-[68px] bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm z-40 my-4">
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-gray-200/50 dark:bg-white/10 pl-4 pr-2 hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors">
+<p class="text-sm font-medium leading-normal">Country</p>
+<span class="material-symbols-outlined text-lg">expand_more</span>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-gray-200/50 dark:bg-white/10 pl-4 pr-2 hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors">
+<p class="text-sm font-medium leading-normal">Activity Type</p>
+<span class="material-symbols-outlined text-lg">expand_more</span>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-gray-200/50 dark:bg-white/10 pl-4 pr-2 hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors">
+<p class="text-sm font-medium leading-normal">Difficulty</p>
+<span class="material-symbols-outlined text-lg">expand_more</span>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-gray-200/50 dark:bg-white/10 pl-4 pr-2 hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors">
+<p class="text-sm font-medium leading-normal">Educational Focus</p>
+<span class="material-symbols-outlined text-lg">expand_more</span>
+</button>
+</div>
+<div class="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-6 p-4">
+<div class="group relative flex flex-col rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+<div class="bg-cover bg-center flex flex-col gap-3 justify-end p-4 aspect-[4/3] relative" data-alt="A large cargo ship passing through the Panama Canal" style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 60%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuAbhRZF-v9dkHrBlx337qy5cahm-YCI3b2OLjsyQjCs8skWNl0AxIGg-9m4gHeqpf1Q6gKwnYALhNuzaT__w0E9wK4gmgNMyo3r4bbKR8AWd_ZTsPSGY0haK-iCTZvLdHV1uvE9PCHWqyQpDr69tZWH_WIbSwt-4t10piyByMx03yonOOn1qHCEkCwXBVqrJ5roLqwKT-fP2IK6T8P1ZGwkt0qArIuYFVTVxQi6Pftcphl83e24dHlspk8CQ2cXbObaz37s6gL_QL6R");'>
+<p class="text-white text-lg font-bold leading-tight">The Panama Canal Challenge</p>
+</div>
+<div class="p-4 bg-white dark:bg-gray-800 flex-grow">
+<div class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400 mb-3">
+<span class="inline-flex items-center gap-1.5 font-medium"><span class="material-symbols-outlined text-base">flag</span>Panama</span>
+<span class="inline-flex items-center gap-1.5 font-medium"><span class="material-symbols-outlined text-base">schedule</span>4 Hours</span>
+</div>
+<div class="flex items-center gap-4 text-sm font-semibold text-gray-700 dark:text-gray-300">
+<span class="inline-flex items-center gap-1.5"><span class="material-symbols-outlined text-base text-amber-500">military_tech</span>500 XP</span>
+<span class="inline-flex items-center gap-1.5"><span class="material-symbols-outlined text-base text-green-500">school</span>Engineering</span>
+</div>
+</div>
+<button class="absolute bottom-4 right-4 bg-primary text-white rounded-full h-12 w-12 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<div class="group relative flex flex-col rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+<div class="bg-cover bg-center flex flex-col gap-3 justify-end p-4 aspect-[4/3] relative" data-alt="Lush green rainforest with a toucan bird" style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 60%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuBvKo5WK75eXXamsaOxuFAYdi06NYiiEaQQvtcUgJIzuqbTzUrFLqi2TgMy6w0zRjdoffl7-0dSrd_zR574phYu6dGSuJFkMhVwh2RL2OpRKpxd3Ogo6gRZsNioMsG1j6NY3c8mofstGnlZOCo_kP8tg-djCOlAjRooKzxni4tVsuUrepGPvSEaTARqmbT24HuigYljkG5vk3z5DC92fiR7EiqfDouZlOuiSWQnP53r4icxC0jlCvFysQs-hzE55wlvkvOMBvjF1NLY");'>
+<p class="text-white text-lg font-bold leading-tight">Rainforest Soundscape Symphony</p>
+</div>
+<div class="p-4 bg-white dark:bg-gray-800 flex-grow">
+<div class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400 mb-3">
+<span class="inline-flex items-center gap-1.5 font-medium"><span class="material-symbols-outlined text-base">flag</span>Panama</span>
+<span class="inline-flex items-center gap-1.5 font-medium"><span class="material-symbols-outlined text-base">schedule</span>3 Hours</span>
+</div>
+<div class="flex items-center gap-4 text-sm font-semibold text-gray-700 dark:text-gray-300">
+<span class="inline-flex items-center gap-1.5"><span class="material-symbols-outlined text-base text-amber-500">military_tech</span>350 XP</span>
+<span class="inline-flex items-center gap-1.5"><span class="material-symbols-outlined text-base text-green-500">school</span>Biology</span>
+</div>
+</div>
+<button class="absolute bottom-4 right-4 bg-primary text-white rounded-full h-12 w-12 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<div class="group relative flex flex-col rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+<div class="bg-cover bg-center flex flex-col gap-3 justify-end p-4 aspect-[4/3] relative" data-alt="Gardens by the Bay Supertree Grove at night in Singapore" style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 60%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCK6vCwraiLdHlTzFtu4bXC1-c9Cdc8FjjFcsNUuIEl0u2JvdIFOO4iqiNxlZ-uqnfqWPxL3oqfT13Ll3YRYk0vvS_Hpc4BBNSeKkHFfq7gfObYkOxl4VZdUBxKAFEVB5_HzRFlieeIdr6--_7UrC2HlZB9bmAKw8veEG0lzA0faYCvhTa5tf3-i_8WqFFIVoxuhSe494okHNMFPokbH8jkgYWWcp8Fb2dGruq-_y3nc1TllPJAz3jGrPz9c81_8XQW81DDoaCJ7-NA");'>
+<p class="text-white text-lg font-bold leading-tight">Gardens by the Bay Light Quest</p>
+</div>
+<div class="p-4 bg-white dark:bg-gray-800 flex-grow">
+<div class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400 mb-3">
+<span class="inline-flex items-center gap-1.5 font-medium"><span class="material-symbols-outlined text-base">flag</span>Singapore</span>
+<span class="inline-flex items-center gap-1.5 font-medium"><span class="material-symbols-outlined text-base">schedule</span>2 Hours</span>
+</div>
+<div class="flex items-center gap-4 text-sm font-semibold text-gray-700 dark:text-gray-300">
+<span class="inline-flex items-center gap-1.5"><span class="material-symbols-outlined text-base text-amber-500">military_tech</span>250 XP</span>
+<span class="inline-flex items-center gap-1.5"><span class="material-symbols-outlined text-base text-green-500">school</span>Art & Tech</span>
+</div>
+</div>
+<button class="absolute bottom-4 right-4 bg-primary text-white rounded-full h-12 w-12 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<div class="group relative flex flex-col rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+<div class="bg-cover bg-center flex flex-col gap-3 justify-end p-4 aspect-[4/3] relative" data-alt="A variety of street food dishes from Singapore" style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 60%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuAjkwQ3uwIFcHswaHTIOtLktLm8NEtn0l6SP41wsAwXUYkVXbdtyNSKkDFkd4uBSieGbJbG65YJDOxcF5ZTXg1Y2Ex8mJAzHhHPhnWAT7WbvU1aTpMlJRg-t0Lf_eQigrihiUPI6xRBAkD3fvXb_F3Bv_3zhQsY0jK2l4t10jmzSrU-DRflUj5Z-9wj7kX_L9l9CWmQNFRfr6Pz0qE7uUFisHi95N0frGFU2oT_J8HxXe3chQagkWSs0NEv5Z2P_rVc9DpUgNzV_GrR");'>
+<p class="text-white text-lg font-bold leading-tight">Singapore Foodie Hunt</p>
+</div>
+<div class="p-4 bg-white dark:bg-gray-800 flex-grow">
+<div class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400 mb-3">
+<span class="inline-flex items-center gap-1.5 font-medium"><span class="material-symbols-outlined text-base">flag</span>Singapore</span>
+<span class="inline-flex items-center gap-1.5 font-medium"><span class="material-symbols-outlined text-base">schedule</span>5 Hours</span>
+</div>
+<div class="flex items-center gap-4 text-sm font-semibold text-gray-700 dark:text-gray-300">
+<span class="inline-flex items-center gap-1.5"><span class="material-symbols-outlined text-base text-amber-500">military_tech</span>400 XP</span>
+<span class="inline-flex items-center gap-1.5"><span class="material-symbols-outlined text-base text-green-500">school</span>Culture</span>
+</div>
+</div>
+<button class="absolute bottom-4 right-4 bg-primary text-white rounded-full h-12 w-12 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<div class="group relative flex flex-col rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+<div class="bg-cover bg-center flex flex-col gap-3 justify-end p-4 aspect-[4/3] relative" data-alt="Colorful colonial buildings in Casco Viejo, Panama" style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 60%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuAR244qIV1K3JFyYNeXm3YBHgx8bVVQKg_WC-y6E_7MhQBO1X668pGCnu0e5NyspX_cJNaGcolA6XvUZZ2KYhJz_eERIYB1Z3n2hNB3R6MF_cSJI28CObnc6IeTf_l_ssapa3AqxeHi4IqlpSgnLnk1F8CJCBEzTzRyVhKQsPMqL3DPtCFxPrwC3gJLOrIUhh0xCcNsBc2crXGchoysM3QsChZakBnHeoD9tqxLXvmYxU75uzwVw-Af3VXJN2cmbSrG_mEZonCYJEdO");'>
+<p class="text-white text-lg font-bold leading-tight">Casco Viejo Historical Trek</p>
+</div>
+<div class="p-4 bg-white dark:bg-gray-800 flex-grow">
+<div class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400 mb-3">
+<span class="inline-flex items-center gap-1.5 font-medium"><span class="material-symbols-outlined text-base">flag</span>Panama</span>
+<span class="inline-flex items-center gap-1.5 font-medium"><span class="material-symbols-outlined text-base">schedule</span>3 Hours</span>
+</div>
+<div class="flex items-center gap-4 text-sm font-semibold text-gray-700 dark:text-gray-300">
+<span class="inline-flex items-center gap-1.5"><span class="material-symbols-outlined text-base text-amber-500">military_tech</span>300 XP</span>
+<span class="inline-flex items-center gap-1.5"><span class="material-symbols-outlined text-base text-green-500">school</span>History</span>
+</div>
+</div>
+<button class="absolute bottom-4 right-4 bg-primary text-white rounded-full h-12 w-12 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<div class="group relative flex flex-col rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+<div class="bg-cover bg-center flex flex-col gap-3 justify-end p-4 aspect-[4/3] relative" data-alt="The Universal Studios globe on Sentosa Island, Singapore" style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 60%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuAACbe1DYiyYovU2FLrvD5QKiF1hpF_t2g7MlHFI2CseWAVvW1Nw_61Xd1kw2OZ11LiPmOIQpTj2BbftJ4aU0XVF3eygrnLulm0kKBwcMoe1mU14pAU7e7I8exgyr9njcPH7Cdl4BfaIo1MP5Wi6thAzMBsa1SFecUZlAGmuV3SY4wHBHJs7QFTZ9H1I5yfXgwanwTA-9uwddm-euifV4jtsHnR2ts1-DvQSHljXaDWrOspd9-J0JBPbn6b8-gYOlOZd5gDoh3HXctP");'>
+<p class="text-white text-lg font-bold leading-tight">Sentosa Island Explorer</p>
+</div>
+<div class="p-4 bg-white dark:bg-gray-800 flex-grow">
+<div class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400 mb-3">
+<span class="inline-flex items-center gap-1.5 font-medium"><span class="material-symbols-outlined text-base">flag</span>Singapore</span>
+<span class="inline-flex items-center gap-1.5 font-medium"><span class="material-symbols-outlined text-base">schedule</span>6 Hours</span>
+</div>
+<div class="flex items-center gap-4 text-sm font-semibold text-gray-700 dark:text-gray-300">
+<span class="inline-flex items-center gap-1.5"><span class="material-symbols-outlined text-base text-amber-500">military_tech</span>600 XP</span>
+<span class="inline-flex items-center gap-1.5"><span class="material-symbols-outlined text-base text-green-500">school</span>Entertainment</span>
+</div>
+</div>
+<button class="absolute bottom-4 right-4 bg-primary text-white rounded-full h-12 w-12 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="flex items-center justify-center p-4">
+<a class="flex size-10 items-center justify-center rounded-full hover:bg-gray-200/50 dark:hover:bg-white/10" href="#">
+<span class="material-symbols-outlined text-xl">chevron_left</span>
+</a>
+<a class="text-sm font-bold leading-normal tracking-[0.015em] flex size-10 items-center justify-center text-white rounded-full bg-primary" href="#">1</a>
+<a class="text-sm font-normal leading-normal flex size-10 items-center justify-center rounded-full hover:bg-gray-200/50 dark:hover:bg-white/10" href="#">2</a>
+<a class="text-sm font-normal leading-normal flex size-10 items-center justify-center rounded-full hover:bg-gray-200/50 dark:hover:bg-white/10" href="#">3</a>
+<span class="text-sm font-normal leading-normal flex size-10 items-center justify-center rounded-full" href="#">...</span>
+<a class="flex size-10 items-center justify-center rounded-full hover:bg-gray-200/50 dark:hover:bg-white/10" href="#">
+<span class="material-symbols-outlined text-xl">chevron_right</span>
+</a>
+</div>
+</div>
+</main>
+
+  <footer class="w-full bg-background-light dark:bg-background-dark">
+    <div class="mx-auto max-w-7xl px-4 py-8 sm:px-8">
+      <div class="flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-8 dark:border-slate-800 sm:flex-row">
+        <p class="text-sm text-slate-600 dark:text-slate-400">© 2024 XPLØR. All Rights Reserved.</p>
+        <div class="text-sm text-slate-600 dark:text-slate-400">
+          Follow us: <span class="font-semibold text-slate-800 dark:text-slate-200">@xplor.pty</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</div>
+</body>
+</html>
