@@ -3,13 +3,16 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>XPLOR AND PLAY - Gamification Dashboard</title>
+<title>XPLØR: Explore, Play, Learn and Earn</title>
 
+<!-- Fonts -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
 
+<!-- Tailwind -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
 tailwind.config = {
@@ -17,25 +20,17 @@ tailwind.config = {
   theme: {
     extend: {
       colors: {
-        // NAV/FOOTER PALETTE
-        "primary": "#0da6f2", // Bright Blue
-        "background-light": "#f5f7f8", // Light background for navigation
-        "background-dark": "#101c22", // Dark background for navigation
-
-        // DASHBOARD PALETTE (Ensuring compatibility)
-        "sunny-yellow": "#FFC72C",
-        "deep-navy": "#1D3557",
-        "light-gray": "#F1FAEE",
-        "energetic-red": "#E63946",
-        "teal-accent": "#00A79D"
+        "primary": "#0da6f2",
+        "background-light": "#f5f7f8",
+        "background-dark": "#101c22",
       },
       fontFamily: {
         "display": ["Plus Jakarta Sans", "Noto Sans", "sans-serif"]
       },
       borderRadius: {
         "DEFAULT": "1rem",
-        "lg": "1.5rem",
-        "xl": "2rem",
+        "lg": "2rem",
+        "xl": "3rem",
         "full": "9999px"
       },
     },
@@ -74,17 +69,17 @@ tailwind.config = {
 
 /* Compensar header fijo en scroll suave */
 .scroll-offset { scroll-margin-top: 84px; }
-
-/* Configuración de íconos */
+/* Estilo para los iconos de Material Symbols */
 .material-symbols-outlined {
-    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
 </style>
 </head>
 
 <body class="bg-background-light dark:bg-background-dark font-display">
-<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="relative flex min-h-screen w-full flex-col">
 
+  <!-- HEADER -->
   <header class="sticky top-0 z-50 flex justify-center border-b border-gray-200/50 bg-background-light/80 px-4 py-3 backdrop-blur-sm dark:border-gray-800/50 dark:bg-background-dark/80 sm:px-8 md:px-10">
     <div class="flex w-full max-w-7xl items-center justify-between">
       <div class="flex items-center gap-8">
@@ -97,7 +92,8 @@ tailwind.config = {
           <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="explore.html" data-en="EXPLORE" data-es="EXPLORA">EXPLORE</a>
           <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="play.html" data-en="PLAY" data-es="JUEGA">PLAY</a>
           <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="learn.html" data-en="LEARN" data-es="APRENDE">LEARN</a>
-          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="earn.html" data-en="EARN" data-es="GANA">EARN</a>
+          <!-- ENLACE ACTIVO -->
+          <a class="nav-link text-sm font-extrabold text-primary dark:text-primary" href="earn.html" data-en="EARN" data-es="GANA">EARN</a>
           <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="about.html" data-en="ABOUT US" data-es="NOSOTROS">ABOUT US</a>
         </nav>
       </div>
@@ -115,217 +111,176 @@ tailwind.config = {
     </div>
   </div>
 
-        <button id="profileBtn" class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
+        <a href="user.html" id="profileBtn" class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
           <span class="material-symbols-outlined text-xl">person</span>
-        </button>
+        </a>
       </div>
     </div>
   </header>
 
-  <main class="flex flex-col gap-8 mt-8 px-4 sm:px-8 md:px-16 lg:px-24 xl:px-40 flex-1 justify-center py-5">
-    <div class="layout-content-container flex flex-col w-full max-w-[960px] flex-1 mx-auto">
+  <!-- MAIN (Contenido de EARN) -->
+  <main class="flex-grow flex justify-center w-full">
+    <div class="w-full max-w-7xl px-4 sm:px-8 md:px-10 lg:px-16 py-8">
+        <div class="layout-content-container flex flex-col max-w-[960px] flex-1 mx-auto">
+            
+            <div class="flex flex-wrap justify-between gap-3 p-4">
+                <p class="text-slate-900 dark:text-white text-4xl font-black leading-tight tracking-[-0.033em] min-w-72">EARN</p>
+            </div>
 
-      <div class="flex p-4 @container bg-white rounded-lg shadow-sm">
-        <div class="flex w-full flex-col gap-6 @[520px]:flex-row @[520px]:justify-between @[520px]:items-center">
-          <div class="flex gap-4 items-center">
-            <div class="relative">
-              <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-24 h-24 sm:w-32 sm:h-32" data-alt="User avatar of Alex Chen" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuADELKxCz3s93opa_f3M0mlWF74uRRNDuxADDhodGsVT5H7iLt3fsSxu2U7LN_UU6sEfaYWYFDAeyuvnNzXt5akCVeXM69OXxjp_WmvbgXLJo0wFZPPHe65-7aBcId5Sso3vMpP2dCpcpHlKbxnm_hZql-KUCr1-ecwv9Oe42bc1zgo9g3eknt6Q93_bE5CydfiHVVkJCIQ6w3Ff0-_rpde-4tKU9KVd7A-GTjoj1nPmFKnLkpTUBK8NDyQhzmCjdVSbIa6EJdnhKAG");'></div>
-              <button class="absolute bottom-0 right-0 bg-teal-accent text-white rounded-full p-1.5 shadow-md hover:bg-teal-accent/90 transition-colors"><span class="material-symbols-outlined text-base">edit</span></button>
+            <!-- Tarjetas de Puntos y Badges -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
+            <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-6 bg-white dark:bg-background-dark/50 border border-slate-200 dark:border-primary/20 shadow-lg">
+            <p class="text-slate-600 dark:text-white/80 text-base font-medium leading-normal">Your Total Points</p>
+            <p class="text-primary tracking-light text-4xl font-bold leading-tight">12,450</p>
             </div>
-            <div class="flex flex-col justify-center">
-              <p class="text-deep-navy text-xl sm:text-[22px] font-bold leading-tight tracking-[-0.015em]">Alex Chen</p>
-              <p class="text-slate-500 text-base font-normal leading-normal">World Wanderer</p>
-              <p class="text-slate-500 text-base font-normal leading-normal flex items-center gap-1"><span class="material-symbols-outlined text-sunny-yellow text-lg">star</span> Level 12</p>
+            <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-6 bg-white dark:bg-background-dark/50 border border-slate-200 dark:border-primary/20 shadow-lg">
+            <p class="text-slate-600 dark:text-white/80 text-base font-medium leading-normal">Your Badges</p>
+            <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary text-4xl">local_bar</span>
+            <span class="material-symbols-outlined text-primary text-4xl">photo_camera</span>
+            <span class="material-symbols-outlined text-primary text-4xl">restaurant</span>
+            <span class="material-symbols-outlined text-primary text-4xl">hiking</span>
+            <span class="material-symbols-outlined text-slate-300 dark:text-white/40 text-4xl">workspace_premium</span>
+            <span class="material-symbols-outlined text-slate-300 dark:text-white/40 text-4xl">workspace_premium</span>
             </div>
-          </div>
-          <div class="flex flex-col gap-3 p-4 w-full @[520px]:max-w-xs">
-            <div class="flex gap-6 justify-between"><p class="text-deep-navy text-base font-medium leading-normal">Progress to 'Global Voyager'</p></div>
-            <div class="rounded-full bg-slate-200"><div class="h-2.5 rounded-full bg-teal-accent" style="width: 75%;"></div></div>
-            <p class="text-slate-500 text-sm font-normal leading-normal">2500 / 3000 XP</p>
-          </div>
-        </div>
-      </div>
+            </div>
+            </div>
 
-      <div class="flex flex-col gap-6 mt-8">
-        <h2 class="text-deep-navy text-[22px] font-bold leading-tight tracking-[-0.015em]">Your Current Missions</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="bg-white p-6 rounded-lg shadow-sm flex flex-col gap-4 border-l-4 border-teal-accent">
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 rounded-full bg-center bg-cover" data-alt="Flag of Panama" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDR6IcjPW3MIGz-YNma09_OtUiVmdQqUm44wAN1BCmztqjY9i1ZGp6pjHJtUloDPyVSFF9nmYkOcY3TVu9oRA20lLjDE_eViMuL8FOLAUyzxKU6eYgp_nVHglQgbRnxI-F-GEWhF-XlkkTT5m_kH8RPlxan46jlH4n4niQFMf2PVK5QPzxxaSSiNRu_SUXx1wnkfMhGdnNXxuIjdmaC0UBrBYiUl_eMvkKr10rAMIJR_7ztj5buJxgzqap1QQBD7igkURvH_HX3HTCk');"></div>
-              <div>
-                <h3 class="text-lg font-bold text-deep-navy">Mission: Panama</h3>
-                <p class="text-sm text-slate-500">The Crossroads of the World</p>
-              </div>
-            </div>
-            <div class="flex flex-col gap-2">
-              <p class="text-sm font-medium text-slate-600">Mission Completion: 45%</p>
-              <div class="rounded-full bg-slate-200"><div class="h-2 rounded-full bg-teal-accent" style="width: 45%;"></div></div>
-            </div>
-            <button class="mt-2 w-full text-sm font-bold bg-teal-accent text-white py-2.5 rounded-full hover:bg-teal-accent/90 transition-colors">View Mission Details</button>
-          </div>
-          <div class="bg-white p-6 rounded-lg shadow-sm flex flex-col gap-4 border-l-4 border-energetic-red">
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 rounded-full bg-center bg-cover" data-alt="Flag of Singapore" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCa4MxgE4iffmmnL-LeqDB_U-csIRu1sWrJpqXIHi8fEYQHVMfJNJ7-3MS2Ne6kOCILTSrqXQF73EHU5W8bb9jcafGiGXf5Pyqk2XEhaeG5xM5OMevhZLueoYhyeCrIiibbJU2fYM2DmXDVq2X34DXLpIo51wK71Kmlp2AhueiJyXcVbaucrYsb8izFZdoj1hAF7PT8uoTeIwxneUIae83k4Fb-EDHKsjCYVDjDZb7RYin1qPlujIknCQIV1-D8hK-s98FaGmSLJ2bv');"></div>
-              <div>
-                <h3 class="text-lg font-bold text-deep-navy">Mission: Singapore</h3>
-                <p class="text-sm text-slate-500">The Lion City</p>
-              </div>
-            </div>
-            <div class="flex flex-col gap-2">
-              <p class="text-sm font-medium text-slate-600">Mission Completion: 20%</p>
-              <div class="rounded-full bg-slate-200"><div class="h-2 rounded-full bg-energetic-red" style="width: 20%;"></div></div>
-            </div>
-            <button class="mt-2 w-full text-sm font-bold bg-energetic-red text-white py-2.5 rounded-full hover:bg-energetic-red/90 transition-colors">View Mission Details</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-        <div class="md:col-span-2 flex flex-col gap-6">
-          
-          <div class="bg-white p-6 rounded-lg shadow-sm flex flex-col gap-4">
-            <div class="flex justify-between items-center">
-              <h3 class="text-lg font-bold text-deep-navy">Active Challenges</h3>
-              <a class="text-sm font-bold text-teal-accent" href="#">View All</a>
+            <!-- Misiones y Ranking -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 p-4">
+            <div class="lg:col-span-2 flex flex-col gap-4">
+            <h2 class="text-slate-900 dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4">Missions</h2>
+            <div class="flex flex-col gap-4">
+            <div class="flex items-center border-b border-b-slate-200 dark:border-b-blue-900 px-4">
+            <button class="text-primary border-b-2 border-b-primary px-4 py-3 text-sm font-semibold">Panama</button>
+            <button class="text-slate-500 hover:text-primary dark:text-white/60 px-4 py-3 text-sm font-medium">Singapore</button>
+            <button class="text-slate-500 hover:text-primary dark:text-white/60 px-4 py-3 text-sm font-medium">Activities</button>
             </div>
             <div class="flex flex-col gap-4">
-              <div class="border rounded-lg p-4 flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-                <div class="flex items-center gap-3 flex-shrink-0">
-                  <div class="w-8 h-8 rounded-full bg-center bg-cover" data-alt="Flag of Panama" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDR6IcjPW3MIGz-YNma09_OtUiVmdQqUm44wAN1BCmztqjY9i1ZGp6pjHJtUloDPyVSFF9nmYkOcY3TVu9oRA20lLjDE_eViMuL8FOLAUyzxKU6eYgp_nVHglQgbRnxI-F-GEWhF-XlkkTT5m_kH8RPlxan46jlH4n4niQFMf2PVK5QPzxxaSSiNRu_SUXx1wnkfMhGdnNXxuIjdmaC0UBrBYiUl_eMvkKr10rAMIJR_7ztj5buJxgzqap1QQBD7igkURvH_HX3HTCk');"></div>
-                  <h4 class="font-bold text-deep-navy">Panama City Food Tour</h4>
-                </div>
-                <div class="flex-grow w-full">
-                  <div class="flex items-center justify-between mb-1"><span class="text-xs text-slate-500">3 / 5 dishes tasted</span><span class="text-xs font-bold text-teal-accent">60%</span></div>
-                  <div class="rounded-full bg-slate-200"><div class="h-2 rounded-full bg-teal-accent" style="width: 60%;"></div></div>
-                </div>
-                <span class="text-sm font-bold text-sunny-yellow flex items-center gap-1 flex-shrink-0"><span class="material-symbols-outlined text-base">emoji_events</span> +150 XP</span>
-              </div>
-              <div class="border rounded-lg p-4 flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-                <div class="flex items-center gap-3 flex-shrink-0">
-                  <div class="w-8 h-8 rounded-full bg-center bg-cover" data-alt="Flag of Singapore" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCa4MxgE4iffmmnL-LeqDB_U-csIRu1sWrJpqXIHi8fEYQHVMfJNJ7-3MS2Ne6kOCILTSrqXQF73EHU5W8bb9jcafGiGXf5Pyqk2XEhaeG5xM5OMevhZLueoYhyeCrIiibbJU2fYM2DmXDVq2X34DXLpIo51wK71Kmlp2AhueiJyXcVbaucrYsb8izFZdoj1hAF7PT8uoTeIwxneUIae83k4Fb-EDHKsjCYVDjDZb7RYin1qPlujIknCQIV1-D8hK-s98FaGmSLJ2bv');"></div>
-                  <h4 class="font-bold text-deep-navy">Gardens Photo Hunt</h4>
-                </div>
-                <div class="flex-grow w-full">
-                  <div class="flex items-center justify-between mb-1"><span class="text-xs text-slate-500">1 / 3 photos taken</span><span class="text-xs font-bold text-energetic-red">33%</span></div>
-                  <div class="rounded-full bg-slate-200"><div class="h-2 rounded-full bg-energetic-red" style="width: 33%;"></div></div>
-                </div>
-                <span class="text-sm font-bold text-sunny-yellow flex items-center gap-1 flex-shrink-0"><span class="material-symbols-outlined text-base">emoji_events</span> +200 XP</span>
-              </div>
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 rounded-xl bg-white dark:bg-background-dark/50 border border-slate-200 dark:border-primary/20 shadow-md">
+            <div class="flex items-center justify-center size-16 bg-primary/20 text-primary rounded-lg">
+            <span class="material-symbols-outlined text-3xl">sailing</span>
             </div>
-          </div>
-          
-          <div class="bg-white p-6 rounded-lg shadow-sm flex flex-col gap-4">
-            <div class="flex justify-between items-center">
-              <h3 class="text-lg font-bold text-deep-navy">Badge Collection</h3>
-              <a class="text-sm font-bold text-teal-accent" href="#">View All</a>
+            <div class="flex-1">
+            <p class="text-slate-900 dark:text-white font-bold">Panama Canal Explorer</p>
+            <p class="text-slate-500 dark:text-white/60 text-sm">Visit all 3 lookout points.</p>
+            <div class="w-full bg-slate-200 dark:bg-white/10 rounded-full h-2.5 mt-2">
+            <div class="bg-primary h-2.5 rounded-full" style="width: 66%"></div>
             </div>
-            <div class="grid grid-cols-4 sm:grid-cols-6 gap-4">
-              <div class="flex flex-col items-center text-center gap-2 relative">
-                <div class="bg-sunny-yellow/20 p-3 rounded-full flex items-center justify-center">
-                  <span class="material-symbols-outlined text-sunny-yellow text-4xl" data-icon="explore">explore</span>
-                </div>
-                <p class="text-xs font-medium text-slate-600">Panama Canal Navigator</p>
-                <button class="absolute -top-1 -right-1 bg-primary text-white rounded-full p-0.5 opacity-0 hover:opacity-100 focus:opacity-100 transition-opacity"><span class="material-symbols-outlined !text-sm">share</span></button>
-              </div>
-              <div class="flex flex-col items-center text-center gap-2 relative">
-                <div class="bg-teal-accent/20 p-3 rounded-full flex items-center justify-center">
-                  <span class="material-symbols-outlined text-teal-accent text-4xl" data-icon="forest">forest</span>
-                </div>
-                <p class="text-xs font-medium text-slate-600">Gardens by the Bay Explorer</p>
-                <button class="absolute -top-1 -right-1 bg-primary text-white rounded-full p-0.5 opacity-0 hover:opacity-100 focus:opacity-100 transition-opacity"><span class="material-symbols-outlined !text-sm">share</span></button>
-              </div>
-              <div class="flex flex-col items-center text-center gap-2 relative">
-                <div class="bg-energetic-red/20 p-3 rounded-full flex items-center justify-center">
-                  <span class="material-symbols-outlined text-energetic-red text-4xl" data-icon="restaurant">restaurant</span>
-                </div>
-                <p class="text-xs font-medium text-slate-600">Singapore Foodie</p>
-                <button class="absolute -top-1 -right-1 bg-primary text-white rounded-full p-0.5 opacity-0 hover:opacity-100 focus:opacity-100 transition-opacity"><span class="material-symbols-outlined !text-sm">share</span></button>
-              </div>
-              <div class="flex flex-col items-center text-center gap-2 opacity-40">
-                <div class="bg-slate-200 p-3 rounded-full flex items-center justify-center">
-                  <span class="material-symbols-outlined text-slate-500 text-4xl" data-icon="photo_camera">photo_camera</span>
-                </div>
-                <p class="text-xs font-medium text-slate-500">Casco Viejo Historian</p>
-              </div>
-              <div class="flex flex-col items-center text-center gap-2 opacity-40">
-                <div class="bg-slate-200 p-3 rounded-full flex items-center justify-center">
-                  <span class="material-symbols-outlined text-slate-500 text-4xl" data-icon="beach_access">beach_access</span>
-                </div>
-                <p class="text-xs font-medium text-slate-500">Bocas del Toro Diver</p>
-              </div>
-              <div class="flex flex-col items-center text-center gap-2 opacity-40">
-                <div class="bg-slate-200 p-3 rounded-full flex items-center justify-center">
-                  <span class="material-symbols-outlined text-slate-500 text-4xl" data-icon="local_mall">local_mall</span>
-                </div>
-                <p class="text-xs font-medium text-slate-500">Orchard Road Shopper</p>
-              </div>
             </div>
-          </div>
-          
-          <div class="bg-deep-navy/90 p-6 rounded-lg shadow-sm flex flex-col gap-4 text-white">
-            <div class="flex items-center gap-3">
-              <span class="material-symbols-outlined text-sunny-yellow text-3xl">rocket_launch</span>
-              <h3 class="text-lg font-bold">Coming Soon!</h3>
+            <div class="flex flex-col items-end">
+            <p class="text-slate-600 dark:text-white/80 text-sm">Reward</p>
+            <p class="text-primary font-bold text-lg">+500 PTS</p>
             </div>
-            <p class="text-sm text-slate-300">New missions and challenges are just around the corner. Get ready to explore more of the world!</p>
-            <ul class="text-sm list-disc pl-5 space-y-1 text-slate-300">
-              <li>Mission: Costa Rica</li>
-              <li>Volcano Explorer Badge</li>
-              <li>Jungle Wildlife Photo Hunt</li>
-            </ul>
-          </div>
+            </div>
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 rounded-xl bg-white dark:bg-background-dark/50 border border-slate-200 dark:border-primary/20 shadow-md">
+            <div class="flex items-center justify-center size-16 bg-primary/20 text-primary rounded-lg">
+            <span class="material-symbols-outlined text-3xl">coffee</span>
+            </div>
+            <div class="flex-1">
+            <p class="text-slate-900 dark:text-white font-bold">Taste Geisha Coffee</p>
+            <p class="text-slate-500 dark:text-white/60 text-sm">Try the famous Geisha coffee.</p>
+            <div class="w-full bg-slate-200 dark:bg-white/10 rounded-full h-2.5 mt-2">
+            <div class="bg-primary h-2.5 rounded-full" style="width: 100%"></div>
+            </div>
+            </div>
+            <div class="flex flex-col items-end">
+            <p class="text-slate-600 dark:text-white/80 text-sm">Reward</p>
+            <p class="text-primary font-bold text-lg">+150 PTS</p>
+            </div>
+            </div>
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 rounded-xl bg-white dark:bg-background-dark/50 border border-slate-200 dark:border-primary/20 shadow-md">
+            <div class="flex items-center justify-center size-16 bg-primary/20 text-primary rounded-lg">
+            <span class="material-symbols-outlined text-3xl">draw</span>
+            </div>
+            <div class="flex-1">
+            <p class="text-slate-900 dark:text-white font-bold">Complete a Mola Art Quiz</p>
+            <p class="text-slate-500 dark:text-white/60 text-sm">Test your knowledge on Guna art.</p>
+            <div class="w-full bg-slate-200 dark:bg-white/10 rounded-full h-2.5 mt-2">
+            <div class="bg-primary h-2.5 rounded-full" style="width: 0%"></div>
+            </div>
+            </div>
+            <div class="flex flex-col items-end">
+            <p class="text-slate-600 dark:text-white/80 text-sm">Reward</p>
+            <p class="text-primary font-bold text-lg">+200 PTS</p>
+            </div>
+            </div>
+            </div>
+            <div class="flex flex-col items-center justify-center gap-4 p-8 rounded-xl bg-slate-50 dark:bg-background-dark/50 border border-dashed border-slate-300 dark:border-white/20 mt-4">
+            <span class="material-symbols-outlined text-slate-400 dark:text-white/40 text-5xl">hourglass_top</span>
+            <h3 class="text-slate-900 dark:text-white font-bold">Coming Soon</h3>
+            <p class="text-center text-slate-500 dark:text-white/60 text-sm max-w-xs">New challenges are on the horizon! Check back soon for more ways to explore and earn.</p>
+            </div>
+            </div>
+            </div>
+            <div class="flex flex-col gap-4">
+            <h2 class="text-slate-900 dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4">Top XPLØRers</h2>
+            <div class="flex flex-col overflow-hidden rounded-xl border border-slate-200 dark:border-blue-900 bg-white dark:bg-background-dark/50 shadow-lg">
+            <div class="flex items-center justify-between px-4 py-3 bg-slate-100 dark:bg-blue-900/50">
+            <p class="text-slate-700 dark:text-white text-sm font-medium w-1/6">Rank</p>
+            <p class="text-slate-700 dark:text-white text-sm font-medium w-3/6 text-left">User</p>
+            <p class="text-slate-700 dark:text-white text-sm font-medium w-2/6 text-right">Points</p>
+            </div>
+            <div class="flex flex-col">
+            <!-- Fila 1 -->
+            <div class="flex items-center justify-between px-4 py-3 border-t border-t-slate-100 dark:border-t-blue-900">
+            <p class="text-slate-500 dark:text-blue-300 font-bold text-lg w-1/6">1</p>
+            <div class="flex items-center gap-3 w-3/6">
+            <!-- Avatar genérico (sin imagen) -->
+            <div class="size-10 rounded-full bg-slate-300/50 dark:bg-slate-700/50 flex items-center justify-center text-slate-500 text-lg font-bold">A</div>
+            <p class="text-slate-900 dark:text-white font-medium">Alex</p>
+            </div>
+            <p class="text-slate-500 dark:text-blue-300 font-medium w-2/6 text-right">15,200</p>
+            </div>
+            <!-- Fila 2 -->
+            <div class="flex items-center justify-between px-4 py-3 border-t border-t-slate-100 dark:border-t-blue-900">
+            <p class="text-slate-500 dark:text-blue-300 font-bold text-lg w-1/6">2</p>
+            <div class="flex items-center gap-3 w-3/6">
+            <!-- Avatar genérico (sin imagen) -->
+            <div class="size-10 rounded-full bg-slate-300/50 dark:bg-slate-700/50 flex items-center justify-center text-slate-500 text-lg font-bold">M</div>
+            <p class="text-slate-900 dark:text-white font-medium">Maria</p>
+            </div>
+            <p class="text-slate-500 dark:text-blue-300 font-medium w-2/6 text-right">14,800</p>
+            </div>
+            <!-- Highlighted row: Current User -->
+            <div class="flex items-center justify-between px-4 py-3 border-y border-primary/50 dark:border-primary/50 bg-primary/10 dark:bg-primary/30">
+            <p class="text-primary font-bold text-lg w-1/6">3</p>
+            <div class="flex items-center gap-3 w-3/6">
+            <!-- Avatar genérico (sin imagen) -->
+            <div class="size-10 rounded-full bg-primary/50 flex items-center justify-center text-white text-lg font-bold">Y</div>
+            <p class="text-slate-900 dark:text-white font-bold">You</p>
+            </div>
+            <p class="text-primary font-bold w-2/6 text-right">12,450</p>
+            </div>
+            <!-- Fila 4 -->
+            <div class="flex items-center justify-between px-4 py-3 border-t border-t-slate-100 dark:border-t-blue-900">
+            <p class="text-slate-500 dark:text-blue-300 font-bold text-lg w-1/6">4</p>
+            <div class="flex items-center gap-3 w-3/6">
+            <!-- Avatar genérico (sin imagen) -->
+            <div class="size-10 rounded-full bg-slate-300/50 dark:bg-slate-700/50 flex items-center justify-center text-slate-500 text-lg font-bold">C</div>
+            <p class="text-slate-900 dark:text-white font-medium">Chen</p>
+            </div>
+            <p class="text-slate-500 dark:text-blue-300 font-medium w-2/6 text-right">11,950</p>
+            </div>
+            <!-- Fila 5 -->
+            <div class="flex items-center justify-between px-4 py-3 border-t border-t-slate-100 dark:border-t-blue-900">
+            <p class="text-slate-500 dark:text-blue-300 font-bold text-lg w-1/6">5</p>
+            <div class="flex items-center gap-3 w-3/6">
+            <!-- Avatar genérico (sin imagen) -->
+            <div class="size-10 rounded-full bg-slate-300/50 dark:bg-slate-700/50 flex items-center justify-center text-slate-500 text-lg font-bold">S</div>
+            <p class="text-slate-900 dark:text-white font-medium">Sofia</p>
+            </div>
+            <p class="text-slate-500 dark:text-blue-300 font-medium w-2/6 text-right">10,500</p>
+            </div>
+            </div>
+            </div>
+            </div>
+
         </div>
-        
-        <div class="md:col-span-1 bg-white p-6 rounded-lg shadow-sm flex flex-col gap-4">
-          <h3 class="text-lg font-bold text-deep-navy">Leaderboard</h3>
-          <div class="flex flex-col gap-3">
-            <div class="flex items-center gap-3 bg-sunny-yellow/20 p-2 rounded-lg">
-              <span class="font-bold text-deep-navy text-lg w-6 text-center">1</span>
-              <div class="w-10 h-10 rounded-full bg-center bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuADELKxCz3s93opa_f3M0mlWF74uRRNDuxADDhodGsVT5H7iLt3fsSxu2U7LN_UU6sEfaYWYFDAeyuvnNzXt5akCVeXM69OXxjp_WmvbgXLJo0wFZPPHe65-7aBcId5Sso3vMpP2dCpcpHlKbxnm_hZql-KUCr1-ecwv9Oe42bc1zgo9g3eknt6Q93_bE5CydfiHVVkJCIQ6w3Ff0-_rpde-4tKU9KVd7A-GTjoj1nPmFKnLkpTUBK8NDyQhzmCjdVSbIa6EJdnhKAG");'></div>
-              <div class="flex-grow">
-                <p class="font-bold text-deep-navy text-sm">Alex Chen (You)</p>
-                <p class="text-xs text-slate-600">2500 XP</p>
-              </div>
-              <span class="material-symbols-outlined text-sunny-yellow">military_tech</span>
-            </div>
-            <div class="flex items-center gap-3 p-2 rounded-lg">
-              <span class="font-bold text-slate-500 text-lg w-6 text-center">2</span>
-              <div class="w-10 h-10 rounded-full bg-center bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD2MMsnH4MiW3UW8TdQN4Ptbb9cm7K1S1dU__FlXGmaG9jrRemcNfgZCueSIDmM0WGEkYF3atfjqVFB0MRv5IWId87A9InJlok08D4yed5jXEhPML4iCRz88e0RIWvc1Ud9rXwazfZ4IzbjXrWxCftGk_a-UashDjeWvO5g1K9L7fs8O0O-I_-Gv_SI9R86cPeI-1rdxDNFCcDKww0FN-oNYvR9EfHGP17Wd6REUyh-pgSAKezPveg_9ZsmT5amCTFD1Q5rhJ9whSII");'></div>
-              <div class="flex-grow">
-                <p class="font-medium text-deep-navy text-sm">Ben Carter</p>
-                <p class="text-xs text-slate-600">2350 XP</p>
-              </div>
-            </div>
-            <div class="flex items-center gap-3 p-2 rounded-lg">
-              <span class="font-bold text-slate-500 text-lg w-6 text-center">3</span>
-              <div class="w-10 h-10 rounded-full bg-center bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD2MMsnH4MiW3UW8TdQN4Ptbb9cm7K1S1dU__FlXGmaG9jrRemcNfgZCueSIDmM0WGEkYF3atfjqVFB0MRv5IWId87A9InJlok08D4yed5jXEhPML4iCRz88e0RIWvc1Ud9rXwazfZ4IzbjXrWxCftGk_a-UashDjeWvO5g1K9L7fs8O0O-I_-Gv_SI9R86cPeI-1rdxDNFCcDKww0FN-oNYvR9EfHGP17Wd6REUyh-pgSAKezPveg_9ZsmT5amCTFD1Q5rhJ9whSII");'></div>
-              <div class="flex-grow">
-                <p class="font-medium text-deep-navy text-sm">Chloe Davis</p>
-                <p class="text-xs text-slate-600">2100 XP</p>
-              </div>
-            </div>
-            <div class="flex items-center gap-3 p-2 rounded-lg">
-              <span class="font-bold text-slate-500 text-lg w-6 text-center">4</span>
-              <div class="w-10 h-10 rounded-full bg-center bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD2MMsnH4MiW3UW8TdQN4Ptbb9cm7K1S1dU__FlXGmaG9jrRemcNfgZCueSIDmM0WGEkYF3atfjqVFB0MRv5IWId87A9InJlok08D4yed5jXEhPML4iCRz88e0RIWvc1Ud9rXwazfZ4IzbjXrWxCftGk_a-UashDjeWvO5g1K9L7fs8O0O-I_-Gv_SI9R86cPeI-1rdxDNFCcDKww0FN-oNYvR9EfHGP17Wd6REUyh-pgSAKezPveg_9ZsmT5amCTFD1Q5rhJ9whSII");'></div>
-              <div class="flex-grow">
-                <p class="font-medium text-deep-navy text-sm">Diana Evans</p>
-                <p class="text-xs text-slate-600">1980 XP</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </main>
 
-  <div class="fixed bottom-5 right-5 flex items-end gap-3 z-50">
-    <div class="bg-white rounded-lg p-3 shadow-lg text-sm text-deep-navy max-w-xs relative hidden sm:block">
-      <p class="font-bold">Mission Update!</p><p>Great progress on your Panama Mission! You've unlocked a new challenge: The Casco Viejo Walking Tour!</p>
-      <div class="absolute -right-2 bottom-2 w-0 h-0 border-t-[8px] border-t-transparent border-l-[10px] border-l-white border-b-[8px] border-b-transparent"></div>
-    </div>
-    <div class="w-20 h-20 bg-center bg-no-repeat bg-contain" data-alt="XPLORO the robot ambassador mascot" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD4pvX4pCR1oo_5if26Ybna1fGvr_WU_IKPa56OzvMabGl1hHiB3T2HKd4zT5DLrNzz68_Y3bbE4yubRVcz1JbZp_Qp7KEyCCtZGgTq1HBOkUFw7iFjwGpHQzEykndvG0jShI4BeheSYfKZTujrJwP7GFLPnsAB1T8Z_xCC_bQU-_2zN8fRRyz9wYRSgFYHLGgRJgjFjGmUvJeFKsA-bbZDm8vV89Pj_y-Px9tklWz2IulSxks9RKzZqQ7vZC8fJpzcx4EIkRJgCEq-');"></div>
-  </div>
-
+  <!-- FOOTER -->
   <footer class="w-full bg-background-light dark:bg-background-dark">
     <div class="mx-auto max-w-7xl px-4 py-8 sm:px-8">
       <div class="flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-8 dark:border-slate-800 sm:flex-row">
@@ -338,5 +293,38 @@ tailwind.config = {
   </footer>
 
 </div>
+<script>
+    // Lógica básica para el menú de idioma (no funcional, solo UI)
+    const langBtn = document.getElementById('langBtn');
+    const langMenu = document.getElementById('langMenu');
+    
+    langBtn.addEventListener('click', () => {
+        const isHidden = langMenu.style.display === 'none' || langMenu.style.display === '';
+        langMenu.style.display = isHidden ? 'block' : 'none';
+    });
+    
+    document.addEventListener('click', (event) => {
+        if (!langBtn.contains(event.target) && !langMenu.contains(event.target)) {
+            langMenu.style.display = 'none';
+        }
+    });
+
+    // Lógica para cambiar el idioma de los textos (ejemplo)
+    document.querySelectorAll('#langMenu button').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const newLang = e.target.getAttribute('data-lang');
+            // Simular cambio de idioma en enlaces y botones visibles
+            document.querySelectorAll('.nav-link, #signupBtn').forEach(el => {
+                const textKey = el.getAttribute(`data-${newLang}`);
+                if (textKey) {
+                    el.textContent = textKey;
+                }
+            });
+            // Ocultar menú
+            langMenu.style.display = 'none';
+            // Aquí iría la lógica real para cambiar el idioma global de la app
+        });
+    });
+</script>
 </body>
 </html>
