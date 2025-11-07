@@ -3,16 +3,15 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>XPLØR: Explore, Play, Learn and Earn</title>
+<title>XPLØR: How EARN Works</title>
 
-<!-- Fonts -->
+
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
 
-<!-- Tailwind -->
+
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
 tailwind.config = {
@@ -20,9 +19,9 @@ tailwind.config = {
   theme: {
     extend: {
       colors: {
-        "primary": "#0da6f2",
-        "background-light": "#f5f7f8",
-        "background-dark": "#101c22",
+        "primary": "#0da6f2", // Azul vibrante
+        "background-light": "#f5f7f8", // Fondo claro
+        "background-dark": "#101c22", // Fondo oscuro para el modo oscuro
       },
       fontFamily: {
         "display": ["Plus Jakarta Sans", "Noto Sans", "sans-serif"]
@@ -39,48 +38,57 @@ tailwind.config = {
 </script>
 
 <style>
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
-}
-.animate-float { animation: float 3s ease-in-out infinite; }
-
-/* Dropdown idiomas */
-#langMenu {
-  position: absolute;
-  right: 0;
-  margin-top: 8px;
-  width: 150px;
-  background: white;
-  border-radius: 0.5rem;
-  overflow: hidden;
-  border: 1px solid #ddd;
-  display: none;
-  z-index: 50;
-}
-#langMenu button {
-  width: 100%;
-  padding: 10px 12px;
-  text-align: left;
-  font-size: 14px;
-}
-#langMenu button:hover { background-color: #0da6f21a; }
-
-/* Compensar header fijo en scroll suave */
-.scroll-offset { scroll-margin-top: 84px; }
-/* Estilo para los iconos de Material Symbols */
 .material-symbols-outlined {
     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+#langMenu {
+    /* Estilos para el dropdown */
+    display: none; /* Oculto por defecto */
+    position: absolute;
+    top: 100%; /* Posiciona debajo del botón */
+    right: 0;
+    margin-top: 8px;
+    z-index: 100;
+    min-width: 140px;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb; /* Color de borde claro */
+    overflow: hidden;
+}
+.dark #langMenu {
+    background-color: #1f2937; /* Fondo oscuro */
+    border-color: #4b5563; /* Borde oscuro */
+}
+
+#langMenu button {
+    width: 100%;
+    padding: 8px 16px;
+    text-align: left;
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 500; /* medium */
+    color: #1f2937; /* slate-800 */
+    transition: background-color 0.15s;
+}
+
+#langMenu button:hover {
+    background-color: #f3f4f6; /* hover:bg-gray-100 */
+}
+
+.dark #langMenu button {
+    color: #f9fafb; /* dark:text-gray-50 */
+}
+.dark #langMenu button:hover {
+    background-color: #374151; /* dark:hover:bg-gray-700 */
 }
 </style>
 </head>
 
-<body class="bg-background-light dark:bg-background-dark font-display">
-<div class="relative flex min-h-screen w-full flex-col">
+<body class="bg-background-light dark:bg-background-dark font-display flex flex-col min-h-screen">
 
-  <!-- HEADER -->
-  <header class="sticky top-0 z-50 flex justify-center border-b border-gray-200/50 bg-background-light/80 px-4 py-3 backdrop-blur-sm dark:border-gray-800/50 dark:bg-background-dark/80 sm:px-8 md:px-10">
+  
+<!-- HEADER -->
+<header class="sticky top-0 z-50 flex justify-center border-b border-gray-200/50 bg-background-light/80 px-4 py-3 backdrop-blur-sm dark:border-gray-800/50 dark:bg-background-dark/80 sm:px-8 md:px-10">
     <div class="flex w-full max-w-7xl items-center justify-between">
       <div class="flex items-center gap-8">
         <div class="flex items-center gap-2 text-slate-800 dark:text-white">
@@ -92,23 +100,25 @@ tailwind.config = {
           <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="explore.html" data-en="EXPLORE" data-es="EXPLORA">EXPLORE</a>
           <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="play.html" data-en="PLAY" data-es="JUEGA">PLAY</a>
           <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="learn.html" data-en="LEARN" data-es="APRENDE">LEARN</a>
-          <!-- ENLACE ACTIVO -->
-          <a class="nav-link text-sm font-extrabold text-primary dark:text-primary" href="earn.html" data-en="EARN" data-es="GANA">EARN</a>
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="earn.html" data-en="GANA" data-es="EARN">EARN</a>
           <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="about.html" data-en="ABOUT US" data-es="NOSOTROS">ABOUT US</a>
         </nav>
       </div>
 
  <div class="flex items-center gap-2">
-  <a href="login.html" id="signupBtn" class="hidden min-w-[84px] md:flex cursor-pointer items-center justify-center overflow-hidden rounded-full bg-primary px-4 h-10 text-sm font-bold text-white transition-colors hover:bg-primary/90" data-en="LOG IN" data-es="INICIAR SESIÓN">LOG IN</a>
+  <a href="login.html" id="loginBtn" class="hidden min-w-[84px] md:flex cursor-pointer items-center justify-center overflow-hidden rounded-full bg-primary px-4 h-10 text-sm font-bold text-white transition-colors hover:bg-primary/90" data-en="LOG IN" data-es="INICIAR SESIÓN">LOG IN</a>
   
   <div class="relative">
     <button id="langBtn" class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
       <span class="material-symbols-outlined text-xl">language</span>
     </button>
+    
+    <!-- Language Menu -->
     <div id="langMenu">
       <button data-lang="en">English 🇺🇸</button>
       <button data-lang="es">Español 🇵🇦</button>
     </div>
+    
   </div>
 
         <a href="user.html" id="profileBtn" class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
@@ -118,170 +128,100 @@ tailwind.config = {
     </div>
   </header>
 
-  <!-- MAIN (Contenido de EARN) -->
-  <main class="flex-grow flex justify-center w-full">
-    <div class="w-full max-w-7xl px-4 sm:px-8 md:px-10 lg:px-16 py-8">
-        <div class="layout-content-container flex flex-col max-w-[960px] flex-1 mx-auto">
-            
-            <div class="flex flex-wrap justify-between gap-3 p-4">
-                <p class="text-slate-900 dark:text-white text-4xl font-black leading-tight tracking-[-0.033em] min-w-72">EARN</p>
+
+<main class="flex-grow flex justify-center w-full py-12">
+    <div class="w-full max-w-4xl px-4 sm:px-8 md:px-10 lg:px-16">
+        <div class="flex flex-col items-center text-center gap-8">
+            <h1 class="text-slate-900 dark:text-white text-5xl font-extrabold leading-tight tracking-[-0.033em]" 
+                data-en="Earn Rewards with XPLØR"
+                data-es="Gana Recompensas con XPLØR">
+                Earn Rewards with XPLØR
+            </h1>
+            <p class="text-lg text-slate-600 dark:text-slate-300 max-w-2xl"
+                data-en="Discover how to complete missions, unlock badges, and level up as you explore, learn, and play."
+                data-es="Descubre cómo completar misiones, desbloquear insignias y subir de nivel mientras exploras, aprendes y juegas.">
+                Discover how to complete missions, unlock badges, and level up as you explore, learn, and play.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+                
+                <!-- Step 1: Explore Missions -->
+                <div class="flex flex-col items-center gap-4 p-6 bg-white dark:bg-background-dark/50 rounded-xl shadow-lg border border-slate-200 dark:border-primary/20">
+                    <div class="size-16 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+                        <span class="material-symbols-outlined text-4xl">travel_explore</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white"
+                        data-en="1. Explore Missions"
+                        data-es="1. Explora Misiones">
+                        1. Explore Missions
+                    </h3>
+                    <p class="text-slate-600 dark:text-slate-400"
+                        data-en="Browse through different categories and discover missions tailored to your exploration interests."
+                        data-es="Navega por las diferentes categorías y descubre misiones adaptadas a tus intereses de exploración.">
+                        Browse through different categories and discover missions tailored to your exploration interests.
+                    </p>
+                </div>
+
+                <!-- Step 2: Complete Challenges -->
+                <div class="flex flex-col items-center gap-4 p-6 bg-white dark:bg-background-dark/50 rounded-xl shadow-lg border border-slate-200 dark:border-primary/20">
+                    <div class="size-16 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+                        <span class="material-symbols-outlined text-4xl">task_alt</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white"
+                        data-en="2. Complete Challenges"
+                        data-es="2. Completa Desafíos">
+                        2. Complete Challenges
+                    </h3>
+                    <p class="text-slate-600 dark:text-slate-400"
+                        data-en="From visiting iconic places to knowledge quizzes, every mission has a unique challenge."
+                        data-es="Desde visitas a lugares emblemáticos hasta pruebas de conocimiento, cada misión tiene un desafío único.">
+                        From visiting iconic places to knowledge quizzes, every mission has a unique challenge.
+                    </p>
+                </div>
+
+                <!-- Step 3: Unlock Badges -->
+                <div class="flex flex-col items-center gap-4 p-6 bg-white dark:bg-background-dark/50 rounded-xl shadow-lg border border-slate-200 dark:border-primary/20">
+                    <div class="size-16 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+                        <span class="material-symbols-outlined text-4xl">auto_awesome</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white"
+                        data-en="3. Unlock Badges"
+                        data-es="3. Desbloquea Insignias">
+                        3. Unlock Badges
+                    </h3>
+                    <p class="text-slate-600 dark:text-slate-400"
+                        data-en="Every completed mission grants you an exclusive badge and helps you level up your XPLØRer status."
+                        data-es="Cada misión completada te otorga una insignia exclusiva y te ayuda a subir tu nivel de XPLØRer.">
+                        Every completed mission grants you an exclusive badge and helps you level up your XPLØRer status.
+                    </p>
+                </div>
             </div>
 
-            <!-- Tarjetas de Puntos y Badges -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
-            <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-6 bg-white dark:bg-background-dark/50 border border-slate-200 dark:border-primary/20 shadow-lg">
-            <p class="text-slate-600 dark:text-white/80 text-base font-medium leading-normal">Your Total Points</p>
-            <p class="text-primary tracking-light text-4xl font-bold leading-tight">12,450</p>
+            <!-- Call to Action -->
+            <div class="mt-12 flex flex-col items-center gap-6 p-8 bg-primary/5 dark:bg-primary/10 rounded-xl">
+                <h2 class="text-slate-900 dark:text-white text-3xl font-bold"
+                    data-en="Start becoming a TOP XPLØRer"
+                    data-es="Empieza a ser un XPLØRer TOP">
+                    Start becoming a TOP XPLØRer
+                </h2>
+                <p class="text-slate-600 dark:text-slate-300 text-lg max-w-md"
+                    data-en="Your exploration journey awaits. Complete your first mission and claim your initial badge."
+                    data-es="Tu viaje de exploración te espera. Completa tu primera misión y reclama tu insignia inicial.">
+                    Your exploration journey awaits. Complete your first mission and claim your initial badge.
+                </p>
+                <button class="bg-primary text-white text-lg font-bold px-8 py-4 rounded-full shadow-lg hover:bg-primary/90 transition-colors"
+                    data-en="Explore Missions Now!"
+                    data-es="¡Explorar Misiones Ahora!">
+                    Explore Missions Now!
+                </button>
             </div>
-            <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-6 bg-white dark:bg-background-dark/50 border border-slate-200 dark:border-primary/20 shadow-lg">
-            <p class="text-slate-600 dark:text-white/80 text-base font-medium leading-normal">Your Badges</p>
-            <div class="flex items-center gap-3">
-            <span class="material-symbols-outlined text-primary text-4xl">local_bar</span>
-            <span class="material-symbols-outlined text-primary text-4xl">photo_camera</span>
-            <span class="material-symbols-outlined text-primary text-4xl">restaurant</span>
-            <span class="material-symbols-outlined text-primary text-4xl">hiking</span>
-            <span class="material-symbols-outlined text-slate-300 dark:text-white/40 text-4xl">workspace_premium</span>
-            <span class="material-symbols-outlined text-slate-300 dark:text-white/40 text-4xl">workspace_premium</span>
-            </div>
-            </div>
-            </div>
-
-            <!-- Misiones y Ranking -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 p-4">
-            <div class="lg:col-span-2 flex flex-col gap-4">
-            <h2 class="text-slate-900 dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4">Missions</h2>
-            <div class="flex flex-col gap-4">
-            <div class="flex items-center border-b border-b-slate-200 dark:border-b-blue-900 px-4">
-            <button class="text-primary border-b-2 border-b-primary px-4 py-3 text-sm font-semibold">Panama</button>
-            <button class="text-slate-500 hover:text-primary dark:text-white/60 px-4 py-3 text-sm font-medium">Singapore</button>
-            <button class="text-slate-500 hover:text-primary dark:text-white/60 px-4 py-3 text-sm font-medium">Activities</button>
-            </div>
-            <div class="flex flex-col gap-4">
-            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 rounded-xl bg-white dark:bg-background-dark/50 border border-slate-200 dark:border-primary/20 shadow-md">
-            <div class="flex items-center justify-center size-16 bg-primary/20 text-primary rounded-lg">
-            <span class="material-symbols-outlined text-3xl">sailing</span>
-            </div>
-            <div class="flex-1">
-            <p class="text-slate-900 dark:text-white font-bold">Panama Canal Explorer</p>
-            <p class="text-slate-500 dark:text-white/60 text-sm">Visit all 3 lookout points.</p>
-            <div class="w-full bg-slate-200 dark:bg-white/10 rounded-full h-2.5 mt-2">
-            <div class="bg-primary h-2.5 rounded-full" style="width: 66%"></div>
-            </div>
-            </div>
-            <div class="flex flex-col items-end">
-            <p class="text-slate-600 dark:text-white/80 text-sm">Reward</p>
-            <p class="text-primary font-bold text-lg">+500 PTS</p>
-            </div>
-            </div>
-            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 rounded-xl bg-white dark:bg-background-dark/50 border border-slate-200 dark:border-primary/20 shadow-md">
-            <div class="flex items-center justify-center size-16 bg-primary/20 text-primary rounded-lg">
-            <span class="material-symbols-outlined text-3xl">coffee</span>
-            </div>
-            <div class="flex-1">
-            <p class="text-slate-900 dark:text-white font-bold">Taste Geisha Coffee</p>
-            <p class="text-slate-500 dark:text-white/60 text-sm">Try the famous Geisha coffee.</p>
-            <div class="w-full bg-slate-200 dark:bg-white/10 rounded-full h-2.5 mt-2">
-            <div class="bg-primary h-2.5 rounded-full" style="width: 100%"></div>
-            </div>
-            </div>
-            <div class="flex flex-col items-end">
-            <p class="text-slate-600 dark:text-white/80 text-sm">Reward</p>
-            <p class="text-primary font-bold text-lg">+150 PTS</p>
-            </div>
-            </div>
-            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 rounded-xl bg-white dark:bg-background-dark/50 border border-slate-200 dark:border-primary/20 shadow-md">
-            <div class="flex items-center justify-center size-16 bg-primary/20 text-primary rounded-lg">
-            <span class="material-symbols-outlined text-3xl">draw</span>
-            </div>
-            <div class="flex-1">
-            <p class="text-slate-900 dark:text-white font-bold">Complete a Mola Art Quiz</p>
-            <p class="text-slate-500 dark:text-white/60 text-sm">Test your knowledge on Guna art.</p>
-            <div class="w-full bg-slate-200 dark:bg-white/10 rounded-full h-2.5 mt-2">
-            <div class="bg-primary h-2.5 rounded-full" style="width: 0%"></div>
-            </div>
-            </div>
-            <div class="flex flex-col items-end">
-            <p class="text-slate-600 dark:text-white/80 text-sm">Reward</p>
-            <p class="text-primary font-bold text-lg">+200 PTS</p>
-            </div>
-            </div>
-            </div>
-            <div class="flex flex-col items-center justify-center gap-4 p-8 rounded-xl bg-slate-50 dark:bg-background-dark/50 border border-dashed border-slate-300 dark:border-white/20 mt-4">
-            <span class="material-symbols-outlined text-slate-400 dark:text-white/40 text-5xl">hourglass_top</span>
-            <h3 class="text-slate-900 dark:text-white font-bold">Coming Soon</h3>
-            <p class="text-center text-slate-500 dark:text-white/60 text-sm max-w-xs">New challenges are on the horizon! Check back soon for more ways to explore and earn.</p>
-            </div>
-            </div>
-            </div>
-            <div class="flex flex-col gap-4">
-            <h2 class="text-slate-900 dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4">Top XPLØRers</h2>
-            <div class="flex flex-col overflow-hidden rounded-xl border border-slate-200 dark:border-blue-900 bg-white dark:bg-background-dark/50 shadow-lg">
-            <div class="flex items-center justify-between px-4 py-3 bg-slate-100 dark:bg-blue-900/50">
-            <p class="text-slate-700 dark:text-white text-sm font-medium w-1/6">Rank</p>
-            <p class="text-slate-700 dark:text-white text-sm font-medium w-3/6 text-left">User</p>
-            <p class="text-slate-700 dark:text-white text-sm font-medium w-2/6 text-right">Points</p>
-            </div>
-            <div class="flex flex-col">
-            <!-- Fila 1 -->
-            <div class="flex items-center justify-between px-4 py-3 border-t border-t-slate-100 dark:border-t-blue-900">
-            <p class="text-slate-500 dark:text-blue-300 font-bold text-lg w-1/6">1</p>
-            <div class="flex items-center gap-3 w-3/6">
-            <!-- Avatar genérico (sin imagen) -->
-            <div class="size-10 rounded-full bg-slate-300/50 dark:bg-slate-700/50 flex items-center justify-center text-slate-500 text-lg font-bold">A</div>
-            <p class="text-slate-900 dark:text-white font-medium">Alex</p>
-            </div>
-            <p class="text-slate-500 dark:text-blue-300 font-medium w-2/6 text-right">15,200</p>
-            </div>
-            <!-- Fila 2 -->
-            <div class="flex items-center justify-between px-4 py-3 border-t border-t-slate-100 dark:border-t-blue-900">
-            <p class="text-slate-500 dark:text-blue-300 font-bold text-lg w-1/6">2</p>
-            <div class="flex items-center gap-3 w-3/6">
-            <!-- Avatar genérico (sin imagen) -->
-            <div class="size-10 rounded-full bg-slate-300/50 dark:bg-slate-700/50 flex items-center justify-center text-slate-500 text-lg font-bold">M</div>
-            <p class="text-slate-900 dark:text-white font-medium">Maria</p>
-            </div>
-            <p class="text-slate-500 dark:text-blue-300 font-medium w-2/6 text-right">14,800</p>
-            </div>
-            <!-- Highlighted row: Current User -->
-            <div class="flex items-center justify-between px-4 py-3 border-y border-primary/50 dark:border-primary/50 bg-primary/10 dark:bg-primary/30">
-            <p class="text-primary font-bold text-lg w-1/6">3</p>
-            <div class="flex items-center gap-3 w-3/6">
-            <!-- Avatar genérico (sin imagen) -->
-            <div class="size-10 rounded-full bg-primary/50 flex items-center justify-center text-white text-lg font-bold">Y</div>
-            <p class="text-slate-900 dark:text-white font-bold">You</p>
-            </div>
-            <p class="text-primary font-bold w-2/6 text-right">12,450</p>
-            </div>
-            <!-- Fila 4 -->
-            <div class="flex items-center justify-between px-4 py-3 border-t border-t-slate-100 dark:border-t-blue-900">
-            <p class="text-slate-500 dark:text-blue-300 font-bold text-lg w-1/6">4</p>
-            <div class="flex items-center gap-3 w-3/6">
-            <!-- Avatar genérico (sin imagen) -->
-            <div class="size-10 rounded-full bg-slate-300/50 dark:bg-slate-700/50 flex items-center justify-center text-slate-500 text-lg font-bold">C</div>
-            <p class="text-slate-900 dark:text-white font-medium">Chen</p>
-            </div>
-            <p class="text-slate-500 dark:text-blue-300 font-medium w-2/6 text-right">11,950</p>
-            </div>
-            <!-- Fila 5 -->
-            <div class="flex items-center justify-between px-4 py-3 border-t border-t-slate-100 dark:border-t-blue-900">
-            <p class="text-slate-500 dark:text-blue-300 font-bold text-lg w-1/6">5</p>
-            <div class="flex items-center gap-3 w-3/6">
-            <!-- Avatar genérico (sin imagen) -->
-            <div class="size-10 rounded-full bg-slate-300/50 dark:bg-slate-700/50 flex items-center justify-center text-slate-500 text-lg font-bold">S</div>
-            <p class="text-slate-900 dark:text-white font-medium">Sofia</p>
-            </div>
-            <p class="text-slate-500 dark:text-blue-300 font-medium w-2/6 text-right">10,500</p>
-            </div>
-            </div>
-            </div>
-            </div>
-
         </div>
     </div>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="w-full bg-background-light dark:bg-background-dark">
+  
+<!-- FOOTER -->
+<footer class="w-full bg-background-light dark:bg-background-dark mt-auto">
     <div class="mx-auto max-w-7xl px-4 py-8 sm:px-8">
       <div class="flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-8 dark:border-slate-800 sm:flex-row">
         <p class="text-sm text-slate-600 dark:text-slate-400">© 2024 XPLØR. All Rights Reserved.</p>
@@ -292,39 +232,53 @@ tailwind.config = {
     </div>
   </footer>
 
-</div>
 <script>
-    // Lógica básica para el menú de idioma (no funcional, solo UI)
+    // Language Menu Logic
     const langBtn = document.getElementById('langBtn');
     const langMenu = document.getElementById('langMenu');
     
-    langBtn.addEventListener('click', () => {
+    // Function to toggle menu visibility
+    langBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); 
         const isHidden = langMenu.style.display === 'none' || langMenu.style.display === '';
         langMenu.style.display = isHidden ? 'block' : 'none';
     });
     
+    // Close menu when clicked outside
     document.addEventListener('click', (event) => {
         if (!langBtn.contains(event.target) && !langMenu.contains(event.target)) {
             langMenu.style.display = 'none';
         }
     });
 
-    // Lógica para cambiar el idioma de los textos (ejemplo)
+    // Main translation function
+    function translateContent(newLang) {
+        const targetLang = newLang === 'en' ? 'en' : 'es';
+        
+        // Iterate over ALL elements that have the data-en attribute
+        document.querySelectorAll('[data-en]').forEach(el => {
+            const textKey = el.getAttribute(`data-${targetLang}`);
+            if (textKey) {
+                el.textContent = textKey;
+            }
+        });
+
+        // Update the HTML lang attribute for accessibility
+        document.documentElement.lang = newLang;
+    }
+
+    // Logic to change the language when a menu button is selected
     document.querySelectorAll('#langMenu button').forEach(button => {
         button.addEventListener('click', (e) => {
             const newLang = e.target.getAttribute('data-lang');
-            // Simular cambio de idioma en enlaces y botones visibles
-            document.querySelectorAll('.nav-link, #signupBtn').forEach(el => {
-                const textKey = el.getAttribute(`data-${newLang}`);
-                if (textKey) {
-                    el.textContent = textKey;
-                }
-            });
-            // Ocultar menú
+            translateContent(newLang);
+
+            // Hide menu
             langMenu.style.display = 'none';
-            // Aquí iría la lógica real para cambiar el idioma global de la app
         });
     });
+    
+    // The content is now correctly set to English by default upon loading.
 </script>
 </body>
 </html>
