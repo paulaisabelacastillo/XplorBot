@@ -71,45 +71,72 @@ tailwind.config = {
 <body class="bg-background-light dark:bg-background-dark font-display">
 <div class="relative flex min-h-screen w-full flex-col">
 
-  <!-- ✅ NAVBAR EXACTO -->
-  <header class="sticky top-0 z-50 flex justify-center border-b border-gray-200/50 bg-background-light/80 px-4 py-3 backdrop-blur-sm dark:border-gray-800/50 dark:bg-background-dark/80 sm:px-8 md:px-10">
-    <div class="flex w-full max-w-7xl items-center justify-between">
-      <div class="flex items-center gap-8">
-        <div class="flex items-center gap-2 text-slate-800 dark:text-white">
+<header class="sticky top-0 z-50 flex justify-center border-b border-gray-200/50 bg-background-light/80 px-4 py-3 backdrop-blur-sm dark:border-gray-800/50 dark:bg-background-dark/80 sm:px-8 md:px-10">
+  <div class="flex w-full max-w-7xl items-center justify-between">
+    <div class="flex items-center gap-8">
+      <div class="flex items-center gap-2 text-slate-800 dark:text-white">
+        <a href="index.html" class="flex items-center gap-2 text-slate-800 dark:text-white">
           <span class="material-symbols-outlined text-primary text-3xl">explore</span>
           <h2 class="text-xl font-bold tracking-tighter">XPLØR</h2>
-        </div>
-        <nav class="hidden items-center gap-6 lg:flex">
-          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="index.html" data-en="HOME" data-es="INICIO">HOME</a>
-          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="explore.html" data-en="EXPLORE" data-es="EXPLORA">EXPLORE</a>
-          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="play.html" data-en="PLAY" data-es="JUEGA">PLAY</a>
-          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="learn.html" data-en="LEARN" data-es="APRENDE">LEARN</a>
-          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="earn.html" data-en="EARN" data-es="GANA">EARN</a>
-          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="about.html" data-en="ABOUT US" data-es="NOSOTROS">ABOUT US</a>
-        </nav>
-      </div>
-
-      <div class="flex items-center gap-2">
-        <a href="login.html" id="signupBtn" class="hidden min-w-[84px] md:flex cursor-pointer items-center justify-center overflow-hidden rounded-full bg-primary px-4 h-10 text-sm font-bold text-white transition-colors hover:bg-primary/90" data-en="LOG IN" data-es="INICIAR SESIÓN">LOG IN</a>
-        
-        <div class="relative">
-          <button id="langBtn" class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
-            <span class="material-symbols-outlined text-xl">language</span>
-          </button>
-          <div id="langMenu">
-            <button data-lang="en">English 🇺🇸</button>
-            <button data-lang="es">Español 🇵🇦</button>
-          </div>
-        </div>
-
-        <a href="user.html" id="profileBtn" class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
-          <span class="material-symbols-outlined text-xl">person</span>
         </a>
       </div>
+      <nav id="desktop-nav" class="hidden items-center gap-6 lg:flex">
+        <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="index.html" data-en="HOME" data-es="INICIO">HOME</a>
+        <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="explore.html" data-en="EXPLORE" data-es="EXPLORA">EXPLORE</a>
+        <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="play.html" data-en="PLAY" data-es="JUEGA">PLAY</a>
+        <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="learn.html" data-en="LEARN" data-es="APRENDE">LEARN</a>
+        <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="earn.html" data-en="EARN" data-es="GANA">EARN</a>
+        <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="about.html" data-en="ABOUT US" data-es="NOSOTROS">ABOUT US</a>
+      </nav>
     </div>
-  </header>
 
-  <!-- ✅ MAIN -->
+    <div class="flex items-center gap-2">
+      <a href="login.html" id="signupBtn" class="hidden min-w-[84px] md:flex cursor-pointer items-center justify-center overflow-hidden rounded-full bg-primary px-4 h-10 text-sm font-bold text-white transition-colors hover:bg-primary/90" data-en="LOG IN" data-es="INICIAR SESIÓN">LOG IN</a>
+      
+      <div class="relative">
+        <button id="langBtn" class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
+          <span class="material-symbols-outlined text-xl">language</span>
+        </button>
+        <div id="langMenu">
+          <button data-lang="en">English 🇺🇸</button>
+          <button data-lang="es">Español 🇵🇦</button>
+        </div>
+      </div>
+
+      <a href="user.html" id="profileBtn" class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
+        <span class="material-symbols-outlined text-xl">person</span>
+      </a>
+
+      <button id="mobileMenuBtn" class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800 lg:hidden">
+        <span id="menuIcon" class="material-symbols-outlined text-xl">menu</span>
+      </button>
+
+    </div>
+  </div>
+</header>
+
+<div id="mobileMenu" class="fixed inset-0 z-40 hidden lg:hidden">
+  <div id="menuOverlay" class="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 ease-in-out opacity-0"></div>
+
+  <div id="menuContent" class="absolute right-0 top-0 h-full w-64 bg-background-light dark:bg-background-dark shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out p-6">
+    
+    <div class="flex flex-col gap-4 pt-4">
+      <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="index.html" data-en="HOME" data-es="INICIO">HOME</a>
+      <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="explore.html" data-en="EXPLORE" data-es="EXPLORA">EXPLORE</a>
+      <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="play.html" data-en="PLAY" data-es="JUEGA">PLAY</a>
+      <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="learn.html" data-en="LEARN" data-es="APRENDE">LEARN</a>
+      <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="earn.html" data-en="EARN" data-es="GANA">EARN</a>
+      <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="about.html" data-en="ABOUT US" data-es="NOSOTROS">ABOUT US</a>
+      
+      <hr class="border-gray-200 dark:border-gray-700">
+
+      <a href="login.html" class="flex cursor-pointer items-center justify-center overflow-hidden rounded-full bg-primary px-4 h-10 text-sm font-bold text-white transition-colors hover:bg-primary/90" data-en="LOG IN" data-es="INICIAR SESIÓN">LOG IN</a>
+    </div>
+
+  </div>
+</div>
+
+  <!-- MAIN -->
   <main class="flex flex-1 items-center justify-center p-8">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full max-w-5xl">
       <div class="hidden lg:flex justify-center items-center">
@@ -126,7 +153,7 @@ tailwind.config = {
           <p class="text-slate-600 dark:text-slate-400 text-lg">Sign up to start your adventure.</p>
         </div>
 
-        <!-- ✅ FORMULARIO CON BORDES CIRCULARES -->
+        <!--  FORMULARIO CON BORDES CIRCULARES -->
         <form id="signUpForm" class="flex flex-col gap-6">
           <label class="flex flex-col">
             <p class="font-medium pb-2">Email Address</p>
@@ -154,7 +181,7 @@ tailwind.config = {
     </div>
   </main>
 
-  <!-- ✅ FOOTER EXACTO -->
+  <!--  FOOTER EXACTO -->
   <footer class="w-full bg-background-light dark:bg-background-dark">
     <div class="mx-auto max-w-7xl px-4 py-8 sm:px-8">
       <div class="flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-8 dark:border-slate-800 sm:flex-row">
@@ -167,7 +194,7 @@ tailwind.config = {
   </footer>
 </div>
 
-<!-- ✅ FIREBASE + TRADUCCIÓN -->
+<!--  FIREBASE + TRADUCCIÓN -->
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
 <script>
@@ -210,6 +237,54 @@ langMenu.querySelectorAll('button').forEach(btn=>{
 // default EN
 localStorage.setItem('xplorLang','en');
 changeLanguage('en');
+</script>
+
+<script>
+  const menuButton = document.getElementById('mobileMenuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const menuContent = document.getElementById('menuContent');
+  const menuOverlay = document.getElementById('menuOverlay');
+  const menuIcon = document.getElementById('menuIcon');
+
+  function openMenu() {
+    mobileMenu.classList.remove('hidden');
+    // Forzar un reflow para que las transiciones CSS funcionen correctamente
+    void mobileMenu.offsetWidth; 
+    menuOverlay.classList.remove('opacity-0');
+    menuContent.classList.remove('translate-x-full');
+    menuContent.classList.add('translate-x-0');
+    menuIcon.innerText = 'close'; // Cambia el icono a 'X'
+  }
+
+  function closeMenu() {
+    menuOverlay.classList.add('opacity-0');
+    menuContent.classList.remove('translate-x-0');
+    menuContent.classList.add('translate-x-full');
+    menuIcon.innerText = 'menu'; // Cambia el icono a 'menu'
+
+    // Esperar a que la transición termine (300ms) antes de ocultar
+    setTimeout(() => {
+      mobileMenu.classList.add('hidden');
+    }, 300);
+  }
+
+  // Evento para abrir/cerrar el menú
+  menuButton.addEventListener('click', () => {
+    if (mobileMenu.classList.contains('hidden')) {
+      openMenu();
+    } else {
+      closeMenu();
+    }
+  });
+
+  // Evento para cerrar el menú al hacer clic en el overlay (fondo oscuro)
+  menuOverlay.addEventListener('click', closeMenu);
+
+  // Evento para cerrar el menú al hacer clic en un enlace (simula navegación)
+  const menuLinks = mobileMenu.querySelectorAll('a');
+  menuLinks.forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
 </script>
 </body>
 </html>
