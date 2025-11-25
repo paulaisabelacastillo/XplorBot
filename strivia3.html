@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>XPLØR: Merlion Legend Quest</title>
+
+  <!-- FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap"/>
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
+
+  <!-- TAILWIND -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#0da6f2",
+            "background-light": "#f5f7f8",
+            "background-dark": "#101c22",
+          },
+          fontFamily: {
+            display: ["Plus Jakarta Sans", "Noto Sans", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "1rem",
+            lg: "2rem",
+            xl: "3rem",
+            full: "9999px",
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- CUSTOM STYLES -->
+  <style>
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+    .animate-float { animation: float 3s ease-in-out infinite; }
+
+    /* Dropdown idiomas */
+    #langMenu {
+      position: absolute;
+      right: 0;
+      margin-top: 8px;
+      width: 150px;
+      background: white;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      border: 1px solid #ddd;
+      display: none;
+      z-index: 50;
+    }
+    #langMenu button {
+      width: 100%;
+      padding: 10px 12px;
+      text-align: left;
+      font-size: 14px;
+    }
+    #langMenu button:hover {
+      background-color: #0da6f21a;
+    }
+
+    .scroll-offset { scroll-margin-top: 84px; }
+
+    .option-btn { transition: 0.2s; }
+    .option-btn:hover { transform: translateY(-2px); }
+  </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+
+<!-- ======================= NAVBAR ======================= -->
+<header class="sticky top-0 z-50 flex justify-center border-b border-gray-200/50 bg-background-light/80 px-4 py-3 
+               backdrop-blur-sm dark:border-gray-800/50 dark:bg-background-dark/80 sm:px-8 md:px-10">
+
+  <div class="flex w-full max-w-7xl items-center justify-between">
+    
+    <!-- LEFT SIDE -->
+    <div class="flex items-center gap-8">
+
+      <!-- LOGO -->
+      <a href="index.html" class="flex items-center gap-2 text-slate-800 dark:text-white">
+        <span class="material-symbols-outlined text-primary text-3xl">explore</span>
+        <h2 class="text-xl font-bold tracking-tighter">XPLØR</h2>
+      </a>
+
+      <!-- DESKTOP NAV -->
+      <nav id="desktop-nav" class="hidden items-center gap-6 lg:flex">
+        <a class="nav-link" href="index.html"      data-en="HOME"      data-es="INICIO">HOME</a>
+        <a class="nav-link" href="explore.html"    data-en="EXPLORE"   data-es="EXPLORA">EXPLORE</a>
+        <a class="nav-link" href="play.html"       data-en="PLAY"      data-es="JUEGA">PLAY</a>
+        <a class="nav-link" href="learn.html"      data-en="LEARN"     data-es="APRENDE">LEARN</a>
+        <a class="nav-link" href="earn.html"       data-en="EARN"      data-es="GANA">EARN</a>
+        <a class="nav-link" href="about.html"      data-en="ABOUT US"  data-es="NOSOTROS">ABOUT US</a>
+      </nav>
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="flex items-center gap-2">
+
+      <!-- LOGIN -->
+      <a href="login.html" id="signupBtn"
+         class="hidden min-w-[84px] md:flex cursor-pointer items-center justify-center rounded-full bg-primary 
+                px-4 h-10 text-sm font-bold text-white hover:bg-primary/90"
+         data-en="LOG IN" data-es="INICIAR SESIÓN">LOG IN</a>
+
+      <!-- LANGUAGE -->
+      <div class="relative">
+        <button id="langBtn"
+                class="flex h-10 w-10 rounded-full items-center justify-center 
+                       bg-slate-200/60 text-slate-700 hover:bg-slate-200
+                       dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
+          <span class="material-symbols-outlined text-xl">language</span>
+        </button>
+
+        <div id="langMenu">
+          <button data-lang="en">English 🇺🇸</button>
+          <button data-lang="es">Español 🇵🇦</button>
+        </div>
+      </div>
+
+      <!-- PROFILE -->
+      <a href="user.html" id="profileBtn"
+         class="flex h-10 w-10 rounded-full items-center justify-center 
+                bg-slate-200/60 text-slate-700 hover:bg-slate-200 
+                dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
+        <span class="material-symbols-outlined text-xl">person</span>
+      </a>
+
+      <!-- MOBILE MENU BUTTON -->
+      <button id="mobileMenuBtn"
+              class="flex h-10 w-10 rounded-full items-center justify-center lg:hidden
+                     bg-slate-200/60 text-slate-700 hover:bg-slate-200 
+                     dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
+        <span id="menuIcon" class="material-symbols-outlined text-xl">menu</span>
+      </button>
+
+    </div>
+  </div>
+</header>
+
+<!-- ======================= MOBILE MENU ======================= -->
+<div id="mobileMenu" class="fixed inset-0 z-40 hidden lg:hidden">
+  <div id="menuOverlay" class="absolute inset-0 bg-black/50 backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
+
+  <div id="menuContent"
+       class="absolute right-0 top-0 h-full w-64 bg-background-light dark:bg-background-dark shadow-xl 
+              transform translate-x-full transition-transform duration-300 p-6">
+
+    <div class="flex flex-col gap-4 pt-4">
+      <a class="nav-link" href="index.html"   data-en="HOME"      data-es="INICIO">HOME</a>
+      <a class="nav-link" href="explore.html" data-en="EXPLORE"   data-es="EXPLORA">EXPLORE</a>
+      <a class="nav-link" href="play.html"    data-en="PLAY"      data-es="JUEGA">PLAY</a>
+      <a class="nav-link" href="learn.html"   data-en="LEARN"     data-es="APRENDE">LEARN</a>
+      <a class="nav-link" href="earn.html"    data-en="EARN"      data-es="GANA">EARN</a>
+      <a class="nav-link" href="about.html"   data-en="ABOUT US"  data-es="NOSOTROS">ABOUT US</a>
+
+      <hr class="border-gray-200 dark:border-gray-700"/>
+
+      <a href="login.html"
+         class="flex items-center justify-center bg-primary h-10 px-4 text-sm font-bold rounded-full text-white hover:bg-primary/90"
+         data-en="LOG IN" data-es="INICIAR SESIÓN">LOG IN</a>
+    </div>
+  </div>
+</div>
+
+<!-- ======================= PAGE CONTENT ======================= -->
+<main class="w-full flex flex-col items-center py-10 px-4">
+  <div class="w-full max-w-5xl space-y-8">
+
+<!-- ===== INTRO CARD ===== -->
+<section id="trivia-intro" class="bg-white rounded-2xl shadow-lg overflow-hidden">
+  <div class="grid md:grid-cols-2">
+
+    <!-- 🔵 PORTADA / IMAGEN -->
+    <div id="coverImage"
+         class="relative h-56 md:h-auto bg-cover bg-center"
+         style="background-image: url('https://offloadmedia.feverup.com/secretnyc.co/wp-content/uploads/2022/09/25090038/hawker.jpg');">
+
+      <div class="absolute inset-0 bg-primary/20 backdrop-blur-[1px]"></div>
+
+      <p class="absolute bottom-4 left-4 bg-primary text-white px-4 py-1 rounded-full text-xs font-bold"
+         data-en="Hawker Food Culture Adventure"
+         data-es="Aventura en la Cultura Hawker">
+         Hawker Food Culture Adventure
+      </p>
+    </div>
+
+    <!-- 🟣 TEXTO + BOTÓN -->
+    <div class="p-6 flex flex-col gap-3">
+      
+      <h1 id="introTitle"
+          class="text-2xl md:text-3xl font-extrabold"
+          data-en="Hawker Food Culture Adventure"
+          data-es="Aventura en la Cultura Hawker">
+          Hawker Food Culture Adventure
+      </h1>
+
+      <p id="introDescription"
+         class="text-sm md:text-base text-slate-600"
+         data-en="Dive into Singapore’s iconic hawker culture! Test your knowledge of famous dishes, history and traditions."
+         data-es="¡Sumérgete en la icónica cultura hawker de Singapur! Pon a prueba tus conocimientos sobre platos famosos, historia y tradiciones.">
+         Dive into Singapore’s iconic hawker culture! Test your knowledge of famous dishes, history and traditions.
+      </p>
+
+      <ul class="text-sm text-slate-600 space-y-1">
+        
+        <li data-en="✔ 10 questions about iconic Singapore hawker food"
+            data-es="✔ 10 preguntas sobre la comida hawker icónica de Singapur">
+            ✔ 10 questions about iconic Singapore hawker food
+        </li>
+
+        <li data-en="✔ Earn 100 points for each correct answer"
+            data-es="✔ Gana 100 puntos por cada respuesta correcta">
+            ✔ Earn 100 points for each correct answer
+        </li>
+
+        <li data-en="✔ Can you finish before the time runs out?"
+            data-es="✔ ¿Puedes terminar antes de que se acabe el tiempo?">
+            ✔ Can you finish before the time runs out?
+        </li>
+
+      </ul>
+
+      <button id="startTriviaBtn"
+              class="bg-primary text-white px-6 py-3 rounded-full font-bold w-full sm:w-auto"
+              data-en="Start Adventure"
+              data-es="Comenzar la Aventura">
+              Start Adventure
+      </button>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== TRIVIA SECTION ===== -->
+<section id="trivia-section" class="hidden space-y-6">
+
+  <div class="bg-white p-6 rounded-xl shadow">
+    <div class="flex justify-between">
+      <p>
+        <b data-en="Question" data-es="Pregunta">Question</b>
+        <span id="questionNumberLabel">1</span> /
+        <span id="questionTotalLabel">10</span>
+      </p>
+
+      <div class="flex gap-4">
+        <p><b data-en="Time:" data-es="Tiempo:">Time:</b> <span id="timerLabel">00:30</span></p>
+        <p><b data-en="Score:" data-es="Puntos:">Score:</b> <span id="scoreLabel">0</span></p>
+      </div>
+    </div>
+
+    <div class="w-full bg-slate-200 h-2 rounded-full mt-3">
+      <div id="progressBarInner" class="h-full bg-primary rounded-full" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- QUESTION CARD -->
+  <div class="bg-white rounded-xl shadow overflow-hidden">
+
+    <div class="grid md:grid-cols-2">
+      <div id="questionImage"
+           class="h-100 bg-slate-200 flex items-center justify-center">
+        <span class="material-symbols-outlined text-7xl text-primary/50">question_mark</span>
+      </div>
+
+      <div class="p-6">
+        <h2 id="questionText" class="text-xl font-bold mb-3"></h2>
+        <div id="optionsContainer" class="flex flex-col gap-3"></div>
+      </div>
+    </div>
+
+    <div class="p-4 bg-slate-100 flex justify-between items-center">
+      <p id="feedbackText" class="text-sm"></p>
+      <button id="nextQuestionBtn"
+              class="bg-primary text-white px-5 py-2 rounded-full font-bold"
+              data-en="Next"
+              data-es="Siguiente"
+              disabled>
+        Next
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RESULT SECTION ===== -->
+<section id="resultCard"
+         class="hidden bg-white p-10 rounded-2xl shadow text-center space-y-4">
+
+  <h2 class="text-3xl font-extrabold" data-en="Mission Complete!"
+      data-es="¡Misión Completa!">Mission Complete!</h2>
+
+  <p id="finalMessage" class="text-primary text-lg font-bold"></p>
+
+  <p class="text-xl font-bold">
+    <span data-en="Correct Answers:" data-es="Respuestas Correctas:">Correct Answers:</span>
+    <span id="correctAnswersLabel">0</span>/10
+  </p>
+
+  <p class="text-xl font-bold">
+    <span data-en="Final Score:" data-es="Puntuación Final:">Final Score:</span>
+    <span id="finalScoreLabel" class="text-primary">0</span>
+  </p>
+
+  <button id="playAgainBtn"
+          class="bg-primary text-white px-6 py-3 rounded-full font-bold w-full sm:w-auto"
+          data-en="Play Again" data-es="Jugar Nuevamente">
+    Play Again
+  </button>
+
+  <a href="play.html"
+     class="border border-slate-400 px-6 py-3 rounded-full font-bold block sm:inline-block mt-2"
+     data-en="Back" data-es="Regresar">
+    Back
+  </a>
+</section>
+
+</div>
+</main>
+
+<!-- ======================= FOOTER ======================= -->
+<footer class="w-full bg-background-light dark:bg-background-dark mt-8">
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-8">
+    <div class="flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-8 dark:border-slate-800 sm:flex-row">
+      <p class="text-sm text-slate-600 dark:text-slate-400">© 2024 XPLØR. All Rights Reserved.</p>
+
+      <div class="text-sm text-slate-600 dark:text-slate-400">
+        Follow us:
+        <span class="font-semibold text-slate-800 dark:text-slate-200">@xplor.pty</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+    SISTEMA DE IDIOMA (EN / ES)
+============================================================ */
+let currentLanguage = localStorage.getItem("xplorLang") || "en";
+applyLanguage(currentLanguage);
+
+/* Mostrar/ocultar menú de idiomas */
+document.getElementById("langBtn").onclick = () => {
+  const menu = document.getElementById("langMenu");
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
+};
+
+/* Cambiar idioma */
+document.querySelectorAll("#langMenu button").forEach(btn => {
+  btn.onclick = () => {
+    applyLanguage(btn.dataset.lang);
+    document.getElementById("langMenu").style.display = "none";
+  };
+});
+
+/* Aplicar idioma EN/ES */
+function applyLanguage(lang) {
+  currentLanguage = lang;
+  localStorage.setItem("xplorLang", lang);
+
+  /* Cambiar todos los textos que tienen data-en / data-es */
+  document.querySelectorAll("[data-en]").forEach(el => {
+    el.textContent = el.getAttribute(`data-${lang}`);
+  });
+}
+
+
+/* ============================================================
+    PREGUNTAS DEL MERLION — EN/ES
+============================================================ */
+const questions = [
+  {
+    image: "https://offloadmedia.feverup.com/secretnyc.co/wp-content/uploads/2022/09/25090038/hawker.jpg",
+    question_en: "What is a ‘hawker centre’ in Singapore?",
+    question_es: "¿Qué es un 'hawker centre' en Singapur?",
+    options: [
+      { text_en: "A luxury restaurant", text_es: "Un restaurante de lujo", isCorrect: false },
+      { text_en: "A large open-air food court", text_es: "Un gran comedor al aire libre", isCorrect: true },
+      { text_en: "A supermarket", text_es: "Un supermercado", isCorrect: false },
+      { text_en: "A seafood-only market", text_es: "Un mercado solo de mariscos", isCorrect: false }
+    ]
+  },
+  {
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9lVPnTeeY8YE8mTs5Z5uaMo1mFeeT3dxy0pPFSrvP9l-WIJY-nYj_vuzluYCTlEocpAg&usqp=CAU",
+    question_en: "Which iconic Singaporean dish is made of rice cooked in fragrant pandan and coconut milk?",
+    question_es: "¿Qué plato icónico de Singapur está hecho con arroz cocido en pandan y leche de coco?",
+    options: [
+      { text_en: "Chicken Rice", text_es: "Chicken Rice", isCorrect: false },
+      { text_en: "Nasi Lemak", text_es: "Nasi Lemak", isCorrect: true },
+      { text_en: "Laksa", text_es: "Laksa", isCorrect: false },
+      { text_en: "Char Kway Teow", text_es: "Char Kway Teow", isCorrect: false }
+    ]
+  },
+  {
+    image: "https://offloadmedia.feverup.com/secretnyc.co/wp-content/uploads/2022/09/25090038/hawker.jpg",
+    question_en: "Which Singapore dish consists of rice and chicken cooked in a flavorful broth?",
+    question_es: "¿Qué plato de Singapur consiste en arroz y pollo cocidos en un caldo sabroso?",
+    options: [
+      { text_en: "Chicken Rice", text_es: "Chicken Rice", isCorrect: true },
+      { text_en: "Hokkien Mee", text_es: "Hokkien Mee", isCorrect: false },
+      { text_en: "Satay", text_es: "Satay", isCorrect: false },
+      { text_en: "Chili Crab", text_es: "Chili Crab", isCorrect: false }
+    ]
+  },
+  {
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9lVPnTeeY8YE8mTs5Z5uaMo1mFeeT3dxy0pPFSrvP9l-WIJY-nYj_vuzluYCTlEocpAg&usqp=CAU",
+    question_en: "Chili Crab, one of Singapore’s national dishes, is known for being:",
+    question_es: "El Chili Crab, uno de los platos nacionales de Singapur, es conocido por ser:",
+    options: [
+      { text_en: "Sweet", text_es: "Dulce", isCorrect: false },
+      { text_en: "Spicy and messy to eat", text_es: "Picante y desordenado para comer", isCorrect: true },
+      { text_en: "Vegetarian", text_es: "Vegetariano", isCorrect: false },
+      { text_en: "Served cold", text_es: "Servido frío", isCorrect: false }
+    ]
+  },
+  {
+    image: "https://offloadmedia.feverup.com/secretnyc.co/wp-content/uploads/2022/09/25090038/hawker.jpg",
+    question_en: "Which dish is made with thick rice noodles in a spicy coconut curry soup?",
+    question_es: "¿Qué plato está hecho con fideos gruesos de arroz en una sopa picante de curry con coco?",
+    options: [
+      { text_en: "Laksa", text_es: "Laksa", isCorrect: true },
+      { text_en: "Mee Goreng", text_es: "Mee Goreng", isCorrect: false },
+      { text_en: "Roti Prata", text_es: "Roti Prata", isCorrect: false },
+      { text_en: "Kaya Toast", text_es: "Kaya Toast", isCorrect: false }
+    ]
+  },
+  {
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9lVPnTeeY8YE8mTs5Z5uaMo1mFeeT3dxy0pPFSrvP9l-WIJY-nYj_vuzluYCTlEocpAg&usqp=CAU",
+    question_en: "Which Singapore breakfast includes toast with coconut jam and butter?",
+    question_es: "¿Qué desayuno de Singapur incluye tostadas con mermelada de coco y mantequilla?",
+    options: [
+      { text_en: "Kaya Toast", text_es: "Kaya Toast", isCorrect: true },
+      { text_en: "Hainanese Chicken", text_es: "Hainanese Chicken", isCorrect: false },
+      { text_en: "Bak Kut Teh", text_es: "Bak Kut Teh", isCorrect: false },
+      { text_en: "Satay", text_es: "Satay", isCorrect: false }
+    ]
+  },
+  {
+    image: "https://offloadmedia.feverup.com/secretnyc.co/wp-content/uploads/2022/09/25090038/hawker.jpg",
+    question_en: "Hawker culture in Singapore became UNESCO Intangible Heritage in which year?",
+    question_es: "¿En qué año la cultura hawker de Singapur fue reconocida como Patrimonio Cultural Inmaterial por la UNESCO?",
+    options: [
+      { text_en: "2010", text_es: "2010", isCorrect: false },
+      { text_en: "2020", text_es: "2020", isCorrect: true },
+      { text_en: "2023", text_es: "2023", isCorrect: false },
+      { text_en: "1998", text_es: "1998", isCorrect: false }
+    ]
+  },
+  {
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9lVPnTeeY8YE8mTs5Z5uaMo1mFeeT3dxy0pPFSrvP9l-WIJY-nYj_vuzluYCTlEocpAg&usqp=CAU",
+    question_en: "What is the main purpose of hawker centres in Singapore today?",
+    question_es: "¿Cuál es el propósito principal de los hawker centres en Singapur hoy en día?",
+    options: [
+      { text_en: "Provide affordable and diverse food", text_es: "Ofrecer comida diversa y asequible", isCorrect: true },
+      { text_en: "Sell imported luxury food", text_es: "Vender comida importada de lujo", isCorrect: false },
+      { text_en: "Serve only tourists", text_es: "Servir solo a turistas", isCorrect: false },
+      { text_en: "Host food competitions", text_es: "Organizar competencias de comida", isCorrect: false }
+    ]
+  },
+  {
+    image: "https://offloadmedia.feverup.com/secretnyc.co/wp-content/uploads/2022/09/25090038/hawker.jpg",
+    question_en: "Which hawker dish includes skewered grilled meat served with peanut sauce?",
+    question_es: "¿Qué plato hawker incluye carne ensartada y asada con salsa de maní?",
+    options: [
+      { text_en: "Satay", text_es: "Satay", isCorrect: true },
+      { text_en: "Bee Hoon", text_es: "Bee Hoon", isCorrect: false },
+      { text_en: "Popiah", text_es: "Popiah", isCorrect: false },
+      { text_en: "Chwee Kueh", text_es: "Chwee Kueh", isCorrect: false }
+    ]
+  },
+  {
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9lVPnTeeY8YE8mTs5Z5uaMo1mFeeT3dxy0pPFSrvP9l-WIJY-nYj_vuzluYCTlEocpAg&usqp=CAU",
+    question_en: "Which drink often accompanies a hawker meal and is made with milk tea pulled dramatically between two cups?",
+    question_es: "¿Qué bebida suele acompañar una comida hawker y se prepara vertiendo té con leche entre dos vasos?",
+    options: [
+      { text_en: "Teh Tarik", text_es: "Teh Tarik", isCorrect: true },
+      { text_en: "Bandung", text_es: "Bandung", isCorrect: false },
+      { text_en: "Milo Dinosaur", text_es: "Milo Dinosaur", isCorrect: false },
+      { text_en: "Sugarcane Juice", text_es: "Jugo de caña", isCorrect: false }
+    ]
+  }
+];
+
+/* ============================================================
+    LÓGICA DE LA TRIVIA
+============================================================ */
+const startTriviaBtn = document.getElementById("startTriviaBtn");
+const triviaIntro = document.getElementById("trivia-intro");
+const triviaSection = document.getElementById("trivia-section");
+const questionText = document.getElementById("questionText");
+const optionsContainer = document.getElementById("optionsContainer");
+const questionNumberLabel = document.getElementById("questionNumberLabel");
+const questionTotalLabel = document.getElementById("questionTotalLabel");
+const timerLabel = document.getElementById("timerLabel");
+const scoreLabel = document.getElementById("scoreLabel");
+const progressBarInner = document.getElementById("progressBarInner");
+const feedbackText = document.getElementById("feedbackText");
+const nextQuestionBtn = document.getElementById("nextQuestionBtn");
+const resultCard = document.getElementById("resultCard");
+const correctAnswersLabel = document.getElementById("correctAnswersLabel");
+const finalScoreLabel = document.getElementById("finalScoreLabel");
+const playAgainBtn = document.getElementById("playAgainBtn");
+const questionImage = document.getElementById("questionImage");
+const finalMessage = document.getElementById("finalMessage");
+
+let currentQuestionIndex = 0;
+let score = 0;
+let correctAnswers = 0;
+let timer;
+const TIME = 30;
+let timeLeft = TIME;
+
+/* ========== Shuffle questions ========== */
+function shuffleArray(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+}
+
+/* ========== Timer ========== */
+function startTimer() {
+  timeLeft = TIME;
+  timerLabel.textContent = `00:${String(timeLeft).padStart(2,"0")}`;
+  if (timer) clearInterval(timer);
+
+  timer = setInterval(() => {
+    timeLeft--;
+    timerLabel.textContent = `00:${String(timeLeft).padStart(2,"0")}`;
+    progressBarInner.style.width = `${(timeLeft / TIME) * 100}%`;
+
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      handleAnswer(null, true);
+    }
+  }, 1000);
+}
+
+/* ========== Load Question ========== */
+function loadQuestion() {
+  if (currentQuestionIndex >= questions.length) {
+    showResults();
+    return;
+  }
+
+  const q = questions[currentQuestionIndex];
+
+  questionText.textContent = q[`question_${currentLanguage}`];
+  questionNumberLabel.textContent = currentQuestionIndex + 1;
+  questionTotalLabel.textContent = questions.length;
+
+  /* Image */
+  if (q.image) {
+    questionImage.style.backgroundImage = `url('${q.image}')`;
+    questionImage.innerHTML = "";
+  } else {
+    questionImage.style.backgroundImage = "none";
+    questionImage.innerHTML = `<span class="material-symbols-outlined text-7xl text-primary/50">question_mark</span>`;
+  }
+
+  /* Options */
+  optionsContainer.innerHTML = "";
+  q.options.forEach(opt => {
+    const btn = document.createElement("button");
+    btn.className = "option-btn bg-slate-100 hover:bg-primary/10 border border-slate-300 p-3 rounded-lg text-left";
+    btn.textContent = opt[`text_${currentLanguage}`];
+    btn.onclick = () => handleAnswer(opt, false);
+    optionsContainer.appendChild(btn);
+  });
+
+  feedbackText.textContent = "";
+  nextQuestionBtn.disabled = true;
+
+  startTimer();
+}
+
+/* ========== Handle Answer ========== */
+function handleAnswer(selected, timeout) {
+  clearInterval(timer);
+
+  const correctOption = questions[currentQuestionIndex].options.find(o => o.isCorrect);
+
+  /* Block all buttons */
+  const buttons = optionsContainer.querySelectorAll("button");
+  buttons.forEach(btn => btn.onclick = null);
+
+  if (timeout) {
+    feedbackText.textContent = currentLanguage === "es"
+      ? "¡Tiempo agotado!"
+      : "Time's up!";
+  } else if (selected.isCorrect) {
+    score += 100;
+    correctAnswers++;
+    feedbackText.textContent = currentLanguage === "es"
+      ? "¡Correcto! +100 puntos"
+      : "Correct! +100 points";
+  } else {
+    feedbackText.textContent = currentLanguage === "es"
+      ? "Incorrecto"
+      : "Incorrect";
+  }
+
+  /* Mark correct option */
+  buttons.forEach(btn => {
+    if (btn.textContent === correctOption[`text_${currentLanguage}`]) {
+      btn.classList.add("bg-green-200", "border-green-600");
+    }
+  });
+
+  nextQuestionBtn.disabled = false;
+  scoreLabel.textContent = score;
+}
+
+/* ========== Show Results ========== */
+function showResults() {
+    triviaSection.classList.add('hidden');
+    resultCard.classList.remove('hidden');
+
+    // 👉 GUARDAR XP AQUÍ
+    localStorage.setItem("xp_strivia3", score);
+
+    finalScoreLabel.textContent = score.toString();
+    correctAnswersLabel.textContent = correctAnswers.toString();
+    totalQuestionsLabel.textContent = questions.length.toString();
+
+    const total = questions.length;
+    let msg;
+    if (currentLanguage === 'es') {
+      msg = `¡Misión completada! Aciertos: ${correctAnswers}/${total}. Sigue explorando para ganar más puntos y subir de nivel.`;
+    } else {
+      msg = `Mission completed! Correct answers: ${correctAnswers}/${total}. Keep exploring to earn more points and level up.`;
+    }
+    finalMessage.textContent = msg;
+}
+
+
+/* ========== Reset Trivia ========== */
+function resetTrivia() {
+  shuffleArray(questions);
+  currentQuestionIndex = 0;
+  score = 0;
+  correctAnswers = 0;
+
+  resultCard.classList.add("hidden");
+  triviaIntro.classList.remove("hidden");
+
+  scoreLabel.textContent = "0";
+}
+
+/* ========== BUTTON EVENTS ========== */
+startTriviaBtn.onclick = () => {
+  triviaIntro.classList.add("hidden");
+  triviaSection.classList.remove("hidden");
+  loadQuestion();
+};
+
+nextQuestionBtn.onclick = () => {
+  currentQuestionIndex++;
+  loadQuestion();
+};
+
+playAgainBtn.onclick = resetTrivia;
+
+/* Inicializar */
+shuffleArray(questions);
+questionTotalLabel.textContent = questions.length;
+
+</script>
+</body>
+</html> 

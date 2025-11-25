@@ -1,93 +1,91 @@
 <!DOCTYPE html>
 <html class="light" lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>XPLØR: How EARN Works</title>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title data-en="XPLØR - Earn XP" data-es="XPLØR - Gana XP">XPLØR - Earn XP</title>
 
+  <!-- FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+  <!-- TAILWIND -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#0da6f2",
+            cyanGlow: "#5defff",
+            panama: "#2ecc71",
+            singapore: "#ff6f61",
+          },
+          fontFamily: { display: ["Plus Jakarta Sans", "sans-serif"] },
+          boxShadow: {
+            glow: "0 0 20px rgba(13,166,242,0.8)",
+            strongGlow: "0 0 45px rgba(13,166,242,0.95)"
+          }
+        }
+      }
+    }
+  </script>
 
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-tailwind.config = {
-  darkMode: "class",
-  theme: {
-    extend: {
-      colors: {
-        "primary": "#0da6f2", // Azul vibrante
-        "background-light": "#f5f7f8", // Fondo claro
-        "background-dark": "#101c22", // Fondo oscuro para el modo oscuro
-      },
-      fontFamily: {
-        "display": ["Plus Jakarta Sans", "Noto Sans", "sans-serif"]
-      },
-      borderRadius: {
-        "DEFAULT": "1rem",
-        "lg": "2rem",
-        "xl": "3rem",
-        "full": "9999px"
-      },
-    },
-  },
-}
-</script>
+  <style>
+    /* XP Animation */
+    .xp-animate {
+      transition: width 0.9s ease-out;
+    }
 
-<style>
-.material-symbols-outlined {
-    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-}
-#langMenu {
-    /* Estilos para el dropdown */
-    display: none; /* Oculto por defecto */
-    position: absolute;
-    top: 100%; /* Posiciona debajo del botón */
-    right: 0;
-    margin-top: 8px;
-    z-index: 100;
-    min-width: 140px;
-    background-color: white;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-    border: 1px solid #e5e7eb; /* Color de borde claro */
-    overflow: hidden;
-}
-.dark #langMenu {
-    background-color: #1f2937; /* Fondo oscuro */
-    border-color: #4b5563; /* Borde oscuro */
-}
+    .pulse {
+      animation: pulseGlow 2s infinite ease-in-out;
+    }
 
-#langMenu button {
-    width: 100%;
-    padding: 8px 16px;
-    text-align: left;
-    font-size: 0.875rem; /* text-sm */
-    font-weight: 500; /* medium */
-    color: #1f2937; /* slate-800 */
-    transition: background-color 0.15s;
-}
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 0 rgba(13,166,242,0.3); }
+      50% { box-shadow: 0 0 20px rgba(13,166,242,0.7); }
+      100% { box-shadow: 0 0 0 rgba(13,166,242,0.3); }
+    }
 
-#langMenu button:hover {
-    background-color: #f3f4f6; /* hover:bg-gray-100 */
-}
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 0;
+      pointer-events: none;
+      overflow: visible;
+      z-index: 9999;
+    }
 
-.dark #langMenu button {
-    color: #f9fafb; /* dark:text-gray-50 */
-}
-.dark #langMenu button:hover {
-    background-color: #374151; /* dark:hover:bg-gray-700 */
-}
-</style>
+    /* Card hover animation */
+    .country-card {
+      transform: translateY(0px);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .country-card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+    }
+  </style>
+
 </head>
 
-<body class="bg-background-light dark:bg-background-dark font-display flex flex-col min-h-screen">
+<body class="bg-background-light dark:bg-background-dark font-display">
 
-  
-<!-- HEADER -->
+<!-- CONFETTI CANVAS -->
+<canvas id="confettiCanvas" class="confetti"></canvas>
+
+
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex min-h-screen w-full flex-col">
+
+  <!-- HEADER -->
 <header class="sticky top-0 z-50 flex justify-center border-b border-gray-200/50 bg-background-light/80 px-4 py-3 backdrop-blur-sm dark:border-gray-800/50 dark:bg-background-dark/80 sm:px-8 md:px-10">
   <div class="flex w-full max-w-7xl items-center justify-between">
     <div class="flex items-center gap-8">
@@ -115,8 +113,7 @@ tailwind.config = {
           <span class="material-symbols-outlined text-xl">language</span>
         </button>
         <div id="langMenu">
-          <button data-lang="en">English 🇺🇸</button>
-          <button data-lang="es">Español 🇵🇦</button>
+
         </div>
       </div>
 
@@ -153,205 +150,433 @@ tailwind.config = {
   </div>
 </div>
 
-<main class="flex-grow flex justify-center w-full py-12">
-    <div class="w-full max-w-4xl px-4 sm:px-8 md:px-10 lg:px-16">
-        <div class="flex flex-col items-center text-center gap-8">
-            <h1 class="text-slate-900 dark:text-white text-5xl font-extrabold leading-tight tracking-[-0.033em]" 
-                data-en="Earn Rewards with XPLØR"
-                data-es="Gana Recompensas con XPLØR">
-                Earn Rewards with XPLØR
-            </h1>
-            <p class="text-lg text-slate-600 dark:text-slate-300 max-w-2xl"
-                data-en="Discover how to complete missions, unlock badges, and level up as you explore, learn, and play."
-                data-es="Descubre cómo completar misiones, desbloquear insignias y subir de nivel mientras exploras, aprendes y juegas.">
-                Discover how to complete missions, unlock badges, and level up as you explore, learn, and play.
-            </p>
+<!-- HERO -->
+<section
+  class="rounded-3xl shadow-lg max-w-7xl mx-auto mt-6 px-6 py-12 bg-cover bg-center text-white"
+  style="background-image: linear-gradient(135deg, rgba(0,0,0,0.75), rgba(13,166,242,0.55)), url('https://images.pexels.com/photos/4603761/pexels-photo-4603761.jpeg?auto=compress&cs=tinysrgb&w=1600');">
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-                
-                <!-- Step 1: Explore Missions -->
-                <div class="flex flex-col items-center gap-4 p-6 bg-white dark:bg-background-dark/50 rounded-xl shadow-lg border border-slate-200 dark:border-primary/20">
-                    <div class="size-16 rounded-full bg-primary/10 text-primary flex items-center justify-center">
-                        <span class="material-symbols-outlined text-4xl">travel_explore</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white"
-                        data-en="1. Explore Missions"
-                        data-es="1. Explora Misiones">
-                        1. Explore Missions
-                    </h3>
-                    <p class="text-slate-600 dark:text-slate-400"
-                        data-en="Browse through different categories and discover missions tailored to your exploration interests."
-                        data-es="Navega por las diferentes categorías y descubre misiones adaptadas a tus intereses de exploración.">
-                        Browse through different categories and discover missions tailored to your exploration interests.
-                    </p>
-                </div>
+  <h1 class="text-4xl font-extrabold mb-2"
+      data-en="EARN: Level Up Your Adventure"
+      data-es="GANA: Sube de Nivel tu Aventura">EARN: Level Up Your Adventure</h1>
 
-                <!-- Step 2: Complete Challenges -->
-                <div class="flex flex-col items-center gap-4 p-6 bg-white dark:bg-background-dark/50 rounded-xl shadow-lg border border-slate-200 dark:border-primary/20">
-                    <div class="size-16 rounded-full bg-primary/10 text-primary flex items-center justify-center">
-                        <span class="material-symbols-outlined text-4xl">task_alt</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white"
-                        data-en="2. Complete Challenges"
-                        data-es="2. Completa Desafíos">
-                        2. Complete Challenges
-                    </h3>
-                    <p class="text-slate-600 dark:text-slate-400"
-                        data-en="From visiting iconic places to knowledge quizzes, every mission has a unique challenge."
-                        data-es="Desde visitas a lugares emblemáticos hasta pruebas de conocimiento, cada misión tiene un desafío único.">
-                        From visiting iconic places to knowledge quizzes, every mission has a unique challenge.
-                    </p>
-                </div>
+  <p class="max-w-xl text-lg opacity-90"
+      data-en="Every mission you play in Panama and Singapore increases your XP!"
+      data-es="¡Cada misión que juegas en Panamá y Singapur aumenta tu XP!">
+    Every mission you play increases your XP!
+  </p>
 
-                <!-- Step 3: Unlock Badges -->
-                <div class="flex flex-col items-center gap-4 p-6 bg-white dark:bg-background-dark/50 rounded-xl shadow-lg border border-slate-200 dark:border-primary/20">
-                    <div class="size-16 rounded-full bg-primary/10 text-primary flex items-center justify-center">
-                        <span class="material-symbols-outlined text-4xl">auto_awesome</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white"
-                        data-en="3. Unlock Badges"
-                        data-es="3. Desbloquea Insignias">
-                        3. Unlock Badges
-                    </h3>
-                    <p class="text-slate-600 dark:text-slate-400"
-                        data-en="Every completed mission grants you an exclusive badge and helps you level up your XPLØRer status."
-                        data-es="Cada misión completada te otorga una insignia exclusiva y te ayuda a subir tu nivel de XPLØRer.">
-                        Every completed mission grants you an exclusive badge and helps you level up your XPLØRer status.
-                    </p>
-                </div>
-            </div>
+  <div class="mt-6 flex flex-wrap gap-4">
 
-            <!-- Call to Action -->
-            <div class="mt-12 flex flex-col items-center gap-6 p-8 bg-primary/5 dark:bg-primary/10 rounded-xl">
-                <h2 class="text-slate-900 dark:text-white text-3xl font-bold"
-                    data-en="Start becoming a TOP XPLØRer"
-                    data-es="Empieza a ser un XPLØRer TOP">
-                    Start becoming a TOP XPLØRer
-                </h2>
-                <p class="text-slate-600 dark:text-slate-300 text-lg max-w-md"
-                    data-en="Your exploration journey awaits. Complete your first mission and claim your initial badge."
-                    data-es="Tu viaje de exploración te espera. Completa tu primera misión y reclama tu insignia inicial.">
-                    Your exploration journey awaits. Complete your first mission and claim your initial badge.
-                </p>
-                <button class="bg-primary text-white text-lg font-bold px-8 py-4 rounded-full shadow-lg hover:bg-primary/90 transition-colors"
-                    data-en="Explore Missions Now!"
-                    data-es="¡Explorar Misiones Ahora!">
-                    Explore Missions Now!
-                </button>
-            </div>
-        </div>
+    <!-- TOTAL XP -->
+    <div class="bg-white/20 rounded-full px-5 py-2 flex items-center gap-2 backdrop-blur-md shadow-glow">
+      <span class="material-symbols-outlined text-yellow-300">star</span>
+      <span data-en="Total XP:" data-es="XP Total:">Total XP:</span>
+      <strong id="totalXpLabel" class="text-yellow-300 text-lg">0</strong>
     </div>
-  </main>
 
-  
-<!-- FOOTER -->
-<footer class="w-full bg-background-light dark:bg-background-dark mt-auto">
+    <!-- LEADER -->
+    <div class="bg-white/20 rounded-full px-5 py-2 flex items-center gap-2 backdrop-blur-md shadow-glow">
+      <span class="material-symbols-outlined text-green-300">military_tech</span>
+      <span id="leaderCountryLabel" class="text-green-200">Loading...</span>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ADVENTURE MAP -->
+<section class="max-w-7xl mx-auto mt-10 px-4 sm:px-6 lg:px-8">
+  <h2 class="text-2xl font-extrabold mb-3"
+      data-en="Your XP Journey"
+      data-es="Tu Viaje de XP">Your XP Journey</h2>
+
+  <p class="text-sm mb-6 text-gray-600 dark:text-gray-300"
+     data-en="Select a country to view its progress."
+     data-es="Selecciona un país para ver su progreso.">
+    Select a country to view its progress.
+  </p>
+
+  <!-- COUNTRY CARDS -->
+  <div class="grid gap-6 md:grid-cols-2">
+
+    <!-- PANAMA CARD -->
+    <button id="countryPanama"
+            class="country-card relative overflow-hidden rounded-3xl bg-gradient-to-br from-panama to-emerald-700 text-white p-6 sm:p-7">
+
+      <!-- Glow halo -->
+      <div class="absolute inset-0 opacity-25 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.7),_transparent_60%)]"></div>
+
+      <div class="relative flex items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="material-symbols-outlined text-lg">flag</span>
+            <span class="text-xs uppercase tracking-wide opacity-90">Panama</span>
+          </div>
+
+          <h3 class="text-2xl font-extrabold mb-1">Panama XP</h3>
+
+          <p class="text-xs sm:text-sm opacity-90"
+             data-en="Earn XP by playing Canal & rainforest missions."
+             data-es="Gana XP jugando misiones del Canal y la selva.">
+            Earn XP by playing Canal & rainforest missions.
+          </p>
+
+          <!-- XP number -->
+          <div class="mt-4 flex items-end gap-2">
+            <span class="text-4xl font-extrabold drop-shadow-sm" id="xpPanamaLabel">0</span>
+            <span class="text-sm opacity-80">XP</span>
+          </div>
+        </div>
+
+        <!-- Icon circle -->
+        <div class="flex flex-col items-center gap-2">
+          <div class="h-16 w-16 rounded-full bg-white/15 flex items-center justify-center shadow-glow">
+            <span class="material-symbols-outlined text-3xl">public</span>
+          </div>
+          <span class="text-[11px] bg-white/20 px-2 py-1 rounded-full"
+                data-en="Tap to view missions"
+                data-es="Toca para ver misiones">
+            Tap to view missions
+          </span>
+        </div>
+      </div>
+    </button>
+
+    <!-- SINGAPORE CARD -->
+    <button id="countrySingapore"
+            class="country-card relative overflow-hidden rounded-3xl bg-gradient-to-br from-singapore to-pink-600 text-white p-6 sm:p-7">
+
+      <!-- Glow halo -->
+      <div class="absolute inset-0 opacity-25 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.7),_transparent_60%)]"></div>
+
+      <div class="relative flex items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="material-symbols-outlined text-lg">flag</span>
+            <span class="text-xs uppercase tracking-wide opacity-90">Singapore</span>
+          </div>
+
+          <h3 class="text-2xl font-extrabold mb-1">Singapore XP</h3>
+
+          <p class="text-xs sm:text-sm opacity-90"
+             data-en="Earn XP in Garden Dome, city & food quests."
+             data-es="Gana XP en Garden Dome, ciudad y comida.">
+            Earn XP in Garden Dome, city & food quests.
+          </p>
+
+          <!-- XP number -->
+          <div class="mt-4 flex items-end gap-2">
+            <span class="text-4xl font-extrabold drop-shadow-sm" id="xpSingaporeLabel">0</span>
+            <span class="text-sm opacity-80">XP</span>
+          </div>
+        </div>
+
+        <!-- Icon circle -->
+        <div class="flex flex-col items-center gap-2">
+          <div class="h-16 w-16 rounded-full bg-white/15 flex items-center justify-center shadow-glow">
+            <span class="material-symbols-outlined text-3xl">stadia_controller</span>
+          </div>
+          <span class="text-[11px] bg-white/20 px-2 py-1 rounded-full"
+                data-en="Tap to view missions"
+                data-es="Toca para ver misiones">
+            Tap to view missions
+          </span>
+        </div>
+      </div>
+    </button>
+
+  </div> <!-- end grid -->
+
+</section> <!-- end Your XP Journey section -->
+
+
+<!-- COUNTRY MODAL -->
+<div id="countryModal"
+     class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 backdrop-blur-md">
+  <div class="w-full max-w-md mx-4 rounded-3xl bg-white dark:bg-gray-900 shadow-2xl p-6 relative">
+
+    <!-- Close button -->
+    <button id="closeModalBtn"
+            class="absolute top-3 right-3 h-8 w-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700">
+      <span class="material-symbols-outlined text-gray-700 dark:text-gray-200">close</span>
+    </button>
+
+    <!-- Header -->
+    <div class="flex items-center gap-3 mb-3">
+      <div class="h-10 w-10 rounded-full flex items-center justify-center bg-primary/10 text-primary">
+        <span class="material-symbols-outlined">travel_explore</span>
+      </div>
+      <div>
+        <p id="modalCountryLabel" class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+          Country
+        </p>
+        <h3 id="modalTitle" class="text-lg font-extrabold text-gray-900 dark:text-white">
+          Country Missions
+        </h3>
+      </div>
+    </div>
+
+    <!-- XP Summary -->
+    <div class="mb-4 rounded-2xl bg-primary/5 border border-primary/20 px-4 py-3 flex items-center justify-between">
+      <div>
+        <p class="text-xs text-gray-500 dark:text-gray-400"
+           data-en="XP in this country"
+           data-es="XP en este país">
+          XP in this country
+        </p>
+        <p id="modalXpLabel" class="text-xl font-extrabold text-primary">0 XP</p>
+      </div>
+      <p id="modalLevelLabel" class="text-xs font-semibold text-gray-600 dark:text-gray-300">
+        🎮
+      </p>
+    </div>
+
+    <!-- Missions -->
+    <h4 class="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-2"
+        data-en="Linked missions"
+        data-es="Misiones vinculadas">
+      Linked missions
+    </h4>
+
+    <div id="modalMissions" class="space-y-2 text-sm">
+      <!-- JS fills -->
+    </div>
+
+  </div>
+</div>
+
+
+  <footer class="w-full bg-background-light dark:bg-background-dark">
     <div class="mx-auto max-w-7xl px-4 py-8 sm:px-8">
       <div class="flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-8 dark:border-slate-800 sm:flex-row">
-        <p class="text-sm text-slate-600 dark:text-slate-400">© 2024 XPLØR. All Rights Reserved.</p>
+        <p class="text-sm text-slate-600 dark:text-slate-400" data-en="© 2024 XPLØR. All Rights Reserved." data-es="© 2024 XPLØR. Todos los Derechos Reservados.">© 2024 XPLØR. All Rights Reserved.</p>
         <div class="text-sm text-slate-600 dark:text-slate-400">
-          Follow us: <span class="font-semibold text-slate-800 dark:text-slate-200">@xplor.pty</span>
+          <span data-en="Follow us: " data-es="Síguenos: ">Follow us: </span><span class="font-semibold text-slate-800 dark:text-slate-200">@xplor.pty</span>
         </div>
       </div>
     </div>
   </footer>
 
 <script>
-    // Language Menu Logic
-    const langBtn = document.getElementById('langBtn');
-    const langMenu = document.getElementById('langMenu');
-    
-    // Function to toggle menu visibility
-    langBtn.addEventListener('click', (e) => {
-        e.stopPropagation(); 
-        const isHidden = langMenu.style.display === 'none' || langMenu.style.display === '';
-        langMenu.style.display = isHidden ? 'block' : 'none';
+/* =============================
+      CONFETTI ANIMATION
+============================= */
+function launchConfetti() {
+  const canvas = document.getElementById("confettiCanvas");
+  const ctx = canvas.getContext("2d");
+
+  canvas.width = window.innerWidth;
+  canvas.height = 300;
+
+  const confettiParticles = [];
+
+  for (let i = 0; i < 120; i++) {
+    confettiParticles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * -canvas.height,
+      r: Math.random() * 6 + 4,
+      c: `hsl(${Math.random() * 360}, 90%, 60%)`,
+      s: Math.random() * 3 + 2
     });
-    
-    // Close menu when clicked outside
-    document.addEventListener('click', (event) => {
-        if (!langBtn.contains(event.target) && !langMenu.contains(event.target)) {
-            langMenu.style.display = 'none';
-        }
-    });
-
-    // Main translation function
-    function translateContent(newLang) {
-        const targetLang = newLang === 'en' ? 'en' : 'es';
-        
-        // Iterate over ALL elements that have the data-en attribute
-        document.querySelectorAll('[data-en]').forEach(el => {
-            const textKey = el.getAttribute(`data-${targetLang}`);
-            if (textKey) {
-                el.textContent = textKey;
-            }
-        });
-
-        // Update the HTML lang attribute for accessibility
-        document.documentElement.lang = newLang;
-    }
-
-    // Logic to change the language when a menu button is selected
-    document.querySelectorAll('#langMenu button').forEach(button => {
-        button.addEventListener('click', (e) => {
-            const newLang = e.target.getAttribute('data-lang');
-            translateContent(newLang);
-
-            // Hide menu
-            langMenu.style.display = 'none';
-        });
-    });
-    
-    // The content is now correctly set to English by default upon loading.
-</script>
-
-<script>
-  const menuButton = document.getElementById('mobileMenuBtn');
-  const mobileMenu = document.getElementById('mobileMenu');
-  const menuContent = document.getElementById('menuContent');
-  const menuOverlay = document.getElementById('menuOverlay');
-  const menuIcon = document.getElementById('menuIcon');
-
-  function openMenu() {
-    mobileMenu.classList.remove('hidden');
-    // Forzar un reflow para que las transiciones CSS funcionen correctamente
-    void mobileMenu.offsetWidth; 
-    menuOverlay.classList.remove('opacity-0');
-    menuContent.classList.remove('translate-x-full');
-    menuContent.classList.add('translate-x-0');
-    menuIcon.innerText = 'close'; // Cambia el icono a 'X'
   }
 
-  function closeMenu() {
-    menuOverlay.classList.add('opacity-0');
-    menuContent.classList.remove('translate-x-0');
-    menuContent.classList.add('translate-x-full');
-    menuIcon.innerText = 'menu'; // Cambia el icono a 'menu'
+  function render() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Esperar a que la transición termine (300ms) antes de ocultar
-    setTimeout(() => {
-      mobileMenu.classList.add('hidden');
-    }, 300);
+    confettiParticles.forEach((p) => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, 2 * Math.PI);
+      ctx.fillStyle = p.c;
+      ctx.fill();
+
+      p.y += p.s;
+      if (p.y > canvas.height) p.y = -10;
+    });
+
+    requestAnimationFrame(render);
   }
 
-  // Evento para abrir/cerrar el menú
-  menuButton.addEventListener('click', () => {
-    if (mobileMenu.classList.contains('hidden')) {
-      openMenu();
-    } else {
-      closeMenu();
-    }
+  render();
+
+  setTimeout(() => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }, 2500);
+}
+
+/* =============================
+      LANGUAGE MANAGER
+============================= */
+function getCurrentLang() {
+  return localStorage.getItem("xplorLang") || "en";
+}
+
+function setLanguage(lang) {
+  localStorage.setItem("xplorLang", lang);
+  document.querySelectorAll("[data-en]").forEach((el) => {
+    el.textContent = lang === "es" ? el.dataset.es : el.dataset.en;
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () =>
+  setLanguage(getCurrentLang())
+);
+
+document.getElementById("langBtn").addEventListener("click", () => {
+  const newLang = getCurrentLang() === "en" ? "es" : "en";
+  setLanguage(newLang);
+});
+
+/* =============================
+      XP & MISSIONS CONFIG
+============================= */
+
+const PANAMA_KEYS = ["xp_ptrivia1","xp_ptrivia2","xp_ptrivia3","xp_pjuego"];
+const SINGAPORE_KEYS = ["xp_strivia1","xp_strivia2","xp_strivia3","xp_sjuego"];
+
+function getXP(key) {
+  const v = parseInt(localStorage.getItem(key), 10);
+  return isNaN(v) ? 0 : v;
+}
+
+function sumXP(keys) {
+  return keys.reduce((a, k) => a + getXP(k), 0);
+}
+
+/* =============================
+      UPDATE MAIN UI
+============================= */
+
+const xpPanamaLabel = document.getElementById("xpPanamaLabel");
+const xpSingaporeLabel = document.getElementById("xpSingaporeLabel");
+const totalXpLabel = document.getElementById("totalXpLabel");
+const leaderCountryLabel = document.getElementById("leaderCountryLabel");
+
+function animateNumber(start, end, duration, callback) {
+  let startTime = null;
+
+  function step(ts) {
+    if (!startTime) startTime = ts;
+    const progress = ts - startTime;
+    const fraction = Math.min(progress / duration, 1);
+    callback(Math.floor(start + (end - start) * fraction));
+    if (fraction < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+function updateUI() {
+  const xpPanama = sumXP(PANAMA_KEYS);
+  const xpSingapore = sumXP(SINGAPORE_KEYS);
+  const total = xpPanama + xpSingapore;
+
+  animateNumber(0, xpPanama, 600, (v) => (xpPanamaLabel.textContent = v));
+  animateNumber(0, xpSingapore, 600, (v) => (xpSingaporeLabel.textContent = v));
+  animateNumber(0, total, 600, (v) => (totalXpLabel.textContent = v));
+
+  if (xpPanama > xpSingapore) {
+    leaderCountryLabel.textContent =
+      getCurrentLang() === "es" ? "¡Panamá va ganando!" : "Panama is leading!";
+  } else if (xpSingapore > xpPanama) {
+    leaderCountryLabel.textContent =
+      getCurrentLang() === "es"
+        ? "¡Singapur va ganando!"
+        : "Singapore is leading!";
+  } else {
+    leaderCountryLabel.textContent =
+      getCurrentLang() === "es"
+        ? "¡Empate entre Panamá y Singapur!"
+        : "It's a tie!";
+  }
+
+  if (total > 0) launchConfetti();
+}
+
+document.addEventListener("DOMContentLoaded", updateUI);
+
+/* =============================
+      MODAL SYSTEM
+============================= */
+
+const modal = document.getElementById("countryModal");
+const closeModalBtn = document.getElementById("closeModalBtn");
+const modalCountryLabel = document.getElementById("modalCountryLabel");
+const modalTitle = document.getElementById("modalTitle");
+const modalXpLabel = document.getElementById("modalXpLabel");
+const modalMissions = document.getElementById("modalMissions");
+
+const CONFIG = {
+  panama: {
+    labelEn: "Panama",
+    labelEs: "Panamá",
+    titleEn: "Panama Missions",
+    titleEs: "Misiones de Panamá",
+    keys: PANAMA_KEYS,
+    missions: [
+      { key: "xp_ptrivia1", titleEn: "Rainforest Trivia", titleEs: "Selva Trivia", path: "ptrivia1.html" },
+      { key: "xp_ptrivia2", titleEn: "Canal Trivia", titleEs: "Canal Trivia", path: "ptrivia2.html" },
+      { key: "xp_ptrivia3", titleEn: "Culture Trivia", titleEs: "Cultura Trivia", path: "ptrivia3.html" },
+      { key: "xp_pjuego", titleEn: "Panama Canal Dash", titleEs: "Panama Canal Dash", path: "pjuego.html" }
+    ]
+  },
+
+  singapore: {
+    labelEn: "Singapore",
+    labelEs: "Singapur",
+    titleEn: "Singapore Missions",
+    titleEs: "Misiones de Singapur",
+    keys: SINGAPORE_KEYS,
+    missions: [
+      { key: "xp_strivia1", titleEn: "Garden Dome Trivia", titleEs: "Garden Dome Trivia", path: "strivia1.html" },
+      { key: "xp_strivia2", titleEn: "City Skyline Trivia", titleEs: "Ciudad Trivia", path: "strivia2.html" },
+      { key: "xp_strivia3", titleEn: "Hawker Food Trivia", titleEs: "Comida Trivia", path: "strivia3.html" },
+      { key: "xp_sjuego", titleEn: "Merlion Night Dash", titleEs: "Merlion Night Dash", path: "sjuego.html" }
+    ]
+  }
+};
+
+function openModal(country) {
+  const cfg = CONFIG[country];
+  const xp = sumXP(cfg.keys);
+  const lang = getCurrentLang();
+
+  modalCountryLabel.textContent = lang === "es" ? cfg.labelEs : cfg.labelEn;
+  modalTitle.textContent = lang === "es" ? cfg.titleEs : cfg.titleEn;
+  modalXpLabel.textContent = xp + " XP";
+
+  modalMissions.innerHTML = "";
+  cfg.missions.forEach((m) => {
+    const div = document.createElement("div");
+    div.className =
+      "flex items-center justify-between px-3 py-2 rounded-xl bg-gray-100 dark:bg-gray-800";
+
+    div.innerHTML = `
+      <div>
+        <p class="font-semibold">${lang === "es" ? m.titleEs : m.titleEn}</p>
+        <p class="text-xs opacity-70">${getXP(m.key)} XP</p>
+      </div>
+      <a href="${m.path}" class="px-3 py-1 rounded-full bg-primary text-white text-xs font-bold">Play</a>
+    `;
+
+    modalMissions.appendChild(div);
   });
 
-  // Evento para cerrar el menú al hacer clic en el overlay (fondo oscuro)
-  menuOverlay.addEventListener('click', closeMenu);
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+}
 
-  // Evento para cerrar el menú al hacer clic en un enlace (simula navegación)
-  const menuLinks = mobileMenu.querySelectorAll('a');
-  menuLinks.forEach(link => {
-    link.addEventListener('click', closeMenu);
-  });
-</script>
+document.getElementById("countryPanama").addEventListener("click", () => openModal("panama"));
+document.getElementById("countrySingapore").addEventListener("click", () => openModal("singapore"));
 
+closeModalBtn.addEventListener("click", () => {
+  modal.classList.add("hidden");
+  modal.classList.remove("flex");
+});
+
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    modal.classList.add("hidden");
+  }
+});
+</script> 
 </body>
 </html>

@@ -3,7 +3,9 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title data-en="XPLØR: Learn, Level Up, and Earn XP" data-es="XPLØR: Aprende, Sube de Nivel y Gana XP">XPLØR: Learn, Level Up, and Earn XP</title>
+<title data-en="XPLØR: Learn, Level Up, and Earn XP" data-es="XPLØR: Aprende, Sube de Nivel y Gana XP">
+  XPLØR: Learn, Level Up, and Earn XP
+</title>
 
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -11,21 +13,99 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
 
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
 <script id="tailwind-config">
-// Configuración de Tailwind unificada con la paleta vibrante
 tailwind.config = {
   darkMode: "class",
   theme: {
     extend: {
       colors: {
-        "primary": "#0da6f2",           // Azul principal (para botones, nav, progreso)
-        "accent-yellow": "#FFC300",     // Amarillo/Dorado vibrante (para XP)
-        "accent-red": "#FF3B30",        // Rojo vibrante (opcional para acentos)
-        "background-light": "#f5f7f8", // Fondo principal claro
+        "primary": "#0da6f2",
+        "accent-yellow": "#FFC300",
+        "background-light": "#f5f7f8",
         "background-dark": "#101c22",
-        "bg-card": "#E6F7FF",           // Azul muy claro para fondos de tarjeta
-        "text-dark": "#1F2937",         // Color de texto principal (Alto contraste)
-        "text-subtle": "#6B7280"        // Color de texto secundario
+        "text-dark": "#1F2937",
+        "text-subtle": "#6B7280"
+      },
+      fontFamily: {
+        "display": ["Plus Jakarta Sans", "Noto Sans", "sans-serif"]
+      },
+      borderRadius: {
+        "DEFAULT": "1rem",
+        "lg": "2rem",
+        "xl": "3rem",
+        "full": "9999px"
+      }
+    }
+  }
+}
+</script>
+
+<style>
+#langMenu {
+  position: absolute;
+  right: 0;
+  margin-top: 8px;
+  width: 150px;
+  background: white;
+  border: 1px solid #ddd;
+  display: none;
+  border-radius: .5rem;
+  z-index: 50;
+}
+#langMenu button { width: 100%; padding: 8px; text-align: left; }
+#langMenu button:hover { background:#0da6f236; }
+
+.nav-active { border-bottom: 3px solid #0da6f2; color:#0da6f2; }
+.nav-active-tab { border-bottom: 3px solid #0da6f2; color:#0da6f2; }
+
+.ticket-btn {
+  width: 100%;
+  background: #0da6f2;
+  height: 42px;
+  border-radius: 50px;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+}
+.ticket-btn:hover {
+  background:#0c90d6;
+}
+</style>
+</head>
+
+<body class="bg-background-light font-display dark:bg-background-dark">
+<div class="relative flex min-h-screen w-full flex-col">
+
+
+<!-- NAVBAR COMPLETO -->
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>XPLØR: Explore, Play, Learn and Earn</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "primary": "#0da6f2",
+        "background-light": "#f5f7f8",
+        "background-dark": "#101c22",
       },
       fontFamily: {
         "display": ["Plus Jakarta Sans", "Noto Sans", "sans-serif"]
@@ -49,7 +129,6 @@ tailwind.config = {
 }
 .animate-float { animation: float 3s ease-in-out infinite; }
 
-/* Dropdown idiomas */
 #langMenu {
   position: absolute;
   right: 0;
@@ -59,7 +138,7 @@ tailwind.config = {
   border-radius: 0.5rem;
   overflow: hidden;
   border: 1px solid #ddd;
-  display: none; /* Asegura que inicie oculto */
+  display: none;
   z-index: 50;
 }
 #langMenu button {
@@ -70,119 +149,14 @@ tailwind.config = {
 }
 #langMenu button:hover { background-color: #0da6f21a; }
 
-/* Compensar header fijo en scroll suave */
 .scroll-offset { scroll-margin-top: 84px; }
-
-.material-symbols-outlined {
-    font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 24
-}
-/* Estilo para la pestaña activa en el tema claro */
-.nav-active {
-    border-color: theme('colors.primary') !important;
-    color: theme('colors.text-dark') !important;
-}
-/* Estilos para el texto en modo oscuro */
-.dark .text-dark-only { color: theme('colors.text-dark'); }
 </style>
 </head>
 
-<script>
-// ======== FUNCIÓN PRINCIPAL DE TRADUCCIÓN (Adaptada para todos los elementos) ========
-function updateLanguage(lang) {
-  // 1. Traducir elementos con data-en / data-es que afectan al textContent o placeholder
-  document.querySelectorAll("[data-en][data-es]").forEach(el => {
-    const translation = el.getAttribute(`data-${lang}`);
-    if (translation) {
-        // Si es un input, actualiza el placeholder; si no, actualiza el texto
-        if (el.tagName === 'INPUT' && el.hasAttribute('placeholder')) {
-            el.setAttribute('placeholder', translation);
-        } else {
-            el.textContent = translation;
-        }
-    }
-  });
-
-  // 2. Traducir el título del documento
-  const titleEl = document.querySelector('title');
-  if (titleEl) {
-    titleEl.textContent = titleEl.getAttribute(`data-${lang}`);
-  }
-}
-
-// Cargar idioma guardado o por defecto en inglés
-let currentLang = localStorage.getItem("language") || "en";
-updateLanguage(currentLang);
-
-
-// ======== LÓGICA DEL BOTÓN DESPLEGABLE (ACTUALIZADA Y CENTRALIZADA) ========
-
-document.addEventListener("DOMContentLoaded", () => {
-    const langBtn = document.getElementById("langBtn");
-    const langMenu = document.getElementById("langMenu");
-
-    if (langBtn && langMenu) {
-        // 1. Alternar menú al hacer clic en el botón
-        langBtn.addEventListener("click", (event) => {
-            event.stopPropagation(); 
-            langMenu.style.display = langMenu.style.display === "block" ? "none" : "block";
-        });
-
-        // 2. Cerrar menú al seleccionar un idioma y realizar la traducción
-        document.querySelectorAll("#langMenu button").forEach(button => {
-            button.addEventListener("click", () => {
-                const lang = button.getAttribute('data-lang');
-                updateLanguage(lang);
-                localStorage.setItem('language', lang);
-                langMenu.style.display = "none";
-            });
-        });
-
-        // 3. Cerrar el menú si se hace clic en cualquier otro lugar de la página
-        document.addEventListener("click", (event) => {
-            if (!langBtn.contains(event.target) && !langMenu.contains(event.target)) {
-                langMenu.style.display = "none";
-            }
-        });
-    }
-
-    // 4. Lógica del botón de tema (Dark/Light Mode)
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
-    const htmlElement = document.documentElement;
-
-    function applyTheme(isDark) {
-        if (isDark) {
-            htmlElement.classList.add('dark');
-            htmlElement.classList.remove('light');
-            themeIcon.textContent = 'light_mode';
-            localStorage.setItem('theme', 'dark');
-        } else {
-            htmlElement.classList.add('light');
-            htmlElement.classList.remove('dark');
-            themeIcon.textContent = 'dark_mode';
-            localStorage.setItem('theme', 'light');
-        }
-    }
-
-    // Cargar tema guardado o usar el predeterminado del sistema
-    const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    applyTheme(savedTheme === 'dark');
-
-    themeToggle.addEventListener('click', () => {
-        const isDark = htmlElement.classList.contains('dark');
-        applyTheme(!isDark);
-    });
-});
-</script>
-
-
-<body class="bg-background-light font-display dark:bg-background-dark">
+<body class="bg-background-light dark:bg-background-dark font-display">
 <div class="relative flex min-h-screen w-full flex-col">
 
+<!-- HEADER (NAVBAR NUEVO) -->
 <header class="sticky top-0 z-50 flex justify-center border-b border-gray-200/50 bg-background-light/80 px-4 py-3 backdrop-blur-sm dark:border-gray-800/50 dark:bg-background-dark/80 sm:px-8 md:px-10">
   <div class="flex w-full max-w-7xl items-center justify-between">
     <div class="flex items-center gap-8">
@@ -192,6 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <h2 class="text-xl font-bold tracking-tighter">XPLØR</h2>
         </a>
       </div>
+
       <nav id="desktop-nav" class="hidden items-center gap-6 lg:flex">
         <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="index.html" data-en="HOME" data-es="INICIO">HOME</a>
         <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="explore.html" data-en="EXPLORE" data-es="EXPLORA">EXPLORE</a>
@@ -203,10 +178,11 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
 
     <div class="flex items-center gap-2">
+
       <a href="login.html" id="signupBtn" class="hidden min-w-[84px] md:flex cursor-pointer items-center justify-center overflow-hidden rounded-full bg-primary px-4 h-10 text-sm font-bold text-white transition-colors hover:bg-primary/90" data-en="LOG IN" data-es="INICIAR SESIÓN">LOG IN</a>
-      
+
       <div class="relative">
-        <button id="langBtn" class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
+        <button id="langBtn" class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
           <span class="material-symbols-outlined text-xl">language</span>
         </button>
         <div id="langMenu">
@@ -215,11 +191,11 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       </div>
 
-      <a href="user.html" id="profileBtn" class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
+      <a href="user.html" id="profileBtn" class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
         <span class="material-symbols-outlined text-xl">person</span>
       </a>
 
-      <button id="mobileMenuBtn" class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800 lg:hidden">
+      <button id="mobileMenuBtn" class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800 lg:hidden">
         <span id="menuIcon" class="material-symbols-outlined text-xl">menu</span>
       </button>
 
@@ -227,145 +203,330 @@ document.addEventListener("DOMContentLoaded", () => {
   </div>
 </header>
 
+<!-- MENÚ MÓVIL -->
 <div id="mobileMenu" class="fixed inset-0 z-40 hidden lg:hidden">
-  <div id="menuOverlay" class="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 ease-in-out opacity-0"></div>
+  <div id="menuOverlay" class="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 opacity-0"></div>
 
-  <div id="menuContent" class="absolute right-0 top-0 h-full w-64 bg-background-light dark:bg-background-dark shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out p-6">
-    
+  <div id="menuContent" class="absolute right-0 top-0 h-full w-64 bg-background-light dark:bg-background-dark shadow-xl transform translate-x-full transition-transform duration-300 p-6">
     <div class="flex flex-col gap-4 pt-4">
-      <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="index.html" data-en="HOME" data-es="INICIO">HOME</a>
-      <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="explore.html" data-en="EXPLORE" data-es="EXPLORA">EXPLORE</a>
-      <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="play.html" data-en="PLAY" data-es="JUEGA">PLAY</a>
-      <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="learn.html" data-en="LEARN" data-es="APRENDE">LEARN</a>
-      <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="earn.html" data-en="EARN" data-es="GANA">EARN</a>
-      <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="about.html" data-en="ABOUT US" data-es="NOSOTROS">ABOUT US</a>
-      
+      <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="index.html">HOME</a>
+      <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="explore.html">EXPLORE</a>
+      <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="play.html">PLAY</a>
+      <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="learn.html">LEARN</a>
+      <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="earn.html">EARN</a>
+      <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="about.html">ABOUT US</a>
+
       <hr class="border-gray-200 dark:border-gray-700">
 
-      <a href="login.html" class="flex cursor-pointer items-center justify-center overflow-hidden rounded-full bg-primary px-4 h-10 text-sm font-bold text-white transition-colors hover:bg-primary/90" data-en="LOG IN" data-es="INICIAR SESIÓN">LOG IN</a>
+      <a href="login.html" class="flex items-center justify-center rounded-full bg-primary px-4 h-10 text-sm font-bold text-white hover:bg-primary/90">LOG IN</a>
     </div>
-
   </div>
 </div>
 
-  <main class="flex w-full justify-center px-4 py-8 sm:px-8 md:py-12">
-    <div class="w-full max-w-7xl">
-      
-      <div class="mb-10 flex items-center justify-between">
-        <div class="flex flex-col gap-2">
-            <h1 class="text-3xl font-extrabold text-text-dark dark:text-white sm:text-4xl" data-en="LEARN & TRAVEL THE WORLD" data-es="APRENDE Y VIAJA POR EL MUNDO">LEARN & TRAVEL THE WORLD</h1>
-            <p class="text-text-subtle text-base font-normal dark:text-slate-400" data-en="Complete missions to explore the cultures of Panama and Singapore." data-es="Completa misiones para explorar las culturas de Panamá y Singapur.">Complete missions to explore the cultures of Panama and Singapore.</p>
-        </div>
-        <button id="cta-enroll" class="hidden sm:flex items-center space-x-2 rounded-xl bg-accent-yellow px-4 py-2 text-sm font-bold text-text-dark shadow-lg transition-transform hover:scale-[1.02] active:scale-95">
-          <span class="material-symbols-outlined text-xl">school</span>
-          <span data-en="Start Your Journey" data-es="Comenzar Tu Viaje">Start Your Journey</span>
-        </button>
-      </div>
+<!-- CONTENEDOR PRINCIPAL (ARREGLA EL BORDE PEGADO) -->
+<div class="w-full max-w-7xl mx-auto px-4 sm:px-8 md:px-10">
 
-      <section class="space-y-12">
-        <div class="flex flex-col gap-4 sticky top-16 z-40 bg-background-light/80 backdrop-blur-sm dark:bg-background-dark/80 pt-2 border-b border-gray-100 dark:border-slate-700">
-          <div class="pb-3">
-            <div class="flex border-b border-gray-200 dark:border-slate-700 px-4 gap-8">
-              <a class="flex flex-col items-center justify-center border-b-[3px] border-b-primary text-text-dark dark:text-white pb-[13px] pt-4 font-bold" href="#">
-                <p class="text-sm leading-normal tracking-[0.015em]" data-en="Panama" data-es="Panamá">Panama</p>
-              </a>
-              <a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-text-subtle dark:text-slate-400 hover:text-text-dark dark:hover:text-white pb-[13px] pt-4 font-medium" href="#">
-                <p class="text-sm leading-normal tracking-[0.015em]" data-en="Singapore" data-es="Singapur">Singapore</p>
-              </a>
-            </div>
-          </div>
-          <div class="flex gap-3 px-3 overflow-x-auto pb-3">
-            <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary/20 pl-4 pr-4">
-              <p class="text-primary text-sm font-medium leading-normal" data-en="All" data-es="Todo">All</p>
-            </div>
-            <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-200 dark:bg-slate-700 pl-4 pr-4">
-              <p class="text-text-dark dark:text-white text-sm font-medium leading-normal" data-en="Cuisine" data-es="Cocina">Cuisine</p>
-            </div>
-            <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-200 dark:bg-slate-700 pl-4 pr-4">
-              <p class="text-text-dark dark:text-white text-sm font-medium leading-normal" data-en="History" data-es="Historia">History</p>
-            </div>
-            <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-200 dark:bg-slate-700 pl-4 pr-4">
-              <p class="text-text-dark dark:text-white text-sm font-medium leading-normal" data-en="Arts & Dance" data-es="Arte y Danza">Arts & Dance</p>
-            </div>
-            <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-200 dark:bg-slate-700 pl-4 pr-4">
-              <p class="text-text-dark dark:text-white text-sm font-medium leading-normal" data-en="Landmarks" data-es="Monumentos">Landmarks</p>
-            </div>
-          </div>
-        </div>
+<!-- TÍTULO -->
+<div class="mb-10">
+  <h1 class="text-3xl font-extrabold text-text-dark dark:text-white"
+      data-en="LEARN & TRAVEL THE WORLD"
+      data-es="APRENDE Y VIAJA POR EL MUNDO">
+    LEARN & TRAVEL THE WORLD
+  </h1>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-            
-            <div class="flex flex-col rounded-xl bg-white dark:bg-slate-800 shadow-lg overflow-hidden group border border-primary/50">
-                <div class="relative h-48">
-                    <img class="w-full h-full object-cover" data-alt="Vibrant textile art with geometric patterns from the Guna people." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-8efVUvMmi86jUAZxZ4zglx87KaMUA1t-zwrzkKYnZQ0BNvC1P4nL4Xrs3NkpTXEWURojzmRlgIacACTBtWXA45tCNzkOPWN3sPi6kysWPmyNeFL93tTeoz1zXDQkujVdSuxZy5lxgkN8YrXTHYZpMbNgUtTTmDwJIKHW1C4HiBcDllAF3Her0v_TPtu0AEEc3RK7P0dZuw53Nvp-0JCcMIsRsHbO472ZvYN0204p_JOCS_5iKsdeYDJcS0CV1hEWyGhn5d-4r3ao" onerror="this.onerror=null; this.src='https://placehold.co/400x200/0da6f2/ffffff?text=Mola+Art';" />
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                    <div class="absolute top-3 right-3 flex items-center gap-2 rounded-full bg-white/80 dark:bg-black/50 px-3 py-1 text-sm font-bold text-accent-yellow shadow-md">
-                        <span class="material-symbols-outlined text-base">star</span>
-                        <span>+50 XP</span>
-                    </div>
-                </div>
-                <div class="p-5 flex flex-col flex-grow">
-                    <div class="flex items-center gap-2 text-text-subtle text-sm mb-2">
-                        <span class="material-symbols-outlined text-base">palette</span>
-                        <span data-en="Arts & Dance" data-es="Arte y Danza">Arts & Dance</span>
-                    </div>
-                    <h3 class="text-text-dark dark:text-white text-xl font-bold leading-tight tracking-[-0.015em] mb-2" data-en="The Mola: Art of the Guna People" data-es="La Mola: Arte del Pueblo Guna">The Mola: Art of the Guna People</h3>
-                    <p class="text-text-subtle dark:text-slate-400 text-sm font-normal leading-normal mb-4 flex-grow" data-en="Discover the intricate textile art that tells the stories of an indigenous culture from Panama." data-es="Descubre el intrincado arte textil que cuenta las historias de una cultura indígena de Panamá.">Discover the intricate textile art that tells the stories of an indigenous culture from Panama.</p>
-                    <button class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors duration-300">
-                        <span class="truncate" data-en="Start Mission" data-es="Comenzar Misión">Start Mission</span>
-                    </button>
-                </div>
-            </div>
+  <p class="text-text-subtle dark:text-slate-400"
+     data-en="Complete missions to explore the cultures of Panama and Singapore."
+     data-es="Completa misiones para explorar las culturas de Panamá y Singapur.">
+     Complete missions to explore the cultures of Panama and Singapore.
+  </p>
+</div>
 
-            <div class="flex flex-col rounded-xl bg-white dark:bg-slate-800 shadow-lg overflow-hidden group border border-gray-200 dark:border-slate-700">
-                <div class="relative h-48">
-                    <img class="w-full h-full object-cover" data-alt="A steaming bowl of Panamanian Sancocho soup with chicken and vegetables." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOhgqo1YPLYIeaNYPlESJq8p-PP6iP-Y5TmGcP0H2jGs6H1QPDURLWzR_T4NXaAb1jNPjtbQoELp8Kq0-WHVPIxAlA10d9p1F9R6MVRw-gBG0ycDzXySX4ppWj_zPLqkOkzwoGIp8TZ368YWjX2wPDO718AGuILfKfAwq9qKzwT0E3Wp-k7jHbCJayqz9B5tR7BZgT-WwESPsMUfbrMJfONGki9slOXIwAYmq-9BbzPv_Yaa3bcwHPMTraQvA0Im5Vt4NyD3JAlnBv" onerror="this.onerror=null; this.src='https://placehold.co/400x200/FFC300/1F2937?text=Sancocho';" />
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                    <div class="absolute top-3 right-3 flex items-center gap-2 rounded-full bg-white/80 dark:bg-black/50 px-3 py-1 text-sm font-bold text-accent-yellow shadow-md">
-                        <span class="material-symbols-outlined text-base">star</span>
-                        <span>+30 XP</span>
-                    </div>
-                </div>
-                <div class="p-5 flex flex-col flex-grow">
-                    <div class="flex items-center gap-2 text-text-subtle text-sm mb-2">
-                        <span class="material-symbols-outlined text-base">restaurant</span>
-                        <span data-en="Cuisine" data-es="Cocina">Cuisine</span>
-                    </div>
-                    <h3 class="text-text-dark dark:text-white text-xl font-bold leading-tight tracking-[-0.015em] mb-2" data-en="A Taste of Sancocho" data-es="Un Sabor a Sancocho">A Taste of Sancocho</h3>
-                    <p class="text-text-subtle dark:text-slate-400 text-sm font-normal leading-normal mb-4 flex-grow" data-en="Learn the ingredients and cultural significance of Panama's national soup." data-es="Aprende los ingredientes y el significado cultural de la sopa nacional de Panamá.">Learn the ingredients and cultural significance of Panama's national soup.</p>
-                    <button class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors duration-300">
-                        <span class="truncate" data-en="Start Mission" data-es="Comenzar Misión">Start Mission</span>
-                    </button>
-                </div>
-            </div>
 
-            <div class="flex flex-col rounded-xl bg-bg-card dark:bg-slate-800/80 shadow-lg overflow-hidden group opacity-80 border border-gray-200 dark:border-slate-700">
-                <div class="relative h-48">
-                    <img class="w-full h-full object-cover" data-alt="A large cargo ship passing through the locks of the Panama Canal." src="data:image/jpeg;base64,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" onerror="this.onerror=null; this.src='https://placehold.co/400x200/0da6f2/ffffff?text=Panama+Canal';" />
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                    <div class="absolute top-3 right-3 flex items-center gap-2 rounded-full bg-white/80 dark:bg-black/50 px-3 py-1 text-sm font-bold text-accent-yellow shadow-md">
-                        <span class="material-symbols-outlined text-base">star</span>
-                        <span>+100 XP</span>
-                    </div>
-                </div>
-                <div class="p-5 flex flex-col flex-grow">
-                    <div class="flex items-center gap-2 text-text-subtle text-sm mb-2">
-                        <span class="material-symbols-outlined text-base">landmark</span>
-                        <span data-en="Landmarks" data-es="Monumentos">Landmarks</span>
-                    </div>
-                    <h3 class="text-text-dark dark:text-white text-xl font-bold leading-tight tracking-[-0.015em] mb-2" data-en="The Panama Canal: A Modern Wonder" data-es="El Canal de Panamá: Una Maravilla Moderna">The Panama Canal: A Modern Wonder</h3>
-                    <p class="text-text-subtle dark:text-slate-400 text-sm font-normal leading-normal mb-4 flex-grow" data-en="Explore the engineering feat that changed global trade routes forever." data-es="Explora la hazaña de ingeniería que cambió las rutas comerciales globales para siempre.">Explore the engineering feat that changed global trade routes forever.</p>
-                    <button class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors duration-300">
-                        <span class="truncate" data-en="Start Mission" data-es="Comenzar Misión">Start Mission</span>
-                    </button>
-                </div>
-            </div>
+<!-- TABS -->
+<div class="border-b border-gray-200 dark:border-slate-700 mb-6 flex gap-6">
+  <button id="btnPanama" class="text-text-subtle pb-2 font-medium hover:text-primary"
+          data-en="Panama" data-es="Panamá">
+          Panama
+  </button>
 
-        </div>
-      </section>
+  <button id="btnSingapore" class="text-text-subtle pb-2 font-medium hover:text-primary"
+          data-en="Singapore" data-es="Singapur">
+          Singapore
+  </button>
+</div>
+
+
+
+<!-- ========================= -->
+<!--     SECCIÓN PANAMÁ        -->
+<!-- ========================= -->
+
+<div id="cards-panama" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+<!-- CARD 1 — TUCÁN -->
+<div class="bg-white dark:bg-charcoal rounded-lg overflow-hidden shadow-lg group">
+  <div class="relative">
+    <div class="w-full aspect-video bg-cover bg-center"
+         style='background-image:url("https://lh3.googleusercontent.com/aida-public/AB6AXuDb31vfrEzLOqrwcSolcvcq3D8R3ZC91dcFIWFj-ASO7TnmRAQlmZ1f8TIuu-rJ-mpVzsY7EaQy7qqx1n74y4K_o_mStpf0QMYhzpFlnZ-pWRDrNgDTfptqlGu6g--oSNcAApqeAI9zbA1cKTLNmDfgbK3nZcXy-_4_QjuvdOQYAwPFOLdx8PKQ_GUEta5-BUZK4_qPoiuFtBGPJrTAsKketBXCHjMIId4_ZTL-J_8P-N4DXtCkkDwsNvNHWjtxSyj1FMQfbtjVJkoF");'>
     </div>
 
-    <script>
+    <div class="absolute top-2 right-2 flex items-center gap-1 bg-primary/80 text-white text-xs font-bold px-2 py-1 rounded-full">
+      <span class="material-symbols-outlined text-sm">school</span>
+      <span>Learn</span>
+    </div>
+  </div>
+
+  <div class="p-4">
+    <p class="text-lg font-bold">Rainforest Discovery</p>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mt-1 mb-4 h-10">
+      Identify unique flora and fauna hidden within Panama's diverse jungles.
+    </p>
+
+      <button class="ticket-btn" onclick="location.href='ptrivia1.html'">
+        <span class="material-symbols-outlined">confirmation_number</span>
+        <span class="truncate">Start Mission</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- CARD 2 — CANAL -->
+  <div class="bg-white dark:bg-charcoal rounded-lg overflow-hidden shadow-lg group">
+    <div class="relative">
+      <div class="w-full aspect-video bg-cover bg-center"
+           style='background-image:url("data:image/jpeg;base64,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");'>
+      </div>
+
+      <div class="absolute top-2 right-2 flex items-center gap-1 bg-primary/80 text-white text-xs font-bold px-2 py-1 rounded-full">
+        <span class="material-symbols-outlined text-sm">school</span>
+        <span>Learn</span>
+      </div>
+    </div>
+
+    <div class="p-4">
+      <p class="text-lg font-bold">Canal Time Traveler</p>
+      <p class="text-sm text-gray-600 dark:text-gray-300 mt-1 mb-4 h-10">
+        Explore how the Panama Canal connects the world and uncover engineering secrets behind its locks.
+      </p>
+
+      <button class="ticket-btn" onclick="location.href='ptrivia2.html'">
+        <span class="material-symbols-outlined">confirmation_number</span>
+        <span class="truncate">Start Mission</span>
+      </button>
+    </div>
+  </div>
+
+
+
+  <!-- CARD 3 — MOLAS -->
+  <div class="bg-white dark:bg-charcoal rounded-lg overflow-hidden shadow-lg group">
+    <div class="relative">
+      <div class="w-full aspect-video bg-cover bg-center"
+           style='background-image:url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpman15AQhlqD-k18jxOftakQ5234_MYH0m-_DXyS4JxphZiwPLOH7gYF9O-dYYRcYowA&usqp=CAU");'>
+      </div>
+
+      <div class="absolute top-2 right-2 flex items-center gap-1 bg-primary/80 text-white text-xs font-bold px-2 py-1 rounded-full">
+        <span class="material-symbols-outlined text-sm">school</span>
+        <span>Learn</span>
+      </div>
+    </div>
+
+    <div class="p-4">
+      <p class="text-lg font-bold">Molas & Indigenous Art Quest</p>
+      <p class="text-sm text-gray-600 dark:text-gray-300 mt-1 mb-4 h-10">
+        Discover the symbols and stories hidden in Panama's colorful Guna molas and indigenous traditions.
+      </p>
+
+      <button class="ticket-btn" onclick="location.href='ptrivia3.html'">
+        <span class="material-symbols-outlined">confirmation_number</span>
+        <span class="truncate">Start Mission</span>
+      </button>
+    </div>
+  </div>
+
+</div> <!-- END PANAMA -->
+
+<!-- ========================= -->
+<!--     SECCIÓN SINGAPUR     -->
+<!-- ========================= -->
+
+<div id="cards-singapore"
+     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+     style="display:none;">
+
+  <!-- SINGAPORE 1 — SUPERTREES -->
+  <div class="bg-white dark:bg-charcoal rounded-lg overflow-hidden shadow-lg group">
+    <div class="relative">
+      <div class="w-full aspect-video bg-cover bg-center"
+           style='background-image:url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN8y0V41bRiB22vuQNQ736N0GIEe1QImYuug&s");'>
+      </div>
+
+      <div class="absolute top-2 right-2 flex items-center gap-1 bg-primary/80 text-white text-xs font-bold px-2 py-1 rounded-full">
+        <span class="material-symbols-outlined text-sm">school</span>
+        <span>Learn</span>
+      </div>
+    </div>
+
+    <div class="p-4">
+      <p class="text-lg font-bold">Garden Dome Discovery</p>
+      <p class="text-sm text-gray-600 dark:text-gray-300 mt-1 mb-4 h-10">
+        Explore nature under futuristic domes and uncover how Singapore grows a “City in a Garden”.
+      </p>
+
+      <button class="ticket-btn" onclick="location.href='strivia1.html'">
+        <span class="material-symbols-outlined">confirmation_number</span>
+        <span class="truncate">Start Mission</span>
+      </button>
+    </div>
+  </div>
+
+
+
+  <!-- SINGAPORE 2 — MERLION -->
+  <div class="bg-white dark:bg-charcoal rounded-lg overflow-hidden shadow-lg group">
+    <div class="relative">
+      <div class="w-full aspect-video bg-cover bg-center"
+           style='background-image:url("data:image/jpeg;base64,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");'>
+      </div>
+
+      <div class="absolute top-2 right-2 flex items-center gap-1 bg-primary/80 text-white text-xs font-bold px-2 py-1 rounded-full">
+        <span class="material-symbols-outlined text-sm">school</span>
+        <span>Learn</span>
+      </div>
+    </div>
+
+    <div class="p-4">
+      <p class="text-lg font-bold">Merlion Legend Quest</p>
+      <p class="text-sm text-gray-600 dark:text-gray-300 mt-1 mb-4 h-10">
+        Dive into the story of the Merlion and uncover why this mythical creature represents Singapore’s identity.
+      </p>
+
+      <button class="ticket-btn" onclick="location.href='strivia2.html'">
+        <span class="material-symbols-outlined">confirmation_number</span>
+        <span class="truncate">Start Mission</span>
+      </button>
+    </div>
+  </div>
+
+
+
+  <!-- SINGAPORE 3 — FOOD -->
+  <div class="bg-white dark:bg-charcoal rounded-lg overflow-hidden shadow-lg group">
+    <div class="relative">
+      <div class="w-full aspect-video bg-cover bg-center"
+           style='background-image:url("data:image/jpeg;base64,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");'>
+      </div>
+
+      <div class="absolute top-2 right-2 flex items-center gap-1 bg-primary/80 text-white text-xs font-bold px-2 py-1 rounded-full">
+        <span class="material-symbols-outlined text-sm">school</span>
+        <span>Learn</span>
+      </div>
+    </div>
+
+    <div class="p-4">
+      <p class="text-lg font-bold">Hawker Food Culture Adventure</p>
+      <p class="text-sm text-gray-600 dark:text-gray-300 mt-1 mb-4 h-10">
+        Explore Singapore’s hawker centers and discover iconic dishes like Hainanese chicken rice and laksa.
+      </p>
+
+      <button class="ticket-btn" onclick="location.href='strivia3.html'">
+        <span class="material-symbols-outlined">confirmation_number</span>
+        <span class="truncate">Start Mission</span>
+      </button>
+    </div>
+  </div>
+
+</div> <!-- END SINGAPORE -->
+
+
+</div> <!-- CONTENEDOR -->
+<!-- FOOTER NUEVO -->
+<footer class="w-full bg-background-light dark:bg-background-dark">
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-8">
+    <div class="flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-8 dark:border-slate-800 sm:flex-row">
+      <p class="text-sm text-slate-600 dark:text-slate-400" data-en="© 2024 XPLØR. All Rights Reserved." data-es="© 2024 XPLØR. Todos los Derechos Reservados.">
+        © 2024 XPLØR. All Rights Reserved.
+      </p>
+      <div class="text-sm text-slate-600 dark:text-slate-400">
+        <span data-en="Follow us: " data-es="Síguenos: ">Follow us: </span>
+        <span class="font-semibold text-slate-800 dark:text-slate-200">@xplor.pty</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</main>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const btnPanama = document.getElementById("btnPanama");
+  const btnSingapore = document.getElementById("btnSingapore");
+
+  const cardsPanama = document.getElementById("cards-panama");
+  const cardsSingapore = document.getElementById("cards-singapore");
+
+  /* FUNCIÓN DE TRADUCCIÓN (usa tus mismos data-en y data-es) */
+  function applyLanguage(lang) {
+    document.documentElement.setAttribute("lang", lang);
+    localStorage.setItem("lang", lang);
+
+    document.querySelectorAll("[data-en], [data-es]").forEach(el => {
+      if (lang === "en" && el.dataset.en) el.innerHTML = el.dataset.en;
+      if (lang === "es" && el.dataset.es) el.innerHTML = el.dataset.es;
+    });
+  }
+
+  /* AL TOCAR PANAMÁ */
+  function showPanama() {
+    cardsPanama.style.display = "grid";
+    cardsSingapore.style.display = "none";
+  }
+
+  /* AL TOCAR SINGAPUR */
+  function showSingapore() {
+    cardsPanama.style.display = "none";
+    cardsSingapore.style.display = "grid";
+  }
+
+  /* EVENTOS */
+  if (btnPanama) btnPanama.addEventListener("click", showPanama);
+  if (btnSingapore) btnSingapore.addEventListener("click", showSingapore);
+
+});
+
+  if (langBtn && langMenu) {
+    // Abrir / cerrar menú
+    langBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      langMenu.style.display = (langMenu.style.display === "block") ? "none" : "block";
+    });
+
+    // Click fuera cierra menú
+    document.addEventListener("click", (e) => {
+      if (!langMenu.contains(e.target) && e.target !== langBtn) {
+        langMenu.style.display = "none";
+      }
+    });
+
+    // Click en opción de idioma
+    langMenu.querySelectorAll("button[data-lang]").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const lang = btn.getAttribute("data-lang");
+        applyLanguage(lang);
+        langMenu.style.display = "none";
+      });
+    });
+  }
+
+  // Idioma inicial
+  const savedLang = localStorage.getItem("xplorLang") || "en";
+  applyLanguage(savedLang);
+
+  /* ============================================================
+     📱 MENÚ MÓVIL
+  ============================================================ */
   const menuButton = document.getElementById('mobileMenuBtn');
   const mobileMenu = document.getElementById('mobileMenu');
   const menuContent = document.getElementById('menuContent');
@@ -374,46 +535,165 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function openMenu() {
     mobileMenu.classList.remove('hidden');
-    // Forzar un reflow para que las transiciones CSS funcionen correctamente
-    void mobileMenu.offsetWidth; 
+    void mobileMenu.offsetWidth;
     menuOverlay.classList.remove('opacity-0');
     menuContent.classList.remove('translate-x-full');
-    menuContent.classList.add('translate-x-0');
-    menuIcon.innerText = 'close'; // Cambia el icono a 'X'
+    menuIcon.innerText = 'close';
   }
 
   function closeMenu() {
     menuOverlay.classList.add('opacity-0');
-    menuContent.classList.remove('translate-x-0');
     menuContent.classList.add('translate-x-full');
-    menuIcon.innerText = 'menu'; // Cambia el icono a 'menu'
-
-    // Esperar a que la transición termine (300ms) antes de ocultar
-    setTimeout(() => {
-      mobileMenu.classList.add('hidden');
-    }, 300);
+    menuIcon.innerText = 'menu';
+    setTimeout(() => mobileMenu.classList.add('hidden'), 300);
   }
 
-  // Evento para abrir/cerrar el menú
   menuButton.addEventListener('click', () => {
-    if (mobileMenu.classList.contains('hidden')) {
-      openMenu();
-    } else {
-      closeMenu();
-    }
+    mobileMenu.classList.contains('hidden') ? openMenu() : closeMenu();
   });
 
-  // Evento para cerrar el menú al hacer clic en el overlay (fondo oscuro)
   menuOverlay.addEventListener('click', closeMenu);
 
-  // Evento para cerrar el menú al hacer clic en un enlace (simula navegación)
-  const menuLinks = mobileMenu.querySelectorAll('a');
-  menuLinks.forEach(link => {
+  mobileMenu.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', closeMenu);
   });
+
+
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const langBtn = document.getElementById('langBtn');
+    const langMenu = document.getElementById('langMenu');
+    const body = document.body;
+    
+    // 1. Mostrar/Ocultar el menú de idiomas
+    langBtn.addEventListener('click', () => {
+        // Alterna la visibilidad del menú
+        langMenu.style.display = langMenu.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Ocultar el menú si se hace clic fuera
+    document.addEventListener('click', (event) => {
+        if (!langBtn.contains(event.target) && !langMenu.contains(event.target)) {
+            langMenu.style.display = 'none';
+        }
+    });
+
+    // 2. Función principal de traducción
+    function translate(lang) {
+        // Establece el idioma en la etiqueta <html> y en el cuerpo
+        document.documentElement.lang = lang;
+        body.setAttribute('data-lang', lang); 
+
+        // Traduce la etiqueta <title>
+        const titleElement = document.querySelector('title');
+        const titleData = titleElement.getAttribute('data-' + lang);
+        if (titleData) {
+            titleElement.textContent = titleData;
+        }
+
+        // Traduce todos los elementos con atributos data-en/data-es
+        document.querySelectorAll('[data-en], [data-es]').forEach(element => {
+            const translation = element.getAttribute('data-' + lang);
+            if (translation) {
+                // Actualiza el contenido de texto de la mayoría de los elementos
+                element.textContent = translation;
+            }
+        });
+
+        // Manejo especial para los botones de las pestañas
+        updateTabButtons(lang);
+    }
+    
+    // Función para actualizar las pestañas activas
+    function updateTabButtons(lang) {
+        const btnPanama = document.getElementById('btnPanama');
+        const btnSingapore = document.getElementById('btnSingapore');
+
+        // Mantiene la clase 'nav-active' en el botón actualmente activo
+        if (document.getElementById('cards-panama').style.display !== 'none') {
+            btnPanama.classList.add('nav-active-tab'); // Usaremos una nueva clase
+            btnSingapore.classList.remove('nav-active-tab');
+        } else {
+            btnPanama.classList.remove('nav-active-tab');
+            btnSingapore.classList.add('nav-active-tab');
+        }
+    }
+
+
+    // 3. Manejar el clic en los botones del menú de idiomas
+    langMenu.querySelectorAll('button').forEach(button => {
+        button.addEventListener('click', () => {
+            const lang = button.getAttribute('data-lang');
+            translate(lang);
+            langMenu.style.display = 'none'; // Ocultar después de seleccionar
+        });
+    });
+
+    // 4. Lógica de TABS (Panamá/Singapur)
+    const btnPanama = document.getElementById('btnPanama');
+    const btnSingapore = document.getElementById('btnSingapore');
+    const cardsPanama = document.getElementById('cards-panama');
+    const cardsSingapore = document.getElementById('cards-singapore');
+
+    // Inicializar el estado de la pestaña
+    function activateTab(activeBtn, activeCards, inactiveBtn, inactiveCards) {
+        // Eliminar las clases de activación de la navbar que pueden interferir
+        document.querySelectorAll('.nav-link').forEach(nav => nav.classList.remove('nav-active'));
+
+        // Pestañas
+        activeBtn.classList.add('nav-active-tab');
+        inactiveBtn.classList.remove('nav-active-tab');
+        activeCards.style.display = 'grid';
+        inactiveCards.style.display = 'none';
+    }
+
+    // Usaremos la clase `nav-active-tab` para las pestañas (Panamá/Singapur)
+    // Inicializar a Panamá como activa al cargar
+    btnPanama.classList.add('nav-active-tab');
+
+    btnPanama.addEventListener('click', () => {
+        activateTab(btnPanama, cardsPanama, btnSingapore, cardsSingapore);
+    });
+
+    btnSingapore.addEventListener('click', () => {
+        activateTab(btnSingapore, cardsSingapore, btnPanama, cardsPanama);
+    });
+
+    // 5. Lógica del Menú Móvil
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
+    const menuContent = document.getElementById('menuContent');
+    const menuIcon = document.getElementById('menuIcon');
+
+    mobileMenuBtn.addEventListener('click', () => {
+        const isOpen = mobileMenu.classList.toggle('hidden');
+        if (!isOpen) {
+            // Abrir menú
+            setTimeout(() => {
+                menuOverlay.style.opacity = '1';
+                menuContent.style.transform = 'translateX(0)';
+                menuIcon.textContent = 'close';
+            }, 10); // Pequeño retraso para que la transición funcione
+        } else {
+            // Cerrar menú
+            menuOverlay.style.opacity = '0';
+            menuContent.style.transform = 'translateX(full)';
+            menuIcon.textContent = 'menu';
+        }
+    });
+
+    // Cerrar menú al hacer clic en el overlay
+    menuOverlay.addEventListener('click', () => {
+        mobileMenuBtn.click(); // Simular clic en el botón de menú
+    });
+    
+    // 6. Configuración inicial del idioma (si el HTML se carga en 'en')
+    translate('en');
+
+});
 </script>
 
-  </main>
-</div>
 </body>
 </html>

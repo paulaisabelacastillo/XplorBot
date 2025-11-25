@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>XPLØR: Molas & Indigenous Art Quest</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#0da6f2",
+            "background-light": "#f5f7f8",
+            "background-dark": "#101c22",
+          },
+          fontFamily: {
+            "display": ["Plus Jakarta Sans", "Noto Sans", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+    .animate-float { animation: float 3s ease-in-out infinite; }
+
+    #langMenu {
+      position: absolute;
+      right: 0;
+      margin-top: 8px;
+      width: 150px;
+      background: white;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      border: 1px solid #ddd;
+      display: none;
+      z-index: 50;
+    }
+    #langMenu button {
+      width: 100%;
+      padding: 10px 12px;
+      text-align: left;
+      font-size: 14px;
+    }
+    #langMenu button:hover { background-color: #0da6f21a; }
+
+    .scroll-offset { scroll-margin-top: 84px; }
+
+    .option-btn { transition: 0.2s; }
+    .option-btn:hover { transform: translateY(-2px); }
+  </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+
+<!-- ================= HEADER ================= -->
+  <header class="sticky top-0 z-50 flex justify-center border-b border-gray-200/50 bg-background-light/80 px-4 py-3 backdrop-blur-sm dark:border-gray-800/50 dark:bg-background-dark/80 sm:px-8 md:px-10">
+    <div class="flex w-full max-w-7xl items-center justify-between">
+      <div class="flex items-center gap-8">
+        <div class="flex items-center gap-2 text-slate-800 dark:text-white">
+          <a href="index.html" class="flex items-center gap-2 text-slate-800 dark:text-white">
+            <span class="material-symbols-outlined text-primary text-3xl">explore</span>
+            <h2 class="text-xl font-bold tracking-tighter">XPLØR</h2>
+          </a>
+        </div>
+        <nav id="desktop-nav" class="hidden items-center gap-6 lg:flex">
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="index.html" data-en="HOME" data-es="INICIO">HOME</a>
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="explore.html" data-en="EXPLORE" data-es="EXPLORA">EXPLORE</a>
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="play.html" data-en="PLAY" data-es="JUEGA">PLAY</a>
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="learn.html" data-en="LEARN" data-es="APRENDE">LEARN</a>
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="earn.html" data-en="EARN" data-es="GANA">EARN</a>
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="about.html" data-en="ABOUT US" data-es="NOSOTROS">ABOUT US</a>
+        </nav>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <a href="login.html" id="signupBtn" class="hidden min-w-[84px] md:flex cursor-pointer items-center justify-center overflow-hidden rounded-full bg-primary px-4 h-10 text-sm font-bold text-white transition-colors hover:bg-primary/90" data-en="LOG IN" data-es="INICIAR SESIÓN">LOG IN</a>
+        
+        <div class="relative">
+          <button id="langBtn" class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
+            <span class="material-symbols-outlined text-xl">language</span>
+          </button>
+          <div id="langMenu">
+            <button data-lang="en">English 🇺🇸</button>
+            <button data-lang="es">Español 🇵🇦</button>
+          </div>
+        </div>
+
+        <a href="user.html" id="profileBtn" class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
+          <span class="material-symbols-outlined text-xl">person</span>
+        </a>
+
+        <button id="mobileMenuBtn" class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800 lg:hidden">
+          <span id="menuIcon" class="material-symbols-outlined text-xl">menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div id="mobileMenu" class="fixed inset-0 z-40 hidden lg:hidden">
+    <div id="menuOverlay" class="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 ease-in-out opacity-0"></div>
+
+    <div id="menuContent" class="absolute right-0 top-0 h-full w-64 bg-background-light dark:bg-background-dark shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out p-6">
+      <div class="flex flex-col gap-4 pt-4">
+        <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="index.html" data-en="HOME" data-es="INICIO">HOME</a>
+        <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="explore.html" data-en="EXPLORE" data-es="EXPLORA">EXPLORE</a>
+        <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="play.html" data-en="PLAY" data-es="JUEGA">PLAY</a>
+        <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="learn.html" data-en="LEARN" data-es="APRENDE">LEARN</a>
+        <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="earn.html" data-en="EARN" data-es="GANA">EARN</a>
+        <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="about.html" data-en="ABOUT US" data-es="NOSOTROS">ABOUT US</a>
+        
+        <hr class="border-gray-200 dark:border-slate-700">
+
+        <a href="login.html" class="flex cursor-pointer items-center justify-center overflow-hidden rounded-full bg-primary px-4 h-10 text-sm font-bold text-white transition-colors hover:bg-primary/90" data-en="LOG IN" data-es="INICIAR SESIÓN">LOG IN</a>
+      </div>
+    </div>
+  </div>
+
+
+<!-- ================= MAIN ================= -->
+<main class="w-full flex flex-col items-center py-10 px-4">
+
+<div class="w-full max-w-5xl space-y-8">
+
+<!-- ================= INTRO ================= -->
+<section id="trivia-intro" class="bg-white rounded-2xl shadow-lg overflow-hidden">
+
+  <div class="grid md:grid-cols-2">
+
+    <div class="relative h-56 md:h-auto bg-cover bg-center"
+         style="background-image:url('https://www.choosepanama.com/uploads/1/1/3/3/11332995/mola_orig.jpg')">
+      <div class="absolute inset-0 bg-black/40"></div>
+      <p class="absolute bottom-4 left-4 bg-primary text-white px-4 py-1 rounded-full text-xs font-bold">
+        Molas Mission
+      </p>
+    </div>
+
+    <div class="p-6 flex flex-col gap-3">
+      <h1 class="text-2xl md:text-3xl font-extrabold">Molas & Indigenous Art Quest</h1>
+
+      <p class="text-sm md:text-base text-slate-600">
+        Test your knowledge about Guna culture, symbolism, and the art of molas.
+      </p>
+
+      <ul class="text-sm text-slate-600 space-y-1">
+        <li>✔ 10 questions about molas and Guna traditions</li>
+        <li>✔ Earn 100 points per correct answer</li>
+        <li>✔ Finish before the timer ends!</li>
+      </ul>
+
+      <button id="startTriviaBtn"
+        class="bg-primary text-white px-6 py-3 rounded-full font-bold w-full sm:w-auto">
+        Start Mission
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================= TRIVIA ================= -->
+<section id="trivia-section" class="hidden space-y-6">
+
+  <div class="bg-white p-6 rounded-xl shadow">
+    <div class="flex justify-between">
+      <p><b>Question</b> <span id="questionNumberLabel">1</span> / <span id="questionTotalLabel">10</span></p>
+      <div class="flex gap-4">
+        <p><b>Time:</b> <span id="timerLabel">00:30</span></p>
+        <p><b>Score:</b> <span id="scoreLabel">0</span></p>
+      </div>
+    </div>
+    <div class="w-full bg-slate-200 h-2 rounded-full mt-3">
+      <div id="progressBarInner" class="h-full bg-primary rounded-full" style="width:0%"></div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl shadow overflow-hidden">
+    <div class="grid md:grid-cols-2">
+
+        <div id="questionImage" class="h-72 md:h-96 w-full bg-cover bg-center rounded-t-xl"></div>
+
+      <div class="p-6">
+        <h2 id="questionText" class="text-xl font-bold mb-3"></h2>
+        <div id="optionsContainer" class="flex flex-col gap-3"></div>
+      </div>
+
+    </div>
+
+    <div class="p-4 bg-slate-100 flex justify-between items-center">
+      <p id="feedbackText" class="text-sm"></p>
+      <button id="nextQuestionBtn" class="bg-primary text-white px-5 py-2 rounded-full font-bold" disabled>Next</button>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================= RESULTADOS ================= -->
+<section id="resultCard" class="hidden bg-white p-10 rounded-2xl shadow text-center space-y-4">
+
+  <h2 class="text-3xl font-extrabold">Mission Complete!</h2>
+
+  <p id="finalMessage" class="text-primary text-lg font-bold"></p>
+
+  <p class="text-xl font-bold">Correct Answers: <span id="correctAnswersLabel">0</span>/10</p>
+  <p class="text-xl font-bold">Final Score: <span id="finalScoreLabel" class="text-primary">0</span></p>
+
+  <button id="playAgainBtn" class="bg-primary text-white px-6 py-3 rounded-full font-bold w-full sm:w-auto">
+    Play Again
+  </button>
+
+  <a href="play.html" class="border border-slate-400 px-6 py-3 rounded-full font-bold block sm:inline-block mt-2">
+    Back
+  </a>
+
+</section>
+
+</div>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="w-full bg-background-light py-6 text-center text-sm text-slate-600">
+  © 2024 XPLØR — All Rights Reserved
+</footer>
+
+<!-- ================================================= -->
+<!-- ======================= SCRIPT ================== -->
+<!-- ================================================= -->
+<script>
+/* ------------------- IDIOMA ------------------- */
+let currentLanguage = localStorage.getItem("xplorLang") || "en";
+applyLanguage(currentLanguage);
+
+document.getElementById("langBtn").onclick = () => {
+  document.getElementById("langMenu").style.display =
+    document.getElementById("langMenu").style.display === "block" ? "none" : "block";
+};
+
+document.querySelectorAll("#langMenu button").forEach(btn => {
+  btn.onclick = () => {
+    applyLanguage(btn.dataset.lang);
+    document.getElementById("langMenu").style.display = "none";
+  };
+});
+
+function applyLanguage(lang) {
+  currentLanguage = lang;
+  localStorage.setItem("xplorLang", lang);
+}
+
+/* ------------------- PREGUNTAS ------------------- */
+const questions = [
+  {
+    image: "https://www.choosepanama.com/uploads/1/1/3/3/11332995/mola_orig.jpg",
+    en:{question:"What is a mola?",options:["A textile art made by Guna women.","A hat.","A musical instrument.","A fishing tool."],correct:0,explanation:"Molas are layered textile artworks made by Guna women."},
+    es:{question:"¿Qué es una mola?",options:["Un arte textil hecho por mujeres Guna.","Un sombrero.","Instrumento musical.","Herramienta de pesca."],correct:0,explanation:"Las molas son arte textil en capas hechas por mujeres Guna."}
+  },
+  {
+    image:"https://www.selvedge.org/cdn/shop/articles/Mola_lead.jpg?v=1613952665",
+    en:{question:"Molas commonly depict…",options:["Animals & nature","Cars","Cities","Sports"],correct:0,explanation:"Molas usually represent animals, nature and Guna worldview."},
+    es:{question:"Las molas representan…",options:["Animales y naturaleza","Autos","Ciudades","Deportes"],correct:0,explanation:"Las molas representan animales, naturaleza y cosmovisión Guna."}
+  },
+  {
+    image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV9x1e-h3P3ptAJaYkvuj-IsyYaidMT9x-d9QyhPXCBo9Vb1n-OZikDvyFvwKdQcHAQ4k&usqp=CAU",
+    en:{question:"Who creates molas?",options:["Guna women","Maya","Aztec","Inuit"],correct:0,explanation:"Guna women hand-sew molas."},
+    es:{question:"¿Quién crea las molas?",options:["Mujeres Guna","Mayas","Aztecas","Inuit"],correct:0,explanation:"Las mujeres Guna confeccionan las molas."}
+  },
+  {
+    image:"https://images.squarespace-cdn.com/content/v1/51f92a2fe4b07d5d9e3fbd31/1584730011085-XWYES2T9FFN4OTPW66K4/Mola_RS.jpg",
+    en:{question:"Which technique is used?",options:["Reverse appliqué","Spray paint","Digital print","Knitting"],correct:0,explanation:"Molas use layered reverse appliqué."},
+    es:{question:"¿Qué técnica se usa?",options:["Aplique inverso","Aerosol","Impresión digital","Tejido"],correct:0,explanation:"Las molas usan aplique inverso en capas."}
+  },
+  {
+    image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5d83kCm8nl_yczaHxCdd8J-zcSId8MlOMqguCIp94gp8yMcJRqAHlZeeQLXdVpOb2M5M&usqp=CAU",
+    en:{question:"Colors in molas represent…",options:["Life & identity","Sports teams","Traffic signs","Cartoons"],correct:0,explanation:"Color combinations express cultural symbolism."},
+    es:{question:"Los colores representan…",options:["Vida e identidad","Equipos deportivos","Tránsito","Caricaturas"],correct:0,explanation:"Los colores expresan simbolismos culturales."}
+  },
+  {
+    image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWq2Q5S8emDWBkeoqrnulqC5wS99QZgM0VFk0WtR7fTqVRQtYu6VkOcemV4wpyFwqKtUw&usqp=CAU",
+    en:{question:"Main fabric?",options:["Cotton","Plastic","Metal","Nylon"],correct:0,explanation:"Traditional molas use cotton fabric."},
+    es:{question:"Tela principal?",options:["Algodón","Plástico","Metal","Nylon"],correct:0,explanation:"Las molas tradicionales usan algodón."}
+  },
+  {
+    image:"https://www.selvedge.org/cdn/shop/articles/Mola_lead.jpg?v=1613952665",
+    en:{question:"Originally molas were…",options:["Part of women’s clothing","Boats","Maps","Flags"],correct:0,explanation:"They were originally panels on women's blouses."},
+    es:{question:"Originalmente eran…",options:["Parte de la ropa femenina","Barcos","Mapas","Banderas"],correct:0,explanation:"Eran paneles de las blusas tradicionales Guna."}
+  },
+  {
+    image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPOOIwVvJZdXhiEfM7UcvixW8BoIeIWlfAt--GdZ15MGrXpffZNK9j_PUltuwWaWZOSBU&usqp=CAU",
+    en:{question:"Symmetry in molas symbolizes…",options:["Balance & harmony","Technology","Chaos","Industry"],correct:0,explanation:"Symmetry expresses harmony in Guna worldview."},
+    es:{question:"Simetría simboliza…",options:["Equilibrio y armonía","Tecnología","Caos","Industria"],correct:0,explanation:"La simetría expresa armonía en la cosmovisión Guna."}
+  },
+  {
+    image:"https://latinamericanpost.com/wp-content/uploads/2024/03/20240312_Panamas-Indigenous-Mola-Art-Saves-Cultural-Identity.jpg",
+    en:{question:"Common mola designs?",options:["Birds & turtles","Cars","Buildings","Sports"],correct:0,explanation:"Birds and turtles are frequent mola motifs."},
+    es:{question:"Diseños comunes?",options:["Aves y tortugas","Autos","Edificios","Deportes"],correct:0,explanation:"Aves y tortugas son motivos frecuentes."}
+  },
+  {
+    image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRsM-pIidphsnzT9Hmr_F_PLs375tWitoRg8VPu7iZ0OUD3W75FzZtjHL-QMiMhpCQV2Q&usqp=CAU",
+    en:{question:"Why are molas important?",options:["Preserve culture","Replace books","Only tourism","Decoration"],correct:0,explanation:"Molas preserve Guna identity and support artisans."},
+    es:{question:"¿Por qué importantes?",options:["Preservan cultura","Reemplazan libros","Solo turismo","Decoración"],correct:0,explanation:"Preservan la identidad Guna y apoyan a artesanas."}
+  }
+];
+
+/* ------------------- VARIABLES ------------------- */
+let current = 0;
+let score = 0;
+let correct = 0;
+const timeLimit = 30;
+let time = timeLimit;
+let interval;
+
+let correctIndexOnScreen = 0;
+let optionOrder = [];
+
+/* ------------------- DOM ------------------- */
+const intro = document.getElementById("trivia-intro");
+const section = document.getElementById("trivia-section");
+const result = document.getElementById("resultCard");
+
+const qNum = document.getElementById("questionNumberLabel");
+const qTotal = document.getElementById("questionTotalLabel");
+qTotal.textContent = questions.length;
+
+const timerLabel = document.getElementById("timerLabel");
+const scoreLabel = document.getElementById("scoreLabel");
+const progress = document.getElementById("progressBarInner");
+
+const qImage = document.getElementById("questionImage");
+const qText = document.getElementById("questionText");
+const optionsDiv = document.getElementById("optionsContainer");
+const feedback = document.getElementById("feedbackText");
+const nextBtn = document.getElementById("nextQuestionBtn");
+
+const finalScore = document.getElementById("finalScoreLabel");
+const finalCorrect = document.getElementById("correctAnswersLabel");
+const finalMsg = document.getElementById("finalMessage");
+
+/* ------------------- TIMER ------------------- */
+function startTimer() {
+  clearInterval(interval);
+  time = timeLimit;
+  timerLabel.textContent = `00:${String(time).padStart(2,"0")}`;
+  interval = setInterval(() => {
+    time--;
+    timerLabel.textContent = `00:${String(time).padStart(2,"0")}`;
+    if (time <= 0) {
+      clearInterval(interval);
+      showCorrectAnswer(true);
+    }
+  }, 1000);
+}
+
+/* ------------------- TRIVIA ------------------- */
+function shuffle(a) {
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+}
+
+function loadQuestion() {
+  const q = questions[current][currentLanguage];
+
+  feedback.textContent = "";
+  nextBtn.disabled = true;
+
+  qNum.textContent = current + 1;
+  progress.style.width = `${(current / questions.length) * 100}%`;
+
+  qImage.style.backgroundImage = `url("${questions[current].image}")`;
+  qText.textContent = q.question;
+
+  optionOrder = q.options.map((_, i) => i);
+  shuffle(optionOrder);
+
+  correctIndexOnScreen = optionOrder.indexOf(questions[current].en.correct);
+
+  optionsDiv.innerHTML = "";
+
+  optionOrder.forEach((origIndex, screenIndex) => {
+    const btn = document.createElement("button");
+    btn.className = "option-btn border rounded-xl px-4 py-3 text-left bg-white";
+    btn.innerHTML = `<b>${String.fromCharCode(65 + screenIndex)}.</b> ${q.options[origIndex]}`;
+    btn.onclick = () => choose(screenIndex);
+    optionsDiv.appendChild(btn);
+  });
+
+  if (current === questions.length - 1) nextBtn.textContent = "Finish";
+  else nextBtn.textContent = "Next";
+
+  startTimer();
+}
+
+function choose(selected) {
+  clearInterval(interval);
+
+  const q = questions[current][currentLanguage];
+  const isCorrect = selected === correctIndexOnScreen;
+
+  const buttons = optionsDiv.querySelectorAll("button");
+
+  buttons.forEach((btn, idx) => {
+    if (idx === correctIndexOnScreen) {
+      btn.classList.add("bg-green-500", "text-white");
+    }
+    if (idx === selected && !isCorrect) {
+      btn.classList.add("bg-red-500", "text-white");
+    }
+  });
+
+  if (isCorrect) {
+    score += 100;
+    correct++;
+    feedback.textContent = "Correct! " + q.explanation;
+  } else {
+    feedback.textContent = "Incorrect. " + q.explanation;
+  }
+
+  scoreLabel.textContent = score;
+  nextBtn.disabled = false;
+}
+
+function showCorrectAnswer() {
+  const q = questions[current][currentLanguage];
+  const buttons = optionsDiv.querySelectorAll("button");
+
+  buttons.forEach((btn, idx) => {
+    if (idx === correctIndexOnScreen) {
+      btn.classList.add("bg-green-500","text-white");
+    }
+  });
+
+  feedback.textContent = q.explanation;
+  nextBtn.disabled = false;
+}
+
+function showResults() {
+    triviaSection.classList.add('hidden');
+    resultCard.classList.remove('hidden');
+
+    // 👉 GUARDAR XP AQUÍ
+    localStorage.setItem("xp_ptrivia3", score);
+
+    finalScoreLabel.textContent = score.toString();
+    correctAnswersLabel.textContent = correctAnswers.toString();
+    totalQuestionsLabel.textContent = questions.length.toString();
+
+    const total = questions.length;
+    let msg;
+    if (currentLanguage === 'es') {
+      msg = `¡Misión completada! Aciertos: ${correctAnswers}/${total}. Sigue explorando para ganar más puntos y subir de nivel.`;
+    } else {
+      msg = `Mission completed! Correct answers: ${correctAnswers}/${total}. Keep exploring to earn more points and level up.`;
+    }
+    finalMessage.textContent = msg;
+}
+
+
+/* ------------------- EVENTOS ------------------- */
+document.getElementById("startTriviaBtn").onclick = () => {
+  intro.classList.add("hidden");
+  section.classList.remove("hidden");
+  loadQuestion();
+};
+
+nextBtn.onclick = () => {
+  current++;
+  if (current < questions.length) loadQuestion();
+  else showResults();
+};
+
+document.getElementById("playAgainBtn").onclick = () => {
+  current = 0;
+  score = 0;
+  correct = 0;
+  result.classList.add("hidden");
+  section.classList.remove("hidden");
+  loadQuestion();
+};
+
+</script>
+
+</body>
+</html>

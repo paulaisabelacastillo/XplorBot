@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>XPLØR: Rainforest Discovery Trivia</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#0da6f2",
+            "background-light": "#f5f7f8",
+            "background-dark": "#101c22",
+          },
+          fontFamily: {
+            "display": ["Plus Jakarta Sans", "Noto Sans", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+    .animate-float { animation: float 3s ease-in-out infinite; }
+
+    /* Dropdown idiomas */
+    #langMenu {
+      position: absolute;
+      right: 0;
+      margin-top: 8px;
+      width: 150px;
+      background: white;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      border: 1px solid #ddd;
+      display: none;
+      z-index: 50;
+    }
+    #langMenu button {
+      width: 100%;
+      padding: 10px 12px;
+      text-align: left;
+      font-size: 14px;
+    }
+    #langMenu button:hover { background-color: #0da6f21a; }
+
+    /* Compensar header fijo en scroll suave */
+    .scroll-offset { scroll-margin-top: 84px; }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    /* Botones de opciones trivia */
+    .option-btn {
+      transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+    }
+    .option-btn:hover {
+      transform: translateY(-1px);
+    }
+  </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+<div class="relative flex min-h-screen w-full flex-col">
+
+  <!-- HEADER -->
+  <header class="sticky top-0 z-50 flex justify-center border-b border-gray-200/50 bg-background-light/80 px-4 py-3 backdrop-blur-sm dark:border-gray-800/50 dark:bg-background-dark/80 sm:px-8 md:px-10">
+    <div class="flex w-full max-w-7xl items-center justify-between">
+      <div class="flex items-center gap-8">
+        <div class="flex items-center gap-2 text-slate-800 dark:text-white">
+          <a href="index.html" class="flex items-center gap-2 text-slate-800 dark:text-white">
+            <span class="material-symbols-outlined text-primary text-3xl">explore</span>
+            <h2 class="text-xl font-bold tracking-tighter">XPLØR</h2>
+          </a>
+        </div>
+        <nav id="desktop-nav" class="hidden items-center gap-6 lg:flex">
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="index.html" data-en="HOME" data-es="INICIO">HOME</a>
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="explore.html" data-en="EXPLORE" data-es="EXPLORA">EXPLORE</a>
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="play.html" data-en="PLAY" data-es="JUEGA">PLAY</a>
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="learn.html" data-en="LEARN" data-es="APRENDE">LEARN</a>
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="earn.html" data-en="EARN" data-es="GANA">EARN</a>
+          <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="about.html" data-en="ABOUT US" data-es="NOSOTROS">ABOUT US</a>
+        </nav>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <a href="login.html" id="signupBtn" class="hidden min-w-[84px] md:flex cursor-pointer items-center justify-center overflow-hidden rounded-full bg-primary px-4 h-10 text-sm font-bold text-white transition-colors hover:bg-primary/90" data-en="LOG IN" data-es="INICIAR SESIÓN">LOG IN</a>
+        
+        <div class="relative">
+          <button id="langBtn" class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
+            <span class="material-symbols-outlined text-xl">language</span>
+          </button>
+          <div id="langMenu">
+            <button data-lang="en">English 🇺🇸</button>
+            <button data-lang="es">Español 🇵🇦</button>
+          </div>
+        </div>
+
+        <a href="user.html" id="profileBtn" class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
+          <span class="material-symbols-outlined text-xl">person</span>
+        </a>
+
+        <button id="mobileMenuBtn" class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800 lg:hidden">
+          <span id="menuIcon" class="material-symbols-outlined text-xl">menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div id="mobileMenu" class="fixed inset-0 z-40 hidden lg:hidden">
+    <div id="menuOverlay" class="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 ease-in-out opacity-0"></div>
+
+    <div id="menuContent" class="absolute right-0 top-0 h-full w-64 bg-background-light dark:bg-background-dark shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out p-6">
+      <div class="flex flex-col gap-4 pt-4">
+        <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="index.html" data-en="HOME" data-es="INICIO">HOME</a>
+        <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="explore.html" data-en="EXPLORE" data-es="EXPLORA">EXPLORE</a>
+        <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="play.html" data-en="PLAY" data-es="JUEGA">PLAY</a>
+        <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="learn.html" data-en="LEARN" data-es="APRENDE">LEARN</a>
+        <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="earn.html" data-en="EARN" data-es="GANA">EARN</a>
+        <a class="nav-link text-base font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="about.html" data-en="ABOUT US" data-es="NOSOTROS">ABOUT US</a>
+        
+        <hr class="border-gray-200 dark:border-slate-700">
+
+        <a href="login.html" class="flex cursor-pointer items-center justify-center overflow-hidden rounded-full bg-primary px-4 h-10 text-sm font-bold text-white transition-colors hover:bg-primary/90" data-en="LOG IN" data-es="INICIAR SESIÓN">LOG IN</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <main class="flex-1 flex flex-col items-center py-8 px-4 sm:px-6 lg:px-8">
+
+    <div class="w-full max-w-5xl space-y-8">
+
+      <!-- INTRO DE LA MISIÓN -->
+      <section id="trivia-intro" class="bg-white dark:bg-background-dark/80 rounded-2xl shadow-lg overflow-hidden border border-slate-200/60 dark:border-slate-800">
+        <div class="grid md:grid-cols-2 gap-0">
+          <div class="relative h-56 md:h-auto">
+            <div class="absolute inset-0 bg-cover bg-center"
+              style='background-image:url("https://lh3.googleusercontent.com/aida-public/AB6AXuDb31vfrEzLOqrwcSolcvcq3D8R3ZC91dcFIWFj-ASO7TnmRAQlmZ1f8TIuu-rJ-mpVzsY7EaQy7qqx1n74y4K_o_mStpf0QMYhzpFlnZ-pWRDrNgDTfptqlGu6g--oSNcAApqeAI9zbA1cKTLNmDfgbK3nZcXy-_4_QjuvdOQYAwPFOLdx8PKQ_GUEta5-BUZK4_qPoiuFtBGPJrTAsKketBXCHjMIId4_ZTL-J_8P-N4DXtCkkDwsNvNHWjtxSyj1FMQfbtjVJkoF");'>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+            <div class="absolute bottom-4 left-4">
+              <p class="inline-flex items-center gap-2 rounded-full bg-emerald-500/90 px-4 py-1 text-xs font-semibold uppercase tracking-wide text-white">
+                <span class="material-symbols-outlined text-sm">forest</span>
+                <span data-en="Rainforest Mission" data-es="Misión Selva Tropical">Rainforest Mission</span>
+              </p>
+              <p class="mt-2 text-lg font-bold text-white drop-shadow"
+                 data-en="Discover Panama's wild, green heart."
+                 data-es="Descubre el corazón verde y salvaje de Panamá.">
+                Discover Panama's wild, green heart.
+              </p>
+            </div>
+          </div>
+
+          <div class="p-6 md:p-8 flex flex-col justify-center gap-4">
+            <div>
+              <h1 class="text-2xl md:text-3xl font-extrabold"
+                  data-en="Rainforest Discovery Trivia"
+                  data-es="Trivia: Descubriendo la Selva de Panamá">
+                Rainforest Discovery Trivia
+              </h1>
+              <p class="mt-2 text-sm md:text-base text-slate-600 dark:text-slate-300"
+                 data-en="Test your knowledge about Panama's rainforests, animals, and why they matter for the planet."
+                 data-es="Pon a prueba tus conocimientos sobre las selvas de Panamá, sus animales y por qué son tan importantes para el planeta.">
+                Test your knowledge about Panama's rainforests, animals, and why they matter for the planet.
+              </p>
+            </div>
+
+            <ul class="text-xs md:text-sm text-slate-600 dark:text-slate-300 space-y-1">
+              <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-base text-emerald-500">check_circle</span>
+                <span data-en="10 questions about Panama's jungles, Darién, Soberanía, and more."
+                      data-es="10 preguntas sobre las selvas de Panamá, Darién, Soberanía y mucho más.">
+                  10 questions about Panama's jungles, Darién, Soberanía, and more.
+                </span>
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-base text-emerald-500">check_circle</span>
+                <span data-en="Earn 100 points for each correct answer."
+                      data-es="Gana 100 puntos por cada respuesta correcta.">
+                  Earn 100 points for each correct answer.
+                </span>
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-base text-emerald-500">check_circle</span>
+                <span data-en="Try to finish before the time runs out!"
+                      data-es="Intenta terminar antes de que se acabe el tiempo.">
+                  Try to finish before the time runs out!
+                </span>
+              </li>
+            </ul>
+
+            <div class="flex flex-col sm:flex-row gap-3 mt-2">
+              <button id="startTriviaBtn"
+                class="flex-1 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm md:text-base font-bold text-white shadow hover:bg-primary/90">
+                <span class="material-symbols-outlined text-base md:text-lg">play_arrow</span>
+                <span data-en="Start Mission"
+                      data-es="Iniciar Misión">Start Mission</span>
+              </button>
+
+              <a href="explore.html"
+                class="flex-1 inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 dark:border-slate-600 px-5 py-3 text-sm md:text-base font-semibold text-slate-700 dark:text-slate-200 hover:border-primary">
+                <span class="material-symbols-outlined text-base md:text-lg">explore</span>
+                <span data-en="Back to Explore"
+                      data-es="Volver a Explorar">Back to Explore</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN DE TRIVIA (SE MUESTRA AL INICIAR) -->
+      <section id="trivia-section" class="hidden space-y-6">
+
+        <!-- Barra superior: pregunta / tiempo / puntaje -->
+        <div class="bg-white dark:bg-background-dark/80 rounded-2xl shadow-lg border border-slate-200/60 dark:border-slate-800 p-5 md:p-6">
+          <div class="flex flex-col gap-4">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+              <p class="text-sm md:text-base font-semibold text-slate-700 dark:text-slate-200">
+                <span id="questionWord" data-en="Question" data-es="Pregunta">Question</span>
+                <span id="questionNumberLabel">1</span>
+                /
+                <span id="questionTotalLabel">10</span>
+              </p>
+
+              <div class="flex gap-3">
+                <div class="flex items-center gap-2 rounded-full bg-slate-100 dark:bg-slate-800 px-3 py-1.5">
+                  <span class="material-symbols-outlined text-base text-emerald-500">schedule</span>
+                  <div class="text-xs md:text-sm">
+                    <p class="font-semibold" data-en="Time left" data-es="Tiempo restante">Time left</p>
+                    <p id="timerLabel" class="font-mono text-xs md:text-sm">00:30</p>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-2 rounded-full bg-slate-100 dark:bg-slate-800 px-3 py-1.5">
+                  <span class="material-symbols-outlined text-base text-amber-400">stars</span>
+                  <div class="text-xs md:text-sm">
+                    <p class="font-semibold" data-en="Score" data-es="Puntaje">Score</p>
+                    <p id="scoreLabel" class="font-mono text-xs md:text-sm">0</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Barra de progreso -->
+            <div class="w-full h-2 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+              <div id="progressBarInner" class="h-full rounded-full bg-primary transition-all duration-300 ease-out" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta principal de pregunta -->
+        <div class="bg-white dark:bg-background-dark/80 rounded-2xl shadow-lg border border-slate-200/60 dark:border-slate-800 overflow-hidden">
+          <div class="grid md:grid-cols-2">
+            <!-- Imagen -->
+            <div id="questionImage"
+                 class="relative h-52 md:h-auto bg-cover bg-center"
+                 style='background-image:url("https://lh3.googleusercontent.com/aida-public/AB6AXuDb31vfrEzLOqrwcSolcvcq3D8R3ZC91dcFIWFj-ASO7TnmRAQlmZ1f8TIuu-rJ-mpVzsY7EaQy7qqx1n74y4K_o_mStpf0QMYhzpFlnZ-pWRDrNgDTfptqlGu6g--oSNcAApqeAI9zbA1cKTLNmDfgbK3nZcXy-_4_QjuvdOQYAwPFOLdx8PKQ_GUEta5-BUZK4_qPoiuFtBGPJrTAsKketBXCHjMIId4_ZTL-J_8P-N4DXtCkkDwsNvNHWjtxSyj1FMQfbtjVJkoF");'>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
+              <p class="absolute bottom-3 left-3 inline-flex items-center gap-1 rounded-full bg-emerald-500/90 px-3 py-1 text-xs font-semibold text-white">
+                <span class="material-symbols-outlined text-sm">eco</span>
+                <span data-en="Panama Rainforest"
+                      data-es="Selva de Panamá">Panama Rainforest</span>
+              </p>
+            </div>
+
+            <!-- Pregunta + opciones -->
+            <div class="p-5 md:p-6 flex flex-col gap-4">
+              <div>
+                <p id="questionText" class="text-lg md:text-xl font-bold text-slate-900 dark:text-white">
+                  Loading question...
+                </p>
+                <p class="text-xs md:text-sm text-slate-600 dark:text-slate-300 mt-1"
+                   data-en="Select one of the options below."
+                   data-es="Selecciona una de las opciones de abajo.">
+                  Select one of the options below.
+                </p>
+              </div>
+
+              <!-- Opciones -->
+              <div id="optionsContainer" class="flex flex-col gap-3">
+                <!-- Se llena dinámicamente -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Feedback + botón siguiente -->
+          <div class="border-t border-slate-200 dark:border-slate-800 px-5 md:px-6 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3 bg-slate-50/80 dark:bg-slate-900/60">
+            <p id="feedbackText" class="text-xs md:text-sm text-slate-700 dark:text-slate-200 min-h-[1.5rem]">
+              <!-- Mensaje feedback -->
+            </p>
+            <button id="nextQuestionBtn"
+              class="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-xs md:text-sm font-bold text-white disabled:opacity-50 disabled:cursor-not-allowed">
+              <span id="nextButtonLabel" data-en="Next Question" data-es="Siguiente Pregunta">Next Question</span>
+              <span class="material-symbols-outlined text-base">arrow_forward</span>
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- RESULTADO FINAL (fuera de trivia-section) -->
+      <section id="resultCard"
+        class="hidden bg-white dark:bg-background-dark/80 rounded-2xl shadow-lg border border-slate-200/60 dark:border-slate-800 p-8 text-center space-y-4 max-w-3xl mx-auto">
+
+        <h2 class="text-3xl font-extrabold"
+            data-en="Mission Complete!"
+            data-es="¡Misión Completada!">
+          Mission Complete!
+        </h2>
+
+        <!-- Mensaje dinámico estilo opción 3 -->
+        <p id="finalMessage" class="text-base md:text-lg font-semibold text-primary"></p>
+
+        <p class="text-sm md:text-base text-slate-700 dark:text-slate-300"
+           data-en="You finished the Rainforest Discovery mission. Great job, explorer!"
+           data-es="Terminaste la misión Descubriendo la Selva. ¡Gran trabajo, explorador(a)!">
+          You finished the Rainforest Discovery mission. Great job, explorer!
+        </p>
+
+        <!-- Correctas + puntaje -->
+        <p class="text-lg md:text-xl font-bold">
+          <span data-en="Correct answers:" data-es="Aciertos:">Correct answers:</span>
+          <span id="correctAnswersLabel" class="mx-1">0</span>
+          /
+          <span id="totalQuestionsLabel">10</span>
+        </p>
+
+        <p class="text-lg md:text-xl font-bold">
+          <span data-en="Final score:" data-es="Puntaje final:">Final score:</span>
+          <span id="finalScoreLabel" class="ml-2 text-primary">0</span>
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mt-2">
+
+          <!-- Play Again -->
+          <button id="playAgainBtn"
+              class="flex-1 inline-flex items-center justify-center gap-2
+                     bg-primary text-white font-bold rounded-full px-6 py-3
+                     hover:bg-primary/90 transition">
+              <span class="material-symbols-outlined">replay</span>
+              <span data-en="Play Again" data-es="Jugar de Nuevo">Play Again</span>
+          </button>
+
+          <!-- Go Back -->
+          <a href="play.html"
+              class="flex-1 inline-flex items-center justify-center gap-2
+                     border border-slate-300 dark:border-slate-600
+                     rounded-full px-6 py-3 font-semibold text-slate-800 dark:text-slate-200
+                     hover:border-primary transition">
+              <span class="material-symbols-outlined">arrow_back</span>
+              <span data-en="Back" data-es="Volver Atrás">Back</span>
+          </a>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="w-full bg-background-light dark:bg-background-dark mt-8">
+    <div class="mx-auto max-w-7xl px-4 py-8 sm:px-8">
+      <div class="flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-8 dark:border-slate-800 sm:flex-row">
+        <p class="text-sm text-slate-600 dark:text-slate-400">© 2024 XPLØR. All Rights Reserved.</p>
+        <div class="text-sm text-slate-600 dark:text-slate-400">
+          Follow us: <span class="font-semibold text-slate-800 dark:text-slate-200">@xplor.pty</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div> <!-- cierre wrapper principal -->
+
+<!-- SCRIPTS -->
+<script>
+  // =========================
+  //  MENÚ MÓVIL
+  // =========================
+  const menuButton = document.getElementById('mobileMenuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const menuContent = document.getElementById('menuContent');
+  const menuOverlay = document.getElementById('menuOverlay');
+  const menuIcon = document.getElementById('menuIcon');
+
+  function openMenu() {
+    if (!mobileMenu) return;
+    mobileMenu.classList.remove('hidden');
+    void mobileMenu.offsetWidth;
+    menuOverlay.classList.remove('opacity-0');
+    menuContent.classList.remove('translate-x-full');
+    menuContent.classList.add('translate-x-0');
+    if (menuIcon) menuIcon.innerText = 'close';
+  }
+
+  function closeMenu() {
+    if (!mobileMenu) return;
+    menuOverlay.classList.add('opacity-0');
+    menuContent.classList.remove('translate-x-0');
+    menuContent.classList.add('translate-x-full');
+    if (menuIcon) menuIcon.innerText = 'menu';
+    setTimeout(() => {
+      mobileMenu.classList.add('hidden');
+    }, 300);
+  }
+
+  if (menuButton) {
+    menuButton.addEventListener('click', () => {
+      if (mobileMenu.classList.contains('hidden')) {
+        openMenu();
+      } else {
+        closeMenu();
+      }
+    });
+  }
+  if (menuOverlay) {
+    menuOverlay.addEventListener('click', closeMenu);
+  }
+  if (mobileMenu) {
+    const menuLinks = mobileMenu.querySelectorAll('a');
+    menuLinks.forEach(link => link.addEventListener('click', closeMenu));
+  }
+
+  // =========================
+  //  IDIOMAS
+  // =========================
+  let currentLanguage = localStorage.getItem('xplorLang') || 'en';
+
+  function applyLanguage(lang) {
+    currentLanguage = lang;
+    document.documentElement.lang = lang;
+    localStorage.setItem('xplorLang', lang);
+
+    document.querySelectorAll('[data-en]').forEach(el => {
+      const text = el.dataset[lang];
+      if (text !== undefined) {
+        el.textContent = text;
+      }
+    });
+
+    // Actualizar textos de la pregunta actual si la trivia está activa
+    if (typeof updateQuestionLanguage === 'function') {
+      updateQuestionLanguage();
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const langBtn = document.getElementById('langBtn');
+    const langMenu = document.getElementById('langMenu');
+
+    if (langBtn && langMenu) {
+      langBtn.addEventListener('click', () => {
+        langMenu.style.display = langMenu.style.display === 'block' ? 'none' : 'block';
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!langMenu.contains(e.target) && !langBtn.contains(e.target)) {
+          langMenu.style.display = 'none';
+        }
+      });
+
+      langMenu.querySelectorAll('button[data-lang]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const lang = btn.getAttribute('data-lang') || 'en';
+          applyLanguage(lang);
+          langMenu.style.display = 'none';
+        });
+      });
+    }
+
+    // Aplicar idioma guardado al cargar
+    applyLanguage(currentLanguage);
+  });
+
+  // =========================
+  //  LÓGICA TRIVIA: RAINFOREST DISCOVERY
+  // =========================
+
+  const questions = [
+    {
+      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDb31vfrEzLOqrwcSolcvcq3D8R3ZC91dcFIWFj-ASO7TnmRAQlmZ1f8TIuu-rJ-mpVzsY7EaQy7qqx1n74y4K_o_mStpf0QMYhzpFlnZ-pWRDrNgDTfptqlGu6g--oSNcAApqeAI9zbA1cKTLNmDfgbK3nZcXy-_4_QjuvdOQYAwPFOLdx8PKQ_GUEta5-BUZK4_qPoiuFtBGPJrTAsKketBXCHjMIId4_ZTL-J_8P-N4DXtCkkDwsNvNHWjtxSyj1FMQfbtjVJkoF",
+      en: {
+        question: "Which region in Panama is home to one of the largest remaining tropical rainforests in Central America?",
+        options: ["Darién", "Azuero Peninsula", "Los Santos", "Pearl Islands"],
+        correct: 0,
+        explanation: "Darién, in eastern Panama, contains one of the largest and wildest tropical rainforests in Central America."
+      },
+      es: {
+        question: "¿Qué región de Panamá alberga una de las selvas tropicales más grandes que quedan en Centroamérica?",
+        options: ["Darién", "Península de Azuero", "Los Santos", "Islas de Las Perlas"],
+        correct: 0,
+        explanation: "Darién, en el oriente de Panamá, tiene una de las selvas tropicales más grandes y salvajes de Centroamérica."
+      }
+    },
+    {
+      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBFNcL_UUEOpqrD5zBrAqbj40LchELvd51c3_GXON2U9pBhpIgSoLws2ZcNJnvb7f2Jt35QMzbR7d9l0vkQ0zodl8eCLua38VYI7Ehq3zBWyjrNTnbQnSqC7ZUwnqbwd_ekAHCn-L9UmIUmqPB62grCZD3kapP71xZZVsGe_V4Mnuag24zByi5IY__2hcbOCHTz-MEq6RtTZcD8RsmOgrBaCXozz3mnAX-fPS7fKuB3WhlVvaq2Sgz7n2BrGhgDHAAKhhgX65ms-5av",
+      en: {
+        question: "Why are Panama's rainforests important for the Panama Canal?",
+        options: [
+          "They help regulate the water cycle and fill the canal's lakes.",
+          "They decorate the canal with more trees.",
+          "They bring tourists to the locks.",
+          "They stop ships from entering the canal."
+        ],
+        correct: 0,
+        explanation: "Forests help keep soils and water stable, so the lakes that feed the Panama Canal receive enough rainwater."
+      },
+      es: {
+        question: "¿Por qué son importantes las selvas de Panamá para el Canal de Panamá?",
+        options: [
+          "Ayudan a regular el ciclo del agua y a llenar los lagos del canal.",
+          "Decorán el canal con más árboles.",
+          "Atraen turistas a las esclusas.",
+          "Impiden que los barcos entren al canal."
+        ],
+        correct: 0,
+        explanation: "Los bosques mantienen el suelo y el agua estables, para que los lagos que alimentan el Canal de Panamá reciban suficiente lluvia."
+      }
+    },
+    {
+      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCMxBYGqvGeVyfj1Yt6G2PKxQf04bnYkijw-WKQVfeWEvsYEEPpkQiQ22oBaQsoTx1n1YRz3jLQDtDiPMZ9_cSz5Vg0thAjJulMd0CWeI0gJtkuuU80zHXyHKs9ohWToTZe5QK-mVJe3HSJR-ycCeKUuFyZer-DPQat5TLxSFOfTXB9SzPwbGgDPCgJCofNk_2NoLXulOBJaVSqS9HnaXklvzjvaso2SIQLvMM41QuUelRhgTUqmCaoJsttqIe_9ckPaII9KBik35Vw",
+      en: {
+        question: "Which national bird of Panama depends on healthy forests to hunt and nest?",
+        options: ["Harpy eagle", "Toucan", "Scarlet macaw", "Hummingbird"],
+        correct: 0,
+        explanation: "The harpy eagle, Panama's national bird, needs large trees and intact forests to build its nest and find prey."
+      },
+      es: {
+        question: "¿Qué ave nacional de Panamá depende de bosques sanos para cazar y anidar?",
+        options: ["Águila harpía", "Tucán", "Guacamaya roja", "Colibrí"],
+        correct: 0,
+        explanation: "El águila harpía, ave nacional de Panamá, necesita árboles grandes y bosques intactos para anidar y encontrar su alimento."
+      }
+    },
+    {
+      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDq7PDQA6eMDsbY69EOLDQhPYmFISaAf0v3L639GshuYE6Q583vOTfr2I69FufEkTbJ5d_HsYx5RAGND_oVps_VzLmVjjJejKvK5FH-v3oglcUaGA7lzpG9332vvv8-nMb4UXFIb53jh5pl0nFooRnu_nWO99yGUd02KQG47hock2isF-djKmSU9_0PBScFjUcHxt3jaT6L0JquwEuR9OyKVPbpxNDaVXilnNJJynWPLFyE-v_tIOoFX0NkQC5hB1cxDSVaNKMyBiXY",
+      en: {
+        question: "Traditional dresses like the pollera and indigenous molas are often inspired by...",
+        options: [
+          "Colors and shapes from nature and the rainforest.",
+          "Only city buildings and cars.",
+          "Flags of other countries.",
+          "Old ships from the canal."
+        ],
+        correct: 0,
+        explanation: "Many traditional designs in Panama are inspired by flowers, animals, and patterns seen in nature and the rainforest."
+      },
+      es: {
+        question: "Vestidos tradicionales como la pollera y las molas indígenas suelen inspirarse en...",
+        options: [
+          "Colores y formas de la naturaleza y la selva.",
+          "Solo edificios y autos de la ciudad.",
+          "Banderas de otros países.",
+          "Barcos antiguos del canal."
+        ],
+        correct: 0,
+        explanation: "Muchos diseños tradicionales de Panamá se inspiran en flores, animales y patrones que se observan en la naturaleza y la selva."
+      }
+    },
+    {
+      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDB7y4FPkJcJEmzq4xDJZwCO31e2as83EjUThfHzXYDDG9HvwYuNgUj4noOqEa5X3i9_mp2KNCqmsKJSBZIp7jqrBwv1XL1iDY3LF5WTNpbwfS-KEND0u2FBYGLaLYWu5JpnzhBcrINzRDj-vSfgVh_MdXKZYouM7Mi2V3L5EjrkJbsjA6qrpskOTO3H31jC5wRlW_QqVDAN-7eOuPzLTXhdtgSolchVTEF_knnKJ6aTeor9CspNsqmvXB5um6lHPtpjKZgurai6tMu",
+      en: {
+        question: "Which indigenous group lives in rainforest regions like Guna Yala and has a deep connection with nature?",
+        options: ["Guna people", "Inuit", "Maori", "Vikings"],
+        correct: 0,
+        explanation: "The Guna people live in areas like Guna Yala and have a strong cultural and spiritual connection with the rainforest and the sea."
+      },
+      es: {
+        question: "¿Qué pueblo indígena vive en zonas de selva como Guna Yala y tiene una fuerte conexión con la naturaleza?",
+        options: ["Pueblo Guna", "Inuit", "Maoríes", "Vikingos"],
+        correct: 0,
+        explanation: "El pueblo Guna vive en zonas como Guna Yala y tiene una conexión cultural y espiritual muy fuerte con la selva y el mar."
+      }
+    },
+    {
+      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDbV5X5D_WS-jaat89c_-JNNnqGuc4vIfSvr42IpmVlBdy3wCQCf5Mkpl0_4GbMmchuAgTA9TjxlZZ05Irl3gzoSgCNYosR0E36KBTJOoGzTwBiisV8mlHCX1jxYOV1deHI6CvFIYVBf_Tpv5mDj3EGO-oguhB_v-hZAGM0Qzo-wxKHSaFLK_Jwg4wzukbonucFxHswiPvkT7jgF9505kx8aVVyeSwRUOW6tDw-azc4LPoyGBWqMekfHyFff9343CTxdzoWQ2v1o0la",
+      en: {
+        question: "What is biodiversity?",
+        options: [
+          "The variety of plants and animals in an area.",
+          "The number of cars in a city.",
+          "Only the big animals in a forest.",
+          "A type of canal lock."
+        ],
+        correct: 0,
+        explanation: "Biodiversity means having many different species of plants, animals, fungi, and microorganisms living together in an ecosystem."
+      },
+      es: {
+        question: "¿Qué es biodiversidad?",
+        options: [
+          "La variedad de plantas y animales en un lugar.",
+          "La cantidad de autos en una ciudad.",
+          "Solo los animales grandes de un bosque.",
+          "Un tipo de esclusa del canal."
+        ],
+        correct: 0,
+        explanation: "Biodiversidad significa tener muchas especies diferentes de plantas, animales, hongos y microorganismos conviviendo en un ecosistema."
+      }
+    },
+    {
+      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuA5Pqt_EKInlegK-FDDTE36ogQkpgI072eR8OEoWdYiQ5edmBb4gKKuS-rnfKahnVeGjTXtNijeSmzqTiN4HKsOGiDaWz5VU3Tj2p2BIoO_MkdtezlmC3-WbS7XU6xItr7w-l9GjTIP3jiW3h3HonTa8N-MkOt_jM_3-6QtcJmbgZVp8fkAzBhzajQkghv6qZdAJVoY74kjzTAjKJ35y8mbJbPG_gVOXl1CHN-1jL0oD_DVpxpo1wK6GVd_tMQGzIIJpr8T3iq8cz4j",
+      en: {
+        question: "Which of these animals is commonly found in Panama's rainforests?",
+        options: ["Sloth", "Polar bear", "Camel", "Penguin"],
+        correct: 0,
+        explanation: "Sloths live in tropical forests of Central and South America, including Panama."
+      },
+      es: {
+        question: "¿Cuál de estos animales se encuentra comúnmente en las selvas de Panamá?",
+        options: ["Perezoso", "Oso polar", "Camello", "Pingüino"],
+        correct: 0,
+        explanation: "Los perezosos viven en bosques tropicales de Centro y Suramérica, incluyendo Panamá."
+      }
+    },
+    {
+      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBFNcL_UUEOpqrD5zBrAqbj40LchELvd51c3_GXON2U9pBhpIgSoLws2ZcNJnvb7f2Jt35QMzbR7d9l0vkQ0zodl8eCLua38VYI7Ehq3zBWyjrNTnbQnSqC7ZUwnqbwd_ekAHCn-L9UmIUmqPB62grCZD3kapP71xZZVsGe_V4Mnuag24zByi5IY__2hcbOCHTz-MEq6RtTZcD8RsmOgrBaCXozz3mnAX-fPS7fKuB3WhlVvaq2Sgz7n2BrGhgDHAAKhhgX65ms-5av",
+      en: {
+        question: "What happens if too many trees are cut down in a rainforest?",
+        options: [
+          "Soil erodes and animals lose their homes.",
+          "There is more fresh air for everyone.",
+          "The canal gets more water automatically.",
+          "Nothing changes in the environment."
+        ],
+        correct: 0,
+        explanation: "Deforestation causes soil erosion, loss of habitat, and affects the water cycle, harming both nature and people."
+      },
+      es: {
+        question: "¿Qué pasa si se talan demasiados árboles en una selva tropical?",
+        options: [
+          "El suelo se erosiona y los animales pierden su hogar.",
+          "Hay más aire fresco para todos.",
+          "El canal recibe más agua automáticamente.",
+          "Nada cambia en el ambiente."
+        ],
+        correct: 0,
+        explanation: "La deforestación provoca erosión del suelo, pérdida de hábitat y afecta el ciclo del agua, dañando a la naturaleza y a las personas."
+      }
+    },
+    {
+      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDq7PDQA6eMDsbY69EOLDQhPYmFISaAf0v3L639GshuYE6Q583vOTfr2I69FufEkTbJ5d_HsYx5RAGND_oVps_VzLmVjjJejKvK5FH-v3oglcUaGA7lzpG9332vvv8-nMb4UXFIb53jh5pl0nFooRnu_nWO99yGUd02KQG47hock2isF-djKmSU9_0PBScFjUcHxt3jaT6L0JquwEuR9OyKVPbpxNDaVXilnNJJynWPLFyE-v_tIOoFX0NkQC5hB1cxDSVaNKMyBiXY",
+      en: {
+        question: "Soberanía National Park, near the Panama Canal, is famous for...",
+        options: [
+          "Birdwatching and rainforest trails.",
+          "Ski slopes and snow.",
+          "Desert dunes.",
+          "Only beaches with no trees."
+        ],
+        correct: 0,
+        explanation: "Soberanía National Park is known for its rich birdlife and rainforest trails like Pipeline Road."
+      },
+      es: {
+        question: "El Parque Nacional Soberanía, cerca del Canal de Panamá, es famoso por...",
+        options: [
+          "Avistamiento de aves y senderos en la selva.",
+          "Pistas de esquí y nieve.",
+          "Dunas de desierto.",
+          "Solo playas sin árboles."
+        ],
+        correct: 0,
+        explanation: "El Parque Nacional Soberanía es conocido por su gran cantidad de aves y senderos en la selva, como el Camino del Oleoducto."
+      }
+    },
+    {
+      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDbV5X5D_WS-jaat89c_-JNNnqGuc4vIfSvr42IpmVlBdy3wCQCf5Mkpl0_4GbMmchuAgTA9TjxlZZ05Irl3gzoSgCNYosR0E36KBTJOoGzTwBiisV8mlHCX1jxYOV1deHI6CvFIYVBf_Tpv5mDj3EGO-oguhB_v-hZAGM0Qzo-wxKHSaFLK_Jwg4wzukbonucFxHswiPvkT7jgF9505kx8aVVyeSwRUOW6tDw-azc4LPoyGBWqMekfHyFff9343CTxdzoWQ2v1o0la",
+      en: {
+        question: "How can YOU help protect Panama's rainforests?",
+        options: [
+          "Learning, sharing information, and supporting conservation efforts.",
+          "Throwing trash in rivers.",
+          "Buying animals as pets from the jungle.",
+          "Cutting more trees for fun."
+        ],
+        correct: 0,
+        explanation: "Learning, talking about conservation, reducing waste, and supporting protected areas are ways to help rainforests."
+      },
+      es: {
+        question: "¿Cómo puedes TÚ ayudar a proteger las selvas de Panamá?",
+        options: [
+          "Aprendiendo, compartiendo información y apoyando esfuerzos de conservación.",
+          "Tirando basura en los ríos.",
+          "Comprando animales salvajes como mascotas.",
+          "Talar más árboles por diversión."
+        ],
+        correct: 0,
+        explanation: "Aprender, hablar de conservación, reducir desechos y apoyar las áreas protegidas son formas de ayudar a las selvas."
+      }
+    }
+  ];
+
+  let currentQuestionIndex = 0;
+  let score = 0;
+  let correctAnswers = 0;
+  const timePerQuestion = 30;
+  let timeLeft = timePerQuestion;
+  let timerInterval = null;
+  let hasAnswered = false;
+
+  // Para mezclar opciones
+  let currentCorrectIndex = 0;      // índice correcto EN PANTALLA
+  let currentOptionOrder = [];      // mapea índice mostrado -> índice original
+
+  const triviaIntro = document.getElementById('trivia-intro');
+  const triviaSection = document.getElementById('trivia-section');
+  const startTriviaBtn = document.getElementById('startTriviaBtn');
+
+  const questionNumberLabel = document.getElementById('questionNumberLabel');
+  const questionTotalLabel = document.getElementById('questionTotalLabel');
+  const timerLabel = document.getElementById('timerLabel');
+  const scoreLabel = document.getElementById('scoreLabel');
+  const progressBarInner = document.getElementById('progressBarInner');
+
+  const questionImage = document.getElementById('questionImage');
+  const questionText = document.getElementById('questionText');
+  const optionsContainer = document.getElementById('optionsContainer');
+  const feedbackText = document.getElementById('feedbackText');
+  const nextQuestionBtn = document.getElementById('nextQuestionBtn');
+  const nextButtonLabel = document.getElementById('nextButtonLabel');
+
+  const resultCard = document.getElementById('resultCard');
+  const finalScoreLabel = document.getElementById('finalScoreLabel');
+  const correctAnswersLabel = document.getElementById('correctAnswersLabel');
+  const totalQuestionsLabel = document.getElementById('totalQuestionsLabel');
+  const finalMessage = document.getElementById('finalMessage');
+  const playAgainBtn = document.getElementById('playAgainBtn');
+
+  if (questionTotalLabel) questionTotalLabel.textContent = questions.length.toString();
+  if (totalQuestionsLabel) totalQuestionsLabel.textContent = questions.length.toString();
+
+  function formatTime(seconds) {
+    const s = seconds.toString().padStart(2, '0');
+    return `00:${s}`;
+  }
+
+  function startTimer() {
+    clearInterval(timerInterval);
+    timeLeft = timePerQuestion;
+    timerLabel.textContent = formatTime(timeLeft);
+
+    timerInterval = setInterval(() => {
+      timeLeft--;
+      timerLabel.textContent = formatTime(timeLeft);
+
+      if (timeLeft <= 0) {
+        clearInterval(timerInterval);
+        if (!hasAnswered) {
+          showCorrectAnswer(true);
+        }
+      }
+    }, 1000);
+  }
+
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  function renderQuestion() {
+    const q = questions[currentQuestionIndex];
+    const data = q[currentLanguage] || q.en;
+
+    // Preparar orden aleatorio de opciones
+    const originalOptions = data.options;
+    const correctOriginalIndex = q.en.correct; // índice correcto en el arreglo original
+    currentOptionOrder = originalOptions.map((_, i) => i); // [0,1,2,3]
+    shuffleArray(currentOptionOrder);
+    currentCorrectIndex = currentOptionOrder.indexOf(correctOriginalIndex); // índice correcto EN PANTALLA
+
+    hasAnswered = false;
+    feedbackText.textContent = "";
+    nextQuestionBtn.disabled = true;
+
+    questionNumberLabel.textContent = (currentQuestionIndex + 1).toString();
+    const progressPercent = (currentQuestionIndex / questions.length) * 100;
+    progressBarInner.style.width = progressPercent + "%";
+
+    questionImage.style.backgroundImage = `url("${q.image}")`;
+    questionText.textContent = data.question;
+
+    optionsContainer.innerHTML = "";
+    currentOptionOrder.forEach((originalIndex, displayIndex) => {
+      const optText = data.options[originalIndex];
+      const btn = document.createElement('button');
+      btn.type = "button";
+      btn.className = "option-btn flex items-center gap-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/70 px-4 py-3 text-left text-sm md:text-base";
+      btn.dataset.index = displayIndex.toString();
+
+      btn.innerHTML = `
+        <span class="font-bold text-xs md:text-sm text-slate-500 dark:text-slate-300">${String.fromCharCode(65 + displayIndex)}.</span>
+        <span class="option-text flex-1">${optText}</span>
+      `;
+
+      btn.addEventListener('click', () => handleOptionClick(displayIndex));
+      optionsContainer.appendChild(btn);
+    });
+
+    if (currentQuestionIndex === questions.length - 1) {
+      nextButtonLabel.dataset.en = "Finish Mission";
+      nextButtonLabel.dataset.es = "Terminar Misión";
+      nextButtonLabel.textContent = nextButtonLabel.dataset[currentLanguage] || "Finish Mission";
+    } else {
+      nextButtonLabel.dataset.en = "Next Question";
+      nextButtonLabel.dataset.es = "Siguiente Pregunta";
+      nextButtonLabel.textContent = nextButtonLabel.dataset[currentLanguage] || "Next Question";
+    }
+
+    startTimer();
+  }
+
+  function updateQuestionLanguage() {
+    if (!triviaSection || triviaSection.classList.contains('hidden')) return;
+    const q = questions[currentQuestionIndex];
+    const data = q[currentLanguage] || q.en;
+
+    questionText.textContent = data.question;
+
+    // Actualizar textos de opciones según el orden actual
+    const optionButtons = optionsContainer.querySelectorAll('button.option-btn');
+    optionButtons.forEach((btn, displayIndex) => {
+      const spanText = btn.querySelector('.option-text');
+      const originalIndex = currentOptionOrder[displayIndex];
+      if (spanText && data.options[originalIndex] !== undefined) {
+        spanText.textContent = data.options[originalIndex];
+      }
+    });
+
+    const explanation = data.explanation;
+    if (feedbackText.textContent && explanation) {
+      // No re-traducimos aquí el prefijo de correcto/incorrecto, solo el texto base
+      // para evitar mezclar idiomas en medio de feedback
+    }
+
+    if (currentQuestionIndex === questions.length - 1) {
+      nextButtonLabel.textContent = nextButtonLabel.dataset[currentLanguage] || "Finish Mission";
+    } else {
+      nextButtonLabel.textContent = nextButtonLabel.dataset[currentLanguage] || "Next Question";
+    }
+  }
+
+  function showCorrectAnswer(fromTimeout = false) {
+    hasAnswered = true;
+    clearInterval(timerInterval);
+
+    const q = questions[currentQuestionIndex];
+    const data = q[currentLanguage] || q.en;
+
+    const optionButtons = optionsContainer.querySelectorAll('button.option-btn');
+    optionButtons.forEach((btn, displayIndex) => {
+      const baseClasses = "option-btn flex items-center gap-3 rounded-xl border px-4 py-3 text-left text-sm md:text-base";
+      const isCorrectDisplay = displayIndex === currentCorrectIndex;
+
+      if (isCorrectDisplay) {
+        btn.className = baseClasses + " border-green-500 bg-green-500 text-white";
+      } else {
+        btn.className = baseClasses + " border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/70 text-slate-800 dark:text-slate-100";
+      }
+    });
+
+    const explanation = data.explanation || "";
+    if (fromTimeout) {
+      feedbackText.textContent = (currentLanguage === 'es'
+        ? "⏰ Se acabó el tiempo. "
+        : "⏰ Time is up. ") + explanation;
+    } else {
+      feedbackText.textContent = explanation;
+    }
+
+    nextQuestionBtn.disabled = false;
+  }
+
+  function handleOptionClick(selectedDisplayIndex) {
+    if (hasAnswered) return;
+    hasAnswered = true;
+    clearInterval(timerInterval);
+
+    const q = questions[currentQuestionIndex];
+    const data = q[currentLanguage] || q.en;
+
+    const optionButtons = optionsContainer.querySelectorAll('button.option-btn');
+    const isCorrect = (selectedDisplayIndex === currentCorrectIndex);
+
+    optionButtons.forEach((btn, displayIndex) => {
+      const baseClasses = "option-btn flex items-center gap-3 rounded-xl border px-4 py-3 text-left text-sm md:text-base";
+      const isCorrectDisplay = displayIndex === currentCorrectIndex;
+
+      if (displayIndex === selectedDisplayIndex && !isCorrect) {
+        btn.className = baseClasses + " border-red-500 bg-red-500 text-white";
+      } else if (isCorrectDisplay) {
+        btn.className = baseClasses + " border-green-500 bg-green-500 text-white";
+      } else {
+        btn.className = baseClasses + " border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/70 text-slate-800 dark:text-slate-100";
+      }
+    });
+
+    if (isCorrect) {
+      score += 100;
+      correctAnswers += 1;
+      scoreLabel.textContent = score.toString();
+      feedbackText.textContent = (currentLanguage === 'es'
+        ? "✅ ¡Correcto! "
+        : "✅ Correct! ") + (data.explanation || "");
+    } else {
+      feedbackText.textContent = (currentLanguage === 'es'
+        ? "❌ No es correcto. "
+        : "❌ Not correct. ") + (data.explanation || "");
+    }
+
+    nextQuestionBtn.disabled = false;
+  }
+
+function showResults() {
+    triviaSection.classList.add('hidden');
+    resultCard.classList.remove('hidden');
+
+    // 👉 GUARDAR XP AQUÍ
+    localStorage.setItem("xp_ptrivia1", score);
+
+    finalScoreLabel.textContent = score.toString();
+    correctAnswersLabel.textContent = correctAnswers.toString();
+    totalQuestionsLabel.textContent = questions.length.toString();
+
+    const total = questions.length;
+    let msg;
+    if (currentLanguage === 'es') {
+      msg = `¡Misión completada! Aciertos: ${correctAnswers}/${total}. Sigue explorando para ganar más puntos y subir de nivel.`;
+    } else {
+      msg = `Mission completed! Correct answers: ${correctAnswers}/${total}. Keep exploring to earn more points and level up.`;
+    }
+    finalMessage.textContent = msg;
+}
+
+
+  function resetQuiz() {
+    score = 0;
+    correctAnswers = 0;
+    currentQuestionIndex = 0;
+    scoreLabel.textContent = "0";
+    progressBarInner.style.width = "0%";
+    resultCard.classList.add('hidden');
+    triviaSection.classList.remove('hidden');
+    renderQuestion();
+  }
+
+  if (startTriviaBtn) {
+    startTriviaBtn.addEventListener('click', () => {
+      triviaIntro.classList.add('hidden');
+      triviaSection.classList.remove('hidden');
+      resultCard.classList.add('hidden');
+      score = 0;
+      correctAnswers = 0;
+      scoreLabel.textContent = "0";
+      currentQuestionIndex = 0;
+      renderQuestion();
+    });
+  }
+
+  if (nextQuestionBtn) {
+    nextQuestionBtn.addEventListener('click', () => {
+      if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
+        renderQuestion();
+      } else {
+        showResults();
+      }
+    });
+  }
+
+  if (playAgainBtn) {
+    playAgainBtn.addEventListener('click', () => {
+      triviaIntro.classList.add('hidden');
+      resetQuiz();
+    });
+  }
+</script>
+
+</body>
+</html>

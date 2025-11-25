@@ -1,50 +1,62 @@
 <!DOCTYPE html>
 <html class="light" lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>XPLØR: Explore Destinations</title>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>XPLØR: Explore Destinations</title>
 
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
 
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-tailwind.config = {
-    darkMode: "class",
-    theme: {
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
         extend: {
-            colors: {
-                "primary": "#0da6f2",
-                "background-light": "#f5f7f8",
-                "background-dark": "#101c22",
-                "electric-blue": "#007BFF",
-                "jungle-green": "#28A745",
-                "sunny-yellow": "#FFC107",
-                "charcoal": "#343A40",
-                "off-white": "#F8F9FA",
-            },
-            fontFamily: {
-                "display": ["Plus Jakarta Sans", "Noto Sans", "sans-serif"]
-            },
-            borderRadius: {
-                "DEFAULT": "1rem",
-                "lg": "2rem",
-                "xl": "3rem",
-                "full": "9999px"
-            },
+          colors: {
+            "primary": "#0da6f2",
+            "background-light": "#f5f7f8",
+            "background-dark": "#101c22",
+            "electric-blue": "#007BFF",
+            "jungle-green": "#28A745",
+            "sunny-yellow": "#FFC107",
+            "charcoal": "#343A40",
+            "off-white": "#F8F9FA",
+          },
+          fontFamily: {
+            "display": ["Plus Jakarta Sans", "Noto Sans", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
         },
-    },
-}
-</script>
+      },
+    }
+  </script>
 
-<style>
+  <style>
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+    .animate-float { animation: float 3s ease-in-out infinite; }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;
+    }
+
+    /* Animación opcional si la necesitas */
 @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
 }
 .animate-float { animation: float 3s ease-in-out infinite; }
 
@@ -68,60 +80,124 @@ tailwind.config = {
   font-size: 14px;
 }
 #langMenu button:hover { background-color: #0da6f21a; }
-
-.material-symbols-outlined {
-    font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;
-}
 </style>
-</head>
+
+    </head>
 
 <body class="bg-background-light dark:bg-background-dark font-display text-charcoal dark:text-off-white">
 <div class="relative flex min-h-screen w-full flex-col">
 
- <header class="sticky top-0 z-50 flex justify-center border-b border-gray-200/50 bg-background-light/80 px-4 py-3 backdrop-blur-sm dark:border-gray-800/50 dark:bg-background-dark/80 sm:px-8 md:px-10">
+  <!-- ========================== -->
+<header class="sticky top-0 z-50 flex justify-center border-b border-gray-200/50 bg-background-light/80 px-4 py-3 backdrop-blur-sm dark:border-gray-800/50 dark:bg-background-dark/80 sm:px-8 md:px-10">
   <div class="flex w-full max-w-7xl items-center justify-between">
     <div class="flex items-center gap-8">
+
+      <!-- LOGO -->
       <div class="flex items-center gap-2 text-slate-800 dark:text-white">
         <a href="index.html" class="flex items-center gap-2 text-slate-800 dark:text-white">
           <span class="material-symbols-outlined text-primary text-3xl">explore</span>
           <h2 class="text-xl font-bold tracking-tighter">XPLØR</h2>
         </a>
       </div>
+
+      <!-- NAV DESKTOP -->
       <nav id="desktop-nav" class="hidden items-center gap-6 lg:flex">
-        <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="index.html" data-en="HOME" data-es="INICIO">HOME</a>
-        <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="explore.html" data-en="EXPLORE" data-es="EXPLORA">EXPLORE</a>
-        <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="play.html" data-en="PLAY" data-es="JUEGA">PLAY</a>
-        <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="learn.html" data-en="LEARN" data-es="APRENDE">LEARN</a>
-        <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="earn.html" data-en="EARN" data-es="GANA">EARN</a>
-        <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="about.html" data-en="ABOUT US" data-es="NOSOTROS">ABOUT US</a>
+        <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" 
+           href="index.html" data-en="HOME" data-es="INICIO">HOME</a>
+
+        <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" 
+           href="explore.html" data-en="EXPLORE" data-es="EXPLORA">EXPLORE</a>
+
+        <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" 
+           href="play.html" data-en="PLAY" data-es="JUEGA">PLAY</a>
+
+        <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" 
+           href="learn.html" data-en="LEARN" data-es="APRENDE">LEARN</a>
+
+        <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" 
+           href="earn.html" data-en="EARN" data-es="GANA">EARN</a>
+
+        <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary" 
+           href="about.html" data-en="ABOUT US" data-es="NOSOTROS">ABOUT US</a>
       </nav>
     </div>
 
-      <div class="flex items-center gap-2">
-        <a href="login.html" id="signupBtn"
-           class="hidden min-w-[84px] md:flex cursor-pointer items-center justify-center overflow-hidden rounded-full bg-primary px-4 h-10 text-sm font-bold text-white transition-colors hover:bg-primary/90"
-           data-en="LOG IN" data-es="INICIAR SESIÓN">LOG IN</a>
+    <!-- BTN DERECHA -->
+    <div class="flex items-center gap-2">
 
-        <div class="relative">
-          <button id="langBtn"
-            class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
-            <span class="material-symbols-outlined text-xl">language</span>
-          </button>
+      <!-- LOG IN -->
+      <a href="login.html" id="signupBtn"
+         class="hidden min-w-[84px] md:flex cursor-pointer items-center justify-center overflow-hidden rounded-full bg-primary px-4 h-10 text-sm font-bold text-white transition-colors hover:bg-primary/90"
+         data-en="LOG IN" data-es="INICIAR SESIÓN">
+         LOG IN
+      </a>
 
-          <div id="langMenu">
-            <button data-lang="en">English 🇺🇸</button>
-            <button data-lang="es">Español 🇵🇦</button>
-          </div>
+      <!-- IDIOMA -->
+      <div class="relative">
+        <button id="langBtn"
+          class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 hover:bg-slate-200 transition-colors dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
+          <span class="material-symbols-outlined text-xl">language</span>
+        </button>
+
+        <div id="langMenu">
+          <button data-lang="en">English 🇺🇸</button>
+          <button data-lang="es">Español 🇵🇦</button>
         </div>
-
-        <a href="user.html" id="profileBtn"
-           class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
-          <span class="material-symbols-outlined text-xl">person</span>
-        </a>
       </div>
+
+      <!-- PERFIL -->
+      <a href="user.html" id="profileBtn"
+         class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 hover:bg-slate-200 transition-colors dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
+        <span class="material-symbols-outlined text-xl">person</span>
+      </a>
+
+      <!-- MENU MÓVIL -->
+      <button id="mobileMenuBtn"
+        class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 hover:bg-slate-200 transition-colors dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800 lg:hidden">
+        <span id="menuIcon" class="material-symbols-outlined text-xl">menu</span>
+      </button>
     </div>
-  </header>
-  <!-- END NAVBAR -->
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div id="mobileMenu" class="fixed inset-0 z-40 hidden lg:hidden">
+  <div id="menuOverlay" class="absolute inset-0 bg-black/50 backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
+
+  <div id="menuContent"
+    class="absolute right-0 top-0 h-full w-64 bg-background-light dark:bg-background-dark shadow-xl transform translate-x-full transition-transform duration-300 p-6">
+
+    <div class="flex flex-col gap-4 pt-4">
+      <a class="nav-link text-base font-medium text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-primary"
+         href="index.html" data-en="HOME" data-es="INICIO">HOME</a>
+
+      <a class="nav-link text-base font-medium text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-primary"
+         href="explore.html" data-en="EXPLORE" data-es="EXPLORA">EXPLORE</a>
+
+      <a class="nav-link text-base font-medium text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-primary"
+         href="play.html" data-en="PLAY" data-es="JUEGA">PLAY</a>
+
+      <a class="nav-link text-base font-medium text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-primary"
+         href="learn.html" data-en="LEARN" data-es="APRENDE">LEARN</a>
+
+      <a class="nav-link text-base font-medium text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-primary"
+         href="earn.html" data-en="EARN" data-es="GANA">EARN</a>
+
+      <a class="nav-link text-base font-medium text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-primary"
+         href="about.html" data-en="ABOUT US" data-es="NOSOTROS">ABOUT US</a>
+
+      <hr class="border-gray-200 dark:border-gray-700">
+
+      <a href="login.html"
+         class="flex cursor-pointer items-center justify-center rounded-full bg-primary h-10 px-4 text-sm font-bold text-white hover:bg-primary/90"
+         data-en="LOG IN" data-es="INICIAR SESIÓN">
+        LOG IN
+      </a>
+    </div>
+
+  </div>
+</div>
+  <!-- ========================== -->
 
   <!-- PAGE CONTENT -->
   <main class="flex-grow">
@@ -170,7 +246,7 @@ tailwind.config = {
         <a href="panama.html"
            class="group relative rounded-3xl overflow-hidden shadow-xl cursor-pointer bg-charcoal/90">
           <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-               style="background-image:url('data:image/jpeg;base64,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');">
+               style="background-image:url('https://residepanama.com/hubfs/Reside%20Panama%20-%20Panama%20City%20Urban.jpg');">
           </div>
           <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/10"></div>
 
@@ -201,7 +277,7 @@ tailwind.config = {
         <a href="singapur.html"
            class="group relative rounded-3xl overflow-hidden shadow-xl cursor-pointer bg-charcoal/90">
           <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-               style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4xvjlsxBFmIBPxZYEiYeEcOsj5Tsyr177Yw&s');">
+               style="background-image:url('https://media.istockphoto.com/id/694570006/photo/merlion-and-singapore-city-skyline.jpg?s=612x612&w=0&k=20&c=x_ttMJtjPi62D6GOqnFQtUYhDYkz9ijbWfYxsQ9f_Gc=');">
           </div>
           <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/10"></div>
 
@@ -233,7 +309,7 @@ tailwind.config = {
 
   </main>
 
-  <!-- FOOTER EXACTO - NO CAMBIADO -->
+  <!-- FOOTER -->
   <footer class="w-full bg-background-light dark:bg-background-dark">
     <div class="mx-auto max-w-7xl px-4 py-8 sm:px-8">
       <div class="flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-8 dark:border-slate-800 sm:flex-row">
@@ -246,66 +322,103 @@ tailwind.config = {
   </footer>
 
 </div>
-
 <script>
-// ================================
-// ⚙️   MENU DE IDIOMA
-// ================================
-const langBtn = document.getElementById("langBtn");
-const langMenu = document.getElementById("langMenu");
+document.addEventListener("DOMContentLoaded", () => {
 
-// Cargar idioma guardado o usar inglés por defecto
-let currentLang = localStorage.getItem("xplorLang") || "en";
-applyLanguage(currentLang);
-
-// Mostrar / ocultar menú al tocar el botón
-langBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    langMenu.style.display = langMenu.style.display === "block" ? "none" : "block";
-});
-
-// Cerrar menú al hacer click fuera
-document.addEventListener("click", (e) => {
-    if (!langMenu.contains(e.target) && e.target !== langBtn) {
-        langMenu.style.display = "none";
-    }
-});
-
-// Cambiar idioma cuando seleccionas uno
-langMenu.querySelectorAll("button").forEach(btn => {
-    btn.addEventListener("click", () => {
-        const lang = btn.dataset.lang;
-        currentLang = lang;
-        localStorage.setItem("xplorLang", lang);
-        applyLanguage(lang);
-        langMenu.style.display = "none";
-    });
-});
-
-
-// ================================
-// 🌎   FUNCIÓN DE TRADUCCIÓN TOTAL
-// ================================
-function applyLanguage(lang) {
+  /* ============================================================
+     🟦 FUNCIÓN DE TRADUCCIÓN (UNIFICADA)
+     Traduce absolutamente TODO lo que tenga data-en / data-es
+  ============================================================ */
+  function applyLanguage(lang) {
     document.documentElement.lang = lang;
 
-    // Seleccionar todo lo que tiene traducciones
     document.querySelectorAll("[data-en]").forEach(el => {
-        let translated = el.getAttribute("data-" + lang);
-        if (!translated) return;
+      const text = el.getAttribute("data-" + lang);
+      if (!text) return;
 
-        // Si es input → traducir placeholder
-        if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
-            el.placeholder = translated;
-
-        // Si es cualquier otro elemento → innerHTML (IMPORTANTE)
-        } else {
-            el.innerHTML = translated;
-        }
+      if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
+        el.placeholder = text;
+      } else {
+        el.innerHTML = text;
+      }
     });
-}
-</script>
 
+    // Guardar idioma
+    localStorage.setItem("xplorLang", lang);
+  }
+
+  // Cargar idioma guardado
+  let currentLang = localStorage.getItem("xplorLang") || "en";
+  applyLanguage(currentLang);
+
+
+
+  /* ============================================================
+     🌍 MENÚ DE IDIOMAS
+  ============================================================ */
+  const langBtn = document.getElementById("langBtn");
+  const langMenu = document.getElementById("langMenu");
+
+  // Abrir / Cerrar menú
+  langBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    langMenu.style.display = langMenu.style.display === "block" ? "none" : "block";
+  });
+
+  // Cerrar al hacer clic fuera
+  document.addEventListener("click", (e) => {
+    if (!langMenu.contains(e.target) && !langBtn.contains(e.target)) {
+      langMenu.style.display = "none";
+    }
+  });
+
+  // Seleccionar idioma
+  langMenu.querySelectorAll("button[data-lang]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const lang = btn.dataset.lang;
+      applyLanguage(lang);
+      langMenu.style.display = "none";
+    });
+  });
+
+
+
+  /* ============================================================
+     📱 MENÚ MÓVIL
+  ============================================================ */
+  const menuButton = document.getElementById('mobileMenuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const menuContent = document.getElementById('menuContent');
+  const menuOverlay = document.getElementById('menuOverlay');
+  const menuIcon = document.getElementById('menuIcon');
+
+  function openMenu() {
+    mobileMenu.classList.remove('hidden');
+    void mobileMenu.offsetWidth;
+    menuOverlay.classList.remove('opacity-0');
+    menuContent.classList.remove('translate-x-full');
+    menuIcon.innerText = 'close';
+  }
+
+  function closeMenu() {
+    menuOverlay.classList.add('opacity-0');
+    menuContent.classList.add('translate-x-full');
+    menuIcon.innerText = 'menu';
+    setTimeout(() => mobileMenu.classList.add('hidden'), 300);
+  }
+
+  menuButton.addEventListener('click', () => {
+    mobileMenu.classList.contains('hidden') ? openMenu() : closeMenu();
+  });
+
+  menuOverlay.addEventListener('click', closeMenu);
+
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+});
+</script>
 
 </body>
 </html>

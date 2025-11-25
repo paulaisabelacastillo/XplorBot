@@ -228,9 +228,11 @@
 <div class="p-4">
 <p class="text-lg font-bold">The Panama Canal Challenge</p>
 <p class="text-sm font-normal text-gray-600 dark:text-gray-300 mt-1 mb-4 h-10">Navigate the history and engineering marvel of the world-famous canal.</p>
-<button class="w-full flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-electric-blue text-white text-sm font-bold leading-normal tracking-[0.015em] group-hover:bg-electric-blue/90 transition-colors">
-<span class="truncate">Start Mission</span>
+<button onclick="location.href='explore.html'"
+class="w-full flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-electric-blue text-white text-sm font-bold leading-normal tracking-[0.015em] group-hover:bg-electric-blue/90 transition-colors">
+    <span class="truncate">Start Mission</span>
 </button>
+
 </div>
 </div>
 <div class="bg-white dark:bg-charcoal rounded-lg overflow-hidden shadow-lg group">
@@ -244,8 +246,11 @@
 <div class="p-4">
 <p class="text-lg font-bold">Rainforest Discovery</p>
 <p class="text-sm font-normal text-gray-600 dark:text-gray-300 mt-1 mb-4 h-10">Identify unique flora and fauna hidden within Panama's diverse jungles.</p>
-<button class="w-full flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-electric-blue text-white text-sm font-bold leading-normal tracking-[0.015em] group-hover:bg-electric-blue/90 transition-colors">
-<span class="truncate">Start Mission</span>
+<button onclick="location.href='learn.html'"
+class="w-full flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-electric-blue text-white text-sm font-bold leading-normal tracking-[0.015em] group-hover:bg-electric-blue/90 transition-colors">
+    <span class="truncate">Start Mission</span>
+</button>
+
 </button>
 </div>
 </div>
@@ -260,8 +265,11 @@
 <div class="p-4">
 <p class="text-lg font-bold">Casco Viejo Quest</p>
 <p class="text-sm font-normal text-gray-600 dark:text-gray-300 mt-1 mb-4 h-10">Embark on a scavenger hunt through the historic streets of Panama City.</p>
-<button class="w-full flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-electric-blue text-white text-sm font-bold leading-normal tracking-[0.015em] group-hover:bg-electric-blue/90 transition-colors">
-<span class="truncate">Start Mission</span>
+<button onclick="location.href='play.html'"
+class="w-full flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-electric-blue text-white text-sm font-bold leading-normal tracking-[0.015em] group-hover:bg-electric-blue/90 transition-colors">
+    <span class="truncate">Start Mission</span>
+</button>
+
 </button>
 </div>
 </div>
@@ -289,19 +297,32 @@
 </div>
 </section>
 <section class="text-center bg-off-white dark:bg-charcoal p-8 lg:p-12 rounded-lg shadow-lg">
-<h2 class="text-2xl md:text-3xl font-bold mb-2">Continue Your Adventure!</h2>
-<p class="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto">This is just the start. Dive into specific games, quizzes, and learning modules to become a true Panama expert and earn rewards!</p>
-<div class="flex flex-col sm:flex-row justify-center gap-4">
-<button class="flex flex-1 min-w-[140px] max-w-[480px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-full h-12 px-6 bg-sunny-yellow text-charcoal text-base font-bold leading-normal tracking-[0.015em] hover:bg-sunny-yellow/90 transition-colors">
-<span class="material-symbols-outlined">joystick</span>
-<span class="truncate">PLAY Games</span>
-</button>
-<button class="flex flex-1 min-w-[140px] max-w-[480px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-full h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors">
-<span class="material-symbols-outlined">school</span>
-<span class="truncate">LEARN Facts</span>
-</button>
-</div>
+  <h2 class="text-2xl md:text-3xl font-bold mb-2">Continue Your Adventure!</h2>
+  <p class="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto">
+    This is just the start. Dive into specific games, quizzes, and learning modules to become a true Panama expert and earn rewards!
+  </p>
+
+  <div class="flex flex-col sm:flex-row justify-center gap-4">
+
+    <!-- PLAY BUTTON → play.html -->
+    <button 
+      onclick="location.href='play.html'"
+      class="flex flex-1 min-w-[140px] max-w-[480px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-full h-12 px-6 bg-sunny-yellow text-charcoal text-base font-bold leading-normal tracking-[0.015em] hover:bg-sunny-yellow/90 transition-colors">
+      <span class="material-symbols-outlined">joystick</span>
+      <span class="truncate">PLAY Games</span>
+    </button>
+
+    <!-- LEARN BUTTON → learn.html -->
+    <button
+      onclick="location.href='learn.html'"
+      class="flex flex-1 min-w-[140px] max-w-[480px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-full h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors">
+      <span class="material-symbols-outlined">school</span>
+      <span class="truncate">LEARN Facts</span>
+    </button>
+
+  </div>
 </section>
+
 </div>
 </div>
 </main>

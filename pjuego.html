@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>XPLØR: Panama Canal Dash</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#0da6f2",
+            "background-light": "#f5f7f8",
+            "background-dark": "#101c22",
+          },
+          fontFamily: {
+            "display": ["Plus Jakarta Sans", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0); }
+    }
+    .animate-float { animation: float 3s ease-in-out infinite; }
+
+    #langMenu {
+      position: absolute;
+      right: 0;
+      margin-top: 8px;
+      width: 150px;
+      background: white;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      border: 1px solid #ddd;
+      display: none;
+      z-index: 50;
+    }
+    #langMenu button {
+      width: 100%;
+      padding: 10px 12px;
+      text-align: left;
+      font-size: 14px;
+    }
+    #langMenu button:hover { background-color: #0da6f21a; }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;
+    }
+
+    canvas {
+      image-rendering: crisp-edges;
+      image-rendering: pixelated;
+    }
+  </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+<div class="relative flex min-h-screen flex-col overflow-x-hidden">
+  <div class="flex h-full grow flex-col">
+
+    <!-- HEADER (match XPLØR aesthetic) -->
+    <header class="sticky top-0 z-50 flex justify-center border-b border-gray-200/50 bg-background-light/80 px-4 py-3 backdrop-blur-sm dark:border-gray-800/50 dark:bg-background-dark/80 sm:px-8 md:px-10">
+      <div class="flex w-full max-w-7xl items-center justify-between">
+        <div class="flex items-center gap-8">
+          <div class="flex items-center gap-2 text-slate-800 dark:text-white">
+            <a href="index.html" class="flex items-center gap-2 text-slate-800 dark:text-white">
+              <span class="material-symbols-outlined text-primary text-3xl">explore</span>
+              <h2 class="text-xl font-bold tracking-tighter">XPLØR</h2>
+            </a>
+          </div>
+          <nav class="hidden items-center gap-6 lg:flex">
+            <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary"
+               href="index.html" data-en="HOME" data-es="INICIO">HOME</a>
+            <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary"
+               href="explore.html" data-en="EXPLORE" data-es="EXPLORA">EXPLORE</a>
+            <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary"
+               href="play.html" data-en="PLAY" data-es="JUEGA">PLAY</a>
+            <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary"
+               href="learn.html" data-en="LEARN" data-es="APRENDE">LEARN</a>
+            <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary"
+               href="earn.html" data-en="EARN" data-es="GANA">EARN</a>
+            <a class="nav-link text-sm font-medium text-slate-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary"
+               href="about.html" data-en="ABOUT US" data-es="NOSOTROS">ABOUT US</a>
+          </nav>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <a href="login.html" id="signupBtn"
+             class="hidden min-w-[84px] md:flex cursor-pointer items-center justify-center overflow-hidden rounded-full bg-primary px-4 h-10 text-sm font-bold text-white transition-colors hover:bg-primary/90"
+             data-en="LOG IN" data-es="INICIAR SESIÓN">
+            LOG IN
+          </a>
+
+          <div class="relative">
+            <button id="langBtn"
+                    class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
+              <span class="material-symbols-outlined text-xl">language</span>
+            </button>
+            <div id="langMenu">
+              <button data-lang="en">English 🇺🇸</button>
+              <button data-lang="es">Español 🇵🇦</button>
+            </div>
+          </div>
+
+          <a href="user.html" id="profileBtn"
+             class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200/60 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:bg-slate-800">
+            <span class="material-symbols-outlined text-xl">person</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="w-full flex flex-col items-center py-10 px-4">
+      <div class="w-full max-w-5xl space-y-8">
+
+        <!-- HERO / INTRO -->
+        <section class="bg-white rounded-2xl shadow-lg overflow-hidden">
+          <div class="grid md:grid-cols-2">
+            <!-- Visual area WITHOUT external images -->
+            <div class="relative h-56 md:h-auto bg-gradient-to-br from-sky-500 via-cyan-500 to-emerald-500 flex items-center justify-center">
+              <div class="text-white text-center animate-float">
+                <div class="flex justify-center gap-3 items-center mb-2">
+                  <span class="material-symbols-outlined text-5xl md:text-6xl">directions_boat</span>
+                  <span class="material-symbols-outlined text-4xl md:text-5xl">waves</span>
+                </div>
+                <p class="text-xs uppercase tracking-[0.2em] opacity-80"
+                   data-en="Panama • Arcade Mini-Game"
+                   data-es="Panamá • Mini juego Arcade">
+                  Panama • Arcade Mini-Game
+                </p>
+                <p class="text-lg md:text-xl font-extrabold mt-1"
+                   data-en="Panama Canal Dash"
+                   data-es="Panama Canal Dash">
+                  Panama Canal Dash
+                </p>
+              </div>
+              <p class="absolute bottom-4 left-4 bg-black/40 backdrop-blur px-4 py-1 rounded-full text-[11px] font-semibold text-white">
+                XPLØR • PLAY
+              </p>
+            </div>
+
+            <!-- Text / instructions -->
+            <div class="p-6 flex flex-col gap-3">
+              <h1 class="text-2xl md:text-3xl font-extrabold"
+                  data-en="Panama Canal Dash"
+                  data-es="Panama Canal Dash">
+                Panama Canal Dash
+              </h1>
+
+              <p class="text-sm md:text-base text-slate-600"
+                 data-en="Guide your ship through the Panama Canal! Change lanes to avoid other ships and buoys, collect XP buoys and reach the end of the route without crashing."
+                 data-es="¡Guía tu barco por el Canal de Panamá! Cambia de carril para evitar otros barcos y boyas, recoge boyas de XP y llega al final de la ruta sin chocar.">
+                Guide your ship through the Panama Canal! Change lanes to avoid other ships and buoys, collect XP buoys and reach the end of the route without crashing.
+              </p>
+
+              <ul class="text-sm text-slate-600 space-y-1">
+                <li data-en="✔ Use ← and → (or A / D) to move between 3 lanes"
+                    data-es="✔ Usa ← y → (o A / D) para moverte entre 3 carriles">
+                  ✔ Use ← and → (or A / D) to move between 3 lanes
+                </li>
+                <li data-en="✔ Avoid gray ships and red buoys"
+                    data-es="✔ Evita los barcos grises y las boyas rojas">
+                  ✔ Avoid gray ships and red buoys
+                </li>
+                <li data-en="✔ Collect green XP buoys to increase your score"
+                    data-es="✔ Recoge boyas verdes de XP para aumentar tu puntaje">
+                  ✔ Collect green XP buoys to increase your score
+                </li>
+                <li data-en="✔ The route gets faster over time!"
+                    data-es="✔ ¡La ruta se vuelve más rápida con el tiempo!">
+                  ✔ The route gets faster over time!
+                </li>
+              </ul>
+
+              <div class="flex flex-wrap gap-3 mt-2">
+                <button id="startBtn"
+                        class="bg-primary text-white px-6 py-3 rounded-full font-bold text-sm md:text-base flex items-center gap-2">
+                  <span class="material-symbols-outlined text-base md:text-lg">play_arrow</span>
+                  <span data-en="Start Dash" data-es="Comenzar Dash">Start Dash</span>
+                </button>
+                <button id="howToBtn"
+                        class="border border-slate-300 text-slate-700 px-4 py-2 rounded-full text-xs md:text-sm font-semibold flex items-center gap-2 hover:bg-slate-50">
+                  <span class="material-symbols-outlined text-base">help</span>
+                  <span data-en="How to Play" data-es="Cómo jugar">How to Play</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- GAME CARD -->
+        <section class="bg-white rounded-2xl shadow-lg p-6 space-y-4">
+          <!-- Stats -->
+          <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-3">
+            <div class="flex flex-wrap gap-4">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">timer</span>
+                <div>
+                  <p class="text-[11px] uppercase tracking-wide text-slate-500"
+                     data-en="Time"
+                     data-es="Tiempo">Time</p>
+                  <p id="timeLabel" class="font-bold text-lg">00.0 s</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">military_tech</span>
+                <div>
+                  <p class="text-[11px] uppercase tracking-wide text-slate-500"
+                     data-en="Score"
+                     data-es="Puntaje">Score</p>
+                  <p id="scoreLabel" class="font-bold text-lg">0</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">speed</span>
+                <div>
+                  <p class="text-[11px] uppercase tracking-wide text-slate-500"
+                     data-en="Speed"
+                     data-es="Velocidad">Speed</p>
+                  <p id="speedLabel" class="font-bold text-lg">1.0x</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">star</span>
+                <div>
+                  <p class="text-[11px] uppercase tracking-wide text-slate-500"
+                     data-en="Best Score"
+                     data-es="Mejor puntaje">Best Score</p>
+                  <p id="bestLabel" class="font-bold text-lg">—</p>
+                </div>
+              </div>
+            </div>
+
+            <button id="resetBtn"
+                    class="px-4 py-2 rounded-full border border-slate-300 text-xs md:text-sm font-semibold hover:bg-slate-100"
+                    data-en="Reset Game"
+                    data-es="Reiniciar juego">
+              Reset Game
+            </button>
+          </div>
+
+          <!-- Canvas wrapper -->
+          <div class="w-full flex justify-center">
+            <div class="w-full max-w-3xl rounded-2xl bg-slate-900 p-3">
+              <canvas id="gameCanvas" width="800" height="400" class="w-full rounded-xl bg-slate-900"></canvas>
+            </div>
+          </div>
+
+          <!-- Status + mobile controls -->
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <p id="statusText" class="text-xs md:text-sm text-slate-700"
+               data-en="Use ← and → (or A / D) to move. On mobile, tap the left or right side of the game."
+               data-es="Usa ← y → (o A / D) para moverte. En móvil, toca el lado izquierdo o derecho del juego.">
+              Use ← and → (or A / D) to move. On mobile, tap the left or right side of the game.
+            </p>
+
+            <div class="flex justify-center md:justify-end gap-2">
+              <button id="leftTouch"
+                      class="md:hidden flex items-center gap-1 px-4 py-2 rounded-full bg-slate-800 text-white text-xs font-semibold">
+                <span class="material-symbols-outlined text-base">arrow_back</span>
+                <span data-en="Left" data-es="Izquierda">Left</span>
+              </button>
+              <button id="rightTouch"
+                      class="md:hidden flex items-center gap-1 px-4 py-2 rounded-full bg-slate-800 text-white text-xs font-semibold">
+                <span data-en="Right" data-es="Derecha">Right</span>
+                <span class="material-symbols-outlined text-base">arrow_forward</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full bg-background-light dark:bg-background-dark mt-8">
+      <div class="mx-auto max-w-7xl px-4 py-8 sm:px-8">
+        <div class="flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-8 dark:border-slate-800 sm:flex-row">
+          <p class="text-sm text-slate-600 dark:text-slate-400">© 2024 XPLØR. All Rights Reserved.</p>
+          <div class="text-sm text-slate-600 dark:text-slate-400">
+            Follow us: <span class="font-semibold text-slate-800 dark:text-slate-200">@xplor.pty</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+</div>
+
+<script>
+  /* ------------- LANGUAGE ------------- */
+  let currentLang = localStorage.getItem('xplorLang') || 'en';
+
+  function applyLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('xplorLang', lang);
+    document.querySelectorAll('[data-en]').forEach(el => {
+      const text = el.dataset[lang];
+      if (text) el.textContent = text;
+    });
+  }
+
+  
+
+  applyLanguage(currentLang);
+
+  const langBtn = document.getElementById('langBtn');
+  const langMenu = document.getElementById('langMenu');
+
+  if (langBtn) {
+    langBtn.addEventListener('click', () => {
+      langMenu.style.display = (langMenu.style.display === 'block') ? 'none' : 'block';
+    });
+  }
+
+  document.querySelectorAll('#langMenu button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      applyLanguage(btn.dataset.lang);
+      langMenu.style.display = 'none';
+    });
+  });
+
+  /* ------------- GAME LOGIC ------------- */
+  const canvas = document.getElementById('gameCanvas');
+  const ctx = canvas.getContext('2d');
+
+  const laneCount = 3;
+  const laneWidth = canvas.width / laneCount;
+  const playerWidth = laneWidth * 0.45;
+  const playerHeight = 40;
+  const obstacleHeight = 40;
+
+  let playerLane = 1; // 0,1,2
+  let obstacles = []; // {lane, y, type} type: 'ship','hazard','xp'
+  let lastSpawnTime = 0;
+  let spawnInterval = 900; // ms
+  let baseSpeed = 140; // px/s
+  let speedMultiplier = 1;
+  let running = false;
+  let gameOver = false;
+  let score = 0;
+  let bestScore = Number(localStorage.getItem('dashBestScore') || 0);
+  let startTimestamp = null;
+  let elapsedMs = 0;
+
+  const timeLabel = document.getElementById('timeLabel');
+  const scoreLabel = document.getElementById('scoreLabel');
+  const bestLabel = document.getElementById('bestLabel');
+  const speedLabel = document.getElementById('speedLabel');
+  const statusText = document.getElementById('statusText');
+
+  const startBtn = document.getElementById('startBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const howToBtn = document.getElementById('howToBtn');
+  const leftTouch = document.getElementById('leftTouch');
+  const rightTouch = document.getElementById('rightTouch');
+
+  function updateBestLabel() {
+    if (bestScore > 0) bestLabel.textContent = bestScore.toString();
+    else bestLabel.textContent = '—';
+  }
+  updateBestLabel();
+
+  function resetGame() {
+    obstacles = [];
+    playerLane = 1;
+    lastSpawnTime = 0;
+    spawnInterval = 900;
+    baseSpeed = 140;
+    speedMultiplier = 1;
+    running = false;
+    gameOver = false;
+    score = 0;
+    elapsedMs = 0;
+    startTimestamp = null;
+    timeLabel.textContent = '00.0 s';
+    scoreLabel.textContent = '0';
+    speedLabel.textContent = '1.0x';
+
+    statusText.textContent = currentLang === 'es'
+      ? 'Presiona "Start Dash" o la barra espaciadora para comenzar.'
+      : 'Press "Start Dash" or Space to start.';
+    drawScene(0);
+  }
+
+  function startGame() {
+    if (running) return;
+    resetGame();
+    running = true;
+    statusText.textContent = currentLang === 'es'
+      ? 'Evita los obstáculos y recoge boyas verdes de XP.'
+      : 'Avoid obstacles and collect green XP buoys.';
+    requestAnimationFrame(loop);
+  }
+
+function endGame() {
+    running = false;
+    gameOver = true;
+
+    // 👉 GUARDAR XP DEL JUEGO
+    localStorage.setItem("xp_pjuego", score);
+
+    if (score > bestScore) {
+      bestScore = score;
+      localStorage.setItem('dashBestScore', String(bestScore));
+      updateBestLabel();
+    }
+
+    const seconds = (elapsedMs / 1000).toFixed(1);
+    statusText.textContent = currentLang === 'es'
+      ? `¡Fin del juego! Puntaje: ${score} • Tiempo: ${seconds} s. Presiona Reset o Start para intentar de nuevo.`
+      : `Game Over! Score: ${score} • Time: ${seconds} s. Press Reset or Start to try again.`;
+}
+
+
+  function spawnObstacle(now) {
+    if (now - lastSpawnTime < spawnInterval) return;
+    lastSpawnTime = now;
+
+    const lane = Math.floor(Math.random() * laneCount);
+    const r = Math.random();
+    let type = 'ship'; // default gray ship
+    if (r < 0.18) type = 'xp';       // green XP buoy
+    else if (r < 0.36) type = 'hazard'; // red buoy
+    obstacles.push({ lane, y: -obstacleHeight, type });
+  }
+
+  function updateGame(dt) {
+    // dt in seconds
+    elapsedMs += dt * 1000;
+    const seconds = (elapsedMs / 1000).toFixed(1);
+    timeLabel.textContent = `${seconds} s`;
+
+    // increase difficulty over time
+    speedMultiplier = 1 + Math.min(elapsedMs / 30000, 1.5); // up to 2.5x
+    const speed = baseSpeed * speedMultiplier;
+    speedLabel.textContent = `${speedMultiplier.toFixed(1)}x`;
+
+    // occasionally shorten spawn interval
+    spawnInterval = 900 - Math.min(elapsedMs / 200, 500); // down to ~400ms
+
+    // move obstacles
+    for (let i = obstacles.length - 1; i >= 0; i--) {
+      obstacles[i].y += speed * dt;
+      if (obstacles[i].y > canvas.height + 50) {
+        obstacles.splice(i, 1);
+      }
+    }
+
+    // collisions & XP
+    const playerY = canvas.height - 20 - playerHeight;
+    const laneX = (laneWidth * playerLane) + laneWidth / 2;
+
+    for (let i = obstacles.length - 1; i >= 0; i--) {
+      const o = obstacles[i];
+      const oX = (laneWidth * o.lane) + laneWidth / 2;
+      const oY = o.y;
+
+      const dx = Math.abs(oX - laneX);
+      const dy = Math.abs(oY - playerY);
+
+      if (dx < laneWidth * 0.3 && dy < (playerHeight)) {
+        if (o.type === 'xp') {
+          // collect xp
+          score += 10;
+          scoreLabel.textContent = score.toString();
+          obstacles.splice(i, 1);
+        } else {
+          // hit ship or hazard
+          endGame();
+          break;
+        }
+      }
+    }
+  }
+
+  function drawScene(now) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // background canal
+    const grd = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    grd.addColorStop(0, '#022435');
+    grd.addColorStop(1, '#035c81');
+    ctx.fillStyle = grd;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // lanes
+    for (let i = 1; i < laneCount; i++) {
+      const x = i * laneWidth;
+      ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+      ctx.lineWidth = 2;
+      ctx.setLineDash([8, 10]);
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, canvas.height);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    // start & end lines (locks)
+    ctx.fillStyle = 'rgba(255,255,255,0.18)';
+    ctx.fillRect(0, 40, canvas.width, 6);
+    ctx.fillRect(0, canvas.height - 70, canvas.width, 6);
+
+    // label Atlantic / Pacific
+    ctx.fillStyle = 'rgba(255,255,255,0.8)';
+    ctx.font = '12px "Plus Jakarta Sans", sans-serif';
+    const atlantic = currentLang === 'es' ? 'Atlántico' : 'Atlantic';
+    const pacific = currentLang === 'es' ? 'Pacífico' : 'Pacific';
+    ctx.fillText(atlantic, 12, 30);
+    ctx.fillText(pacific, canvas.width - 70, 30);
+
+    // obstacles
+    for (const o of obstacles) {
+      const xCenter = (o.lane * laneWidth) + laneWidth / 2;
+      const yTop = o.y;
+
+      if (o.type === 'ship') {
+        // gray ship
+        ctx.fillStyle = '#e5e7eb';
+        ctx.beginPath();
+        const w = laneWidth * 0.5;
+        const h = obstacleHeight;
+        const radius = 10;
+        const x = xCenter - w / 2;
+        const y = yTop;
+        ctx.moveTo(x + radius, y);
+        ctx.lineTo(x + w - radius, y);
+        ctx.quadraticCurveTo(x + w, y, x + w, y + radius);
+        ctx.lineTo(x + w, y + h - radius);
+        ctx.quadraticCurveTo(x + w, y + h, x + w - radius, y + h);
+        ctx.lineTo(x + radius, y + h);
+        ctx.quadraticCurveTo(x, y + h, x, y + h - radius);
+        ctx.lineTo(x, y + radius);
+        ctx.quadraticCurveTo(x, y, x + radius, y);
+        ctx.fill();
+        ctx.fillStyle = '#9ca3af';
+        ctx.fillRect(x + 8, y + 6, w - 16, 6);
+      } else if (o.type === 'hazard') {
+        // red buoy
+        ctx.fillStyle = '#ef4444';
+        ctx.beginPath();
+        ctx.arc(xCenter, yTop + obstacleHeight / 2, 12, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#fee2e2';
+        ctx.beginPath();
+        ctx.arc(xCenter, yTop + obstacleHeight / 2 - 4, 5, 0, Math.PI * 2);
+        ctx.fill();
+      } else if (o.type === 'xp') {
+        // green XP buoy
+        ctx.fillStyle = '#22c55e';
+        ctx.beginPath();
+        ctx.arc(xCenter, yTop + obstacleHeight / 2, 12, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#bbf7d0';
+        ctx.font = '10px "Plus Jakarta Sans", sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('+10', xCenter, yTop + obstacleHeight / 2);
+        ctx.textAlign = 'start';
+        ctx.textBaseline = 'alphabetic';
+      }
+    }
+
+    // player ship
+    const playerXCenter = (playerLane * laneWidth) + laneWidth / 2;
+    const playerY = canvas.height - 20 - playerHeight;
+    const w = playerWidth;
+    const h = playerHeight;
+    const x = playerXCenter - w / 2;
+    const y = playerY;
+
+    // ship body
+    ctx.fillStyle = '#f97316';
+    ctx.beginPath();
+    const radius = 12;
+    ctx.moveTo(x + radius, y);
+    ctx.lineTo(x + w - radius, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + radius);
+    ctx.lineTo(x + w, y + h - radius);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - radius, y + h);
+    ctx.lineTo(x + radius, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - radius);
+    ctx.lineTo(x, y + radius);
+    ctx.quadraticCurveTo(x, y, x + radius, y);
+    ctx.fill();
+
+    // deck
+    ctx.fillStyle = '#fed7aa';
+    ctx.fillRect(x + 8, y + 6, w - 16, 10);
+
+    // small cabin
+    ctx.fillStyle = '#0f172a';
+    ctx.fillRect(x + w / 2 - 12, y + 8, 24, 12);
+
+    // wake / waves behind ship
+    ctx.strokeStyle = 'rgba(255,255,255,0.4)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(playerXCenter - 18, playerY + h + 6);
+    ctx.lineTo(playerXCenter - 2, canvas.height - 4);
+    ctx.moveTo(playerXCenter + 18, playerY + h + 6);
+    ctx.lineTo(playerXCenter + 2, canvas.height - 4);
+    ctx.stroke();
+  }
+
+  function loop(timestamp) {
+    if (!running) {
+      drawScene(timestamp);
+      return;
+    }
+
+    if (!startTimestamp) startTimestamp = timestamp;
+    const dt = (timestamp - (startTimestamp + elapsedMs)) / 1000;
+    if (dt <= 0) {
+      requestAnimationFrame(loop);
+      return;
+    }
+
+    // spawn obstacles
+    spawnObstacle(timestamp);
+
+    // update game state
+    updateGame(dt);
+
+    // draw
+    drawScene(timestamp);
+
+    if (running) requestAnimationFrame(loop);
+  }
+
+  function moveLeft() {
+    if (!running || gameOver) return;
+    if (playerLane > 0) playerLane--;
+  }
+
+  function moveRight() {
+    if (!running || gameOver) return;
+    if (playerLane < laneCount - 1) playerLane++;
+  }
+
+  // Keyboard controls
+  window.addEventListener('keydown', (e) => {
+    if (e.code === 'Space') {
+      if (!running) startGame();
+      e.preventDefault();
+      return;
+    }
+    if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
+      moveLeft();
+    } else if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
+      moveRight();
+    }
+  });
+
+  // Touch / mobile buttons
+  leftTouch.addEventListener('click', moveLeft);
+  rightTouch.addEventListener('click', moveRight);
+
+  // Click inside canvas: left/right half
+  canvas.addEventListener('click', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    if (x < rect.width / 2) moveLeft();
+    else moveRight();
+  });
+
+  // Buttons
+  startBtn.addEventListener('click', startGame);
+  resetBtn.addEventListener('click', resetGame);
+  howToBtn.addEventListener('click', () => {
+    alert(
+      currentLang === 'es'
+        ? 'Cómo jugar:\n\n• Usa ← y → (o A / D) para cambiar de carril.\n• Evita barcos grises y boyas rojas.\n• Recoge boyas verdes para ganar XP (+10 puntos).\n• El canal se acelera con el tiempo. ¡Llega lo más lejos que puedas!'
+        : 'How to play:\n\n• Use ← and → (or A / D) to change lanes.\n• Avoid gray ships and red buoys.\n• Collect green buoys to earn XP (+10 points).\n• The canal gets faster over time. Go as far as you can!'
+    );
+  });
+
+  // Initial draw
+  resetGame();
+</script>
+</body>
+</html>
